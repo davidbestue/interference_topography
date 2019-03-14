@@ -13,10 +13,11 @@ Path of this files (.ipynb and .csv):
 #### dist_a_err_analysis.ipynb
 
 Analysis of Angular interference (distributions)
-
 Analysis of Angular interference (perceptual and memory)
-
 Analysis of Controls (dispersion of angular error with eccentricity)
 
 
+#### simulations_broadening_eccentricity.ipynb
 
+Analysis of the modeling of radial dimension
+More broad bumps with eccentricity
