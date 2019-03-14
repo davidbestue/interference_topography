@@ -10,10 +10,9 @@ _From raw txt files generates "idibaps_psychophysics.csv"_
 _Path of this files (.ipynb and .csv):_  
 _"C:\Users\David\Dropbox\IDIBAPS\my code\Project 1 (master thesis)"_  
 
-
-<b>
   
 #### dist_a_err_analysis.ipynb  
+
 _Analysis of Angular interference (distributions)_    
 Analysis of Angular interference (perceptual and memory)  
 Analysis of Controls (dispersion of angular error with eccentricity)_  
