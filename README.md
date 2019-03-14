@@ -10,27 +10,26 @@ _From raw txt files generates "idibaps_psychophysics.csv"_
 _Path of this files (.ipynb and .csv):_  
 _"C:\Users\David\Dropbox\IDIBAPS\my code\Project 1 (master thesis)"_  
   
-<br>
-   
+  
 #### dist_a_err_analysis.ipynb  
 _Analysis of Angular interference (distributions)_    
 Analysis of Angular interference (perceptual and memory)  
 Analysis of Controls (dispersion of angular error with eccentricity)_  
 
-<b>
-<b>
-
-
+<br><br>
 
 ## Monkey:
 
-#### monkey_analysis.ipynb
-<pre>Analysis of Christos Dataset</pre>
+#### monkey_analysis.ipynb  
 
-<b>
+_Analysis of Christos Dataset_
 
-#### monkey_tuning_curves.ipynb
-<pre>Relevant results concearning the tunning curves of monkey neural data</pre>
+#### monkey_tuning_curves.ipynb  
+
+_Relevant results concearning the tunning curves of monkey neural data_
+
+<br><br>
+
 
 
 <b>
