@@ -36,6 +36,10 @@ Analysis of Christos dataset
 Relevant results concearning the tunning curves of monkey neural data
 
 
-### controls_angle_err_eccentricity_simulations
+### controls_angle_err_eccentricity_simulations.ipynb
 Simulations for increase of angle error with eccentricity
+
+
+### memory_interference_simulations.ipynb
+Simulations for memory interference effects
 
