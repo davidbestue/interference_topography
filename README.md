@@ -23,11 +23,9 @@ Analysis of Controls (dispersion of angular error with eccentricity)_
 ## Monkey:
 
 ***monkey_analysis.ipynb***  
-
 _Analysis of Christos Dataset_
 
 ***monkey_tuning_curves.ipynb***    
-
 _Relevant results concearning the tunning curves of monkey neural data_
 
 <br><br>
@@ -35,12 +33,10 @@ _Relevant results concearning the tunning curves of monkey neural data_
 ## Simulations:
 
 ***memory_interference_simulations.ipynb***    
-
 _Simulations for memory interference effects_
 
 
-***simulations_broadening_eccentricity.ipynb***    
-
+***simulations_broadening_eccentricity.ipynb***   
 _Analysis of the modeling of radial dimension
 More broad bumps with eccentricity_
 
