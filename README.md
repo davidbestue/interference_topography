@@ -6,9 +6,9 @@ Codes for simulations, and raw data are not included. Local paths given for all 
 ## Psychophysics:
 
 #### create_pdDataframe.ipynb
-_From raw txt files generates "idibaps_psychophysics.csv"_
-_Path of this files (.ipynb and .csv):_
-_"C:\Users\David\Dropbox\IDIBAPS\my code\Project 1 (master thesis)"_
+_From raw txt files generates "idibaps_psychophysics.csv"_  
+_Path of this files (.ipynb and .csv):_  
+_"C:\Users\David\Dropbox\IDIBAPS\my code\Project 1 (master thesis)"_  
 
 
 <b>
