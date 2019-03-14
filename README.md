@@ -21,8 +21,7 @@ Analysis of Controls (dispersion of angular error with eccentricity)
 ## Monkey:
 
 #### monkey_analysis.ipynb
-
-Analysis of Christos dataset
+Analysis of Christos Dataset
 
 
 #### monkey_tuning_curves.ipynb
