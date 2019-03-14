@@ -30,33 +30,27 @@ _Relevant results concearning the tunning curves of monkey neural data_
 
 <br><br>
 
-
-
-<b>
-
-
 ## Simulations:
 
-#### memory_interference_simulations.ipynb
-<pre>Simulations for memory interference effects</pre>
+#### memory_interference_simulations.ipynb  
 
-<b>
- 
-#### simulations_broadening_eccentricity.ipynb
-<pre>Analysis of the modeling of radial dimension
-More broad bumps with eccentricity</pre>
+_Simulations for memory interference effects_
 
-<b>
+
+#### simulations_broadening_eccentricity.ipynb  
+
+_Analysis of the modeling of radial dimension
+More broad bumps with eccentricity_
+
   
-#### controls_angle_err_eccentricity_simulations.ipynb
-<pre>Simulations for increase of angle error with eccentricity</pre>
+#### controls_angle_err_eccentricity_simulations.ipynb  
+_Simulations for increase of angle error with eccentricity_
 
-<b>
- 
-#### attention as noise reduction.ipynb
-<pre>Reduction of interference when removing noise
+
+#### attention as noise reduction.ipynb  
+_Reduction of interference when removing noise
 less noise --> less interference
-Potential explanation of what is attention causing here: reduction of noise.</pre>
+Potential explanation of what is attention causing here: reduction of noise_
 
 
 
