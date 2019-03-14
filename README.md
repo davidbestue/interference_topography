@@ -1,9 +1,9 @@
-## Interference topography
+# Interference topography
 
 Analysis of the WM task L2 conducted during my master thesis.
 Codes for simulations, and raw data are not included. Local paths given for all of them.
 
-#### Files:
+## Psychophysics:
 
 ### create_pdDataframe.ipynb
 From raw txt files generates "idibaps_psychophysics.csv"
@@ -16,17 +16,9 @@ Analysis of Angular interference (distributions)
 Analysis of Angular interference (perceptual and memory)
 Analysis of Controls (dispersion of angular error with eccentricity)
 
+<b>
 
-### simulations_broadening_eccentricity.ipynb
-Analysis of the modeling of radial dimension
-More broad bumps with eccentricity
-
-
-### attention as noise reduction.ipynb
-Reduction of interference when removing noise
-less noise --> less interference
-Potential explanation of what is attention causing here: reduction of noise.
-
+## Monkey:
 
 ### monkey_analysis.ipynb
 Analysis of Christos dataset
@@ -36,10 +28,26 @@ Analysis of Christos dataset
 Relevant results concearning the tunning curves of monkey neural data
 
 
-### controls_angle_err_eccentricity_simulations.ipynb
-Simulations for increase of angle error with eccentricity
 
+<b>
+  
+
+## Simulations:
 
 ### memory_interference_simulations.ipynb
 Simulations for memory interference effects
+
+### simulations_broadening_eccentricity.ipynb
+Analysis of the modeling of radial dimension
+More broad bumps with eccentricity
+
+### controls_angle_err_eccentricity_simulations.ipynb
+Simulations for increase of angle error with eccentricity
+
+### attention as noise reduction.ipynb
+Reduction of interference when removing noise
+less noise --> less interference
+Potential explanation of what is attention causing here: reduction of noise.
+
+
 
