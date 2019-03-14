@@ -1,7 +1,8 @@
 # Interference topography
 
-Analysis of the WM task L2 conducted during my master thesis.  
-Codes for simulations, and raw data are not included. Local paths given for all of them.
+Analysis of my master thesis. 
+Includes behavioural data, monkey recordings and rate-model simulations.  
+Codes for simulations and raw data are not included. Local paths given in each file.
 
 <br><br>
 
