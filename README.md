@@ -27,3 +27,15 @@ Reduction of interference when removing noise
 less noise --> less interference
 Potential explanation of what is attention causing here: reduction of noise.
 
+
+### monkey_analysis.ipynb
+Analysis of Christos dataset
+
+
+### monkey_tuning_curves.ipynb
+Relevant results concearning the tunning curves of monkey neural data
+
+
+### controls_angle_err_eccentricity_simulations
+Simulations for increase of angle error with eccentricity
+
