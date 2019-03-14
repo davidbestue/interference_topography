@@ -12,7 +12,6 @@ _"C:\Users\David\Dropbox\IDIBAPS\my code\Project 1 (master thesis)"_
 
   
 #### dist_a_err_analysis.ipynb  
-
 _Analysis of Angular interference (distributions)_    
 Analysis of Angular interference (perceptual and memory)  
 Analysis of Controls (dispersion of angular error with eccentricity)_  
