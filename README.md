@@ -3,6 +3,8 @@
 Analysis of the WM task L2 conducted during my master thesis.
 Codes for simulations, and raw data are not included. Local paths given for all of them.
 
+<br><br>
+
 ## Psychophysics:
 
 #### create_pdDataframe.ipynb
@@ -20,7 +22,7 @@ Analysis of Controls (dispersion of angular error with eccentricity)_
 
 ## Monkey:
 
-#### monkey_analysis.ipynb  
+***monkey_analysis.ipynb***
 
 _Analysis of Christos Dataset_
 
