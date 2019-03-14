@@ -18,6 +18,21 @@ Analysis of Controls (dispersion of angular error with eccentricity)
 
 <b>
 
+## Psychophysics:
+
+#### monkey_analysis.ipynb
+FAnalysis of Christos Datset
+
+
+#### dist_a_err_analysis.ipynb
+Analysis of Angular interference (distributions)
+Analysis of Angular interference (perceptual and memory)
+Analysis of Controls (dispersion of angular error with eccentricity)
+
+<b>
+
+
+
 ## Monkey:
 
 #### monkey_analysis.ipynb
