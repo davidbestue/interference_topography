@@ -1,7 +1,7 @@
 # Interference topography
 
-Analysis of the WM task L2 conducted during my master thesis.
-Codes for simulations, and raw data are not included. Local paths given for all of them.
+_Analysis of the WM task L2 conducted during my master thesis.  
+Codes for simulations, and raw data are not included. Local paths given for all of them._
 
 <br><br>
 
