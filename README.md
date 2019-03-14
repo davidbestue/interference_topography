@@ -6,16 +6,18 @@ Codes for simulations, and raw data are not included. Local paths given for all 
 ## Psychophysics:
 
 #### create_pdDataframe.ipynb
-From raw txt files generates "idibaps_psychophysics.csv"
+<pre>From raw txt files generates "idibaps_psychophysics.csv"
 Path of this files (.ipynb and .csv):
-"C:\Users\David\Dropbox\IDIBAPS\my code\Project 1 (master thesis)"
+"C:\Users\David\Dropbox\IDIBAPS\my code\Project 1 (master thesis)"</pre>
 
-
+<b>
+  
 #### dist_a_err_analysis.ipynb
-Analysis of Angular interference (distributions)
+<pre>Analysis of Angular interference (distributions)
 Analysis of Angular interference (perceptual and memory)
-Analysis of Controls (dispersion of angular error with eccentricity)
+Analysis of Controls (dispersion of angular error with eccentricity)</pre>
 
+<b>
 <b>
 
 
@@ -25,36 +27,37 @@ Analysis of Controls (dispersion of angular error with eccentricity)
 #### monkey_analysis.ipynb
 <pre> Analysis of Christos Dataset </pre>
 
+<b>
 
 #### monkey_tuning_curves.ipynb
-Relevant results concearning the tunning curves of monkey neural data
-
+<pre>Relevant results concearning the tunning curves of monkey neural data</pre>
 
 
 <b>
-  
+
 
 ## Simulations:
 
 #### memory_interference_simulations.ipynb
+<pre>Simulations for memory interference effects</pre>
 
-Simulations for memory interference effects
-
-
+<b>
+ 
 #### simulations_broadening_eccentricity.ipynb
+<pre>Analysis of the modeling of radial dimension
+More broad bumps with eccentricity</pre>
 
-Analysis of the modeling of radial dimension
-More broad bumps with eccentricity
-
+<b>
+  
 #### controls_angle_err_eccentricity_simulations.ipynb
+<pre>Simulations for increase of angle error with eccentricity</pre>
 
-Simulations for increase of angle error with eccentricity
-
+<b>
+ 
 #### attention as noise reduction.ipynb
-
-Reduction of interference when removing noise
+<pre>Reduction of interference when removing noise
 less noise --> less interference
-Potential explanation of what is attention causing here: reduction of noise.
+Potential explanation of what is attention causing here: reduction of noise.</pre>
 
 
 
