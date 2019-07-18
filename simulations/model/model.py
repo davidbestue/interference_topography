@@ -66,7 +66,7 @@ def Interference_effects(target, response, reference):
 
 
 
-# model(totalTime=2000, targ_onset=100, dist_onset=234, presentation_period=100, separation=2, plots=True) 
+# model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2, plots=True) 
 
 
 def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
@@ -105,8 +105,8 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
         stimulus1=zeros((N))
         stimulus2=zeros((N))
         for i in range(0, N):
-            stimulus1[i]=2*e**(kappa_stim*cos(theta[i] + origin - stim_sep)) / (2*pi*scipy.special.i0(kappa_stim))
-            stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin + stim_sep)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus1[i]=2*e**(kappa_stim*cos(theta[i] + origin - separation)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin + separation)) / (2*pi*scipy.special.i0(kappa_stim))
         stimulus= (stimulus1 + stimulus2);
         stimulus=reshape(stimulus, (N,1))
     elif n_stims==1:
@@ -119,41 +119,33 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
     ###
     stimon = floor(targ_onset/dt);
     stimoff = floor(targ_onset/dt) + floor(presentation_period/dt) ;
-    return(stimon)
-
-
     #Simulation
     #generation of the noise and the connectivity between inhib and exit
     RE=zeros((N,nsteps));
     RI=zeros((N,nsteps));
-
-
-        f = lambda x : x*x*(x>0)*(x<1) + reshape(array([cmath.sqrt(4*x[i]-3) for i in range(0, len(x))]).real, (N,1)) * (x>=1)
-
-
-        ### diferential equations
-        for i in range(0, nsteps):
-            noiseE = sigE*random.randn(N,1);
-            noiseI = sigI*random.randn(N,1);
-
-            #differential equations for connectivity
-            IE= GEE*dot(WE,rE) - GIE*dot(WI,rI) + I0E*ones((N,1));
-            II= GEI*dot(WE,rE) +  (I0I-GII*mean(rI))*ones((N,1));
-
-            if i>stimon and i<stimoff:
-                IE=IE+stimulus;
-                II=II+stimulus;
-
-
-            #rates of exit and inhib
-            rE = rE + (f(IE) - rE + noiseE)*dt/tauE;
-            rI = rI + (f(II) - rI + noiseI)*dt/tauI;
-
-            rEr=reshape(rE, N)
-            rIr=reshape(rI, N)
-            #drawnow
-            RE[:,i] = rEr;
-            RI[:,i] = rIr;
+    f = lambda x : x*x*(x>0)*(x<1) + reshape(array([cmath.sqrt(4*x[i]-3) for i in range(0, len(x))]).real, (N,1)) * (x>=1)
+    ### diferential equations
+    for i in range(0, nsteps):
+        noiseE = sigE*random.randn(N,1);
+        noiseI = sigI*random.randn(N,1);
+        #differential equations for connectivity
+        IE= GEE*dot(WE,rE) - GIE*dot(WI,rI) + I0E*ones((N,1));
+        II= GEI*dot(WE,rE) +  (I0I-GII*mean(rI))*ones((N,1));
+        #
+        if i>stimon and i<stimoff:
+            IE=IE+stimulus;
+            II=II+stimulus;
+        #
+        #rates of exit and inhib
+        rE = rE + (f(IE) - rE + noiseE)*dt/tauE;
+        rI = rI + (f(II) - rI + noiseI)*dt/tauI;
+        rEr=reshape(rE, N)
+        rIr=reshape(rI, N)
+        #drawnow
+        RE[:,i] = rEr;
+        RI[:,i] = rIr;
+    #
+    return(rE)
 
 
 
