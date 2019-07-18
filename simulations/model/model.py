@@ -148,38 +148,38 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
     #
     ## metrics
     interference = Interference_effects( [decode_rE(stimulus1)], [decode_rE(rE)], [decode_rE(stimulus2)])[0]
-    # p_targ1 = int((N * np.degrees(origin + stim_sep))/360)
-    # p_targ2 = int((N * np.degrees(origin - stim_sep))/360)
-    # #
-    # if plots==True:
-    # 	#### plot dynamics
-    #     fig = plt.figure()
-    #     plt.title('Rate dynamics')
-    #     plt.plot(RE[p_targ1, :], 'b', label='target1')
-    #     plt.plot(RE[p_targ2, :], 'r', label='target2')
-    #     plt.xlabel('time (ms)')
-    #     plt.ylabel('rate (Hz)')
-    #     plt.legend()
-    #     plt.show(block=False)
-    #     ##
-    #     #### plot heatmap
-    #     RE_sorted=flipud(RE)
-    #     plt.figure(figsize=(9,6))
-    #     sns.heatmap(RE_sorted, cmap='viridis')
-    #     plt.title('BUMP activity')
-    #     plt.ylabel('Angle')
-    #     plt.xlabel('time')
-    #     plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
-    #     plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
-    #     plt.yticks([])
-    #     plt.xticks([])
-    #     plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
-    #     plt.plot([stimon/2, stimon/2,], [0+20, N-20], 'k-', label='onset')
-    #     plt.plot([stimoff/2, stimoff/2,], [0+20, N-20], 'k--', label='offset')
-    #     plt.plot([stimon/2, stimon/2,], [0+20, N-20], 'k-')
-    #     plt.plot([stimoff/2, stimoff/2,], [0+20, N-20], 'k--')
-    #     plt.legend()
-    #     plt.show(block=False)
+    p_targ1 = int((N * np.degrees(origin + separation))/360)
+    p_targ2 = int((N * np.degrees(origin - separation))/360)
+    #
+    if plots==True:
+    	#### plot dynamics
+        fig = plt.figure()
+        plt.title('Rate dynamics')
+        plt.plot(RE[p_targ1, :], 'b', label='target1')
+        plt.plot(RE[p_targ2, :], 'r', label='target2')
+        plt.xlabel('time (ms)')
+        plt.ylabel('rate (Hz)')
+        plt.legend()
+        plt.show(block=False)
+        ##
+        #### plot heatmap
+        RE_sorted=flipud(RE)
+        plt.figure(figsize=(9,6))
+        sns.heatmap(RE_sorted, cmap='viridis')
+        plt.title('BUMP activity')
+        plt.ylabel('Angle')
+        plt.xlabel('time')
+        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
+        plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
+        plt.yticks([])
+        plt.xticks([])
+        plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
+        plt.plot([stimon/2, stimon/2,], [0+20, N-20], 'k-', label='onset')
+        plt.plot([stimoff/2, stimoff/2,], [0+20, N-20], 'k--', label='offset')
+        plt.plot([stimon/2, stimon/2,], [0+20, N-20], 'k-')
+        plt.plot([stimoff/2, stimoff/2,], [0+20, N-20], 'k--')
+        plt.legend()
+        plt.show(block=False)
     
     
     # ## print time consumed
@@ -190,6 +190,9 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
     
     # ### Output
     # return(RE)
+
+
+###
 
 model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2, plots=True) 
 
