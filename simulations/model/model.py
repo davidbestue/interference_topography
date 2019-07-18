@@ -72,6 +72,7 @@ def Interference_effects(target, response, reference):
 def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
  GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False ):
     #
+    st_sim =time.time()
     dt=2
     nsteps=int(floor(totalTime/dt));
     origin = pi
@@ -145,148 +146,191 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
         RE[:,i] = rEr;
         RI[:,i] = rIr;
     #
-    return(rE)
+    ## metrics
+    interference = Interference_effects( [decode_rE(stimulus1)], [decode_rE(rE)], [decode_rE(stimulus2)])[0]
+    p_targ1 = int((N * np.degrees(origin + stim_sep))/360)
+    p_targ2 = int((N * np.degrees(origin - stim_sep))/360)
+    #
+    if plots==True:
+    	#### plot dynamics
+        fig = plt.figure()
+        plt.title('Rate dynamics')
+        plt.plot(RE[p_targ1, :], 'b', label='target1')
+        plt.plot(RE[p_targ2, :], 'r', label='target2')
+        plt.xlabel('time (ms)')
+        plt.ylabel('rate (Hz)')
+        plt.legend()
+        plt.show(block=False)
+        ##
+        #### plot heatmap
+        RE_sorted=flipud(RE)
+        plt.figure(figsize=(9,6))
+        sns.heatmap(RE_sorted, cmap='viridis')
+        plt.title('BUMP activity')
+        plt.ylabel('Angle')
+        plt.xlabel('time')
+        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
+        plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
+        plt.yticks([])
+        plt.xticks([])
+        plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
+        plt.plot([stimon/2, stimon/2,], [0+20, N-20], 'k-', label='onset')
+        plt.plot([stimoff/2, stimoff/2,], [0+20, N-20], 'k--', label='offset')
+        plt.plot([stimon/2, stimon/2,], [0+20, N-20], 'k-')
+        plt.plot([stimoff/2, stimoff/2,], [0+20, N-20], 'k--')
+        plt.legend()
+        plt.show(block=False)
+    
+    
+    ## print time consumed
+    end_sim =time.time()
+    total_time= end_sim - st_sim 
+    total_time = round(total_time, 1)
+    print('Simulation time: ' + str(total_time) + 's')
+    
+    ### Output
+    return(RE)
 
 
 
-        ### Plot of activity
-#         # %matplotlib inline
-#         # %config InlineBackend.figure_format = 'png'
+#         ### Plot of activity
+# #         # %matplotlib inline
+# #         # %config InlineBackend.figure_format = 'png'
 
-#         plt.ion()
+# #         plt.ion()
 
-#         #RE_sorted=flipud(RE)
-#         RE_sorted=RE
-#         rE = RE[:,-1]
-#         M=(rE>2)*1
+# #         #RE_sorted=flipud(RE)
+# #         RE_sorted=RE
+# #         rE = RE[:,-1]
+# #         M=(rE>2)*1
 
-#         plt.figure(figsize=(9,6))
-#         sns.heatmap(RE_sorted, cmap='viridis', vmin=-2.5, vmax=10)
-#         plt.title('BUMP activity')
-#         plt.ylabel('Angle (deg)')
-#         plt.xlabel('time')
-#         plt.yticks([])
-#         plt.xticks([])
+# #         plt.figure(figsize=(9,6))
+# #         sns.heatmap(RE_sorted, cmap='viridis', vmin=-2.5, vmax=10)
+# #         plt.title('BUMP activity')
+# #         plt.ylabel('Angle (deg)')
+# #         plt.xlabel('time')
+# #         plt.yticks([])
+# #         plt.xticks([])
 
-#         plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
+# #         plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
 
-#         plt.plot([stim_onset/2, stim_onset/2,], [0+20, N-20], 'k-', label='onset')
-#         plt.plot([stim_offset/2, stim_offset/2,], [0+20, N-20], 'k--', label='offset')
-
-
-#         # Neu = spread_start(rE)[2]
-#         # spr = spread_start(rE)[1]
-
-#         # plt.plot([0, 1000], [ st1_i  ,st1_i ], 'r--', label='st1')
-#         # plt.plot([0, 1000], [ st2_i , st2_i ], 'b--', label='st2')
-
-#         # plt.plot([0, 1000], [ Neu[1]  , Neu[1] ], 'b--', label='offset')
-#         # plt.plot([0, 1000], [ Neu[1] + spr[1]  , Neu[1] + spr[1] ], 'b--', label='offset')
+# #         plt.plot([stim_onset/2, stim_onset/2,], [0+20, N-20], 'k-', label='onset')
+# #         plt.plot([stim_offset/2, stim_offset/2,], [0+20, N-20], 'k--', label='offset')
 
 
-#         # plt.plot([0, 1000], [ 129  , 129], 'g--', label='bump')
-#         # plt.plot([0, 1000], [ 391.5  , 391.5], 'g--', label='bump')
+# #         # Neu = spread_start(rE)[2]
+# #         # spr = spread_start(rE)[1]
+
+# #         # plt.plot([0, 1000], [ st1_i  ,st1_i ], 'r--', label='st1')
+# #         # plt.plot([0, 1000], [ st2_i , st2_i ], 'b--', label='st2')
+
+# #         # plt.plot([0, 1000], [ Neu[1]  , Neu[1] ], 'b--', label='offset')
+# #         # plt.plot([0, 1000], [ Neu[1] + spr[1]  , Neu[1] + spr[1] ], 'b--', label='offset')
 
 
-#         plt.legend()
-#         plt.show(block=False)
-
-#         mx_fr= round(max(rE),2)
-#         #Firing_rates.append(mx_fr)
-
-#         #plot Firing rate RE
-#         plt.figure()
-#         h = sns.tsplot(rE, color='r')
-#         plt.title('Firing rate', weight='demibold')
-#         plt.gca().spines['right'].set_visible(False)
-#         plt.gca().spines['top'].set_visible(False)
-#         plt.gca().get_xaxis().tick_bottom()
-#         plt.gca().get_yaxis().tick_left()
-#         plt.ylabel('rE')
-#         plt.xticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
-#         plt.xlabel('angle')
-#         plt.show(block=False)
-
-#         print( 'Max firing rate = ' + str(round(max(rE),2)))
+# #         # plt.plot([0, 1000], [ 129  , 129], 'g--', label='bump')
+# #         # plt.plot([0, 1000], [ 391.5  , 391.5], 'g--', label='bump')
 
 
-#         # BIAS due to noise
+# #         plt.legend()
+# #         plt.show(block=False)
 
-#         if n_stims==1:
-#             Decoded_ang = round(decode(RE)[-1][2],2)
+# #         mx_fr= round(max(rE),2)
+# #         #Firing_rates.append(mx_fr)
 
-#             #Set the stimulus center
-#             Decoded_stim = round(decode(stimulus)[-1][2],2)
+# #         #plot Firing rate RE
+# #         plt.figure()
+# #         h = sns.tsplot(rE, color='r')
+# #         plt.title('Firing rate', weight='demibold')
+# #         plt.gca().spines['right'].set_visible(False)
+# #         plt.gca().spines['top'].set_visible(False)
+# #         plt.gca().get_xaxis().tick_bottom()
+# #         plt.gca().get_yaxis().tick_left()
+# #         plt.ylabel('rE')
+# #         plt.xticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
+# #         plt.xlabel('angle')
+# #         plt.show(block=False)
 
-#             # BIAS
-#             bias = abs(Decoded_ang - Decoded_stim)
-
-#             print(bias)
-
-#         #Biases.append(bias)
-        # BUMP movement
-        if n_stims==2: 
-        #     CENTERS = []
-
-        #     for r in range(0, len(RE)):
-        #         width, width_p, i_pos, ang_pos, i_cent, ang_cent = spread_start(RE[:,r])
-        #         CENTERS.append(ang_cent)
-
-
-        #     df_c = pd.DataFrame(CENTERS)
-        #     centers_ap = [df_c.iloc[:,i].mean() for i in range(0, shape(df_c)[1])]
-        #     zeros_m = zeros((len(CENTERS), len(centers_ap)))
-
-        #     for i in range(0, len(CENTERS)):
-        #         values = CENTERS[i]
-        #         if len(values) == 0:
-        #             zeros_m[i,:] = ['NaN' for n in range(0, len(centers_ap))]
-        #         elif len(values) == len(centers_ap):
-        #             zeros_m[i,:] = values
-        #         elif len(values) == len(centers_ap) -1:
-        #             default = ['NaN' for n in range(0, len(centers_ap))]
-        #             a = min(centers_ap, key=lambda x:abs(x-values[0]))
-        #             pos_bump = where(array(centers_ap)==a)[0][0]
-        #             default[pos_bump] = values[0]
-        #             zeros_m[i,:] = default
+# #         print( 'Max firing rate = ' + str(round(max(rE),2)))
 
 
-        #     zeros_m
-        #     df = pd.DataFrame(zeros_m)
-        #     #print(mean(df.iloc[:, 0] - st1)) #pos means attraction
-        #     #print(mean(st2 - df.iloc[:, 1])) #pos means atraction
+# #         # BIAS due to noise
 
-            # BIAS in the las rE
-            width, width_p, i_pos, ang_pos, i_cent, ang_cent = spread_start(RE[:,-1])
+# #         if n_stims==1:
+# #             Decoded_ang = round(decode(RE)[-1][2],2)
 
-            if len(width) ==0:
-                Interference = 'NaN'
-            elif len(width) ==1:
-                dec_b1 = round(decode(RE)[-1][2],2)
-                bias_b1 = dec_b1 - degrees(pi - stim_sep) #pos att 
-                Interference = bias_b1
-            elif len(width) ==2:
-                m_i = int(mean(i_cent))
-                rE = RE[:,-1]
-                b1 = rE[0:m_i]
-                b2 = rE[m_i::]
-                angle_mid = neur2angle(m_i)
-                dec_b1 = decode_rE_lim(b1, a_ini=0, a_fin=angle_mid)
-                dec_b2 = angle_mid + decode_rE_lim(b2, a_ini=0, a_fin=360-angle_mid)
-                bias_b1 = dec_b1 - degrees(pi - stim_sep) #pos att 
-                bias_b2 = degrees(pi + stim_sep) - dec_b2 #pos att
-                Interference =  bias_b1
+# #             #Set the stimulus center
+# #             Decoded_stim = round(decode(stimulus)[-1][2],2)
 
-            elif len(width)>2:
-                Interference = 'NaN'
+# #             # BIAS
+# #             bias = abs(Decoded_ang - Decoded_stim)
+
+# #             print(bias)
+
+# #         #Biases.append(bias)
+#         # BUMP movement
+#         if n_stims==2: 
+#         #     CENTERS = []
+
+#         #     for r in range(0, len(RE)):
+#         #         width, width_p, i_pos, ang_pos, i_cent, ang_cent = spread_start(RE[:,r])
+#         #         CENTERS.append(ang_cent)
+
+
+#         #     df_c = pd.DataFrame(CENTERS)
+#         #     centers_ap = [df_c.iloc[:,i].mean() for i in range(0, shape(df_c)[1])]
+#         #     zeros_m = zeros((len(CENTERS), len(centers_ap)))
+
+#         #     for i in range(0, len(CENTERS)):
+#         #         values = CENTERS[i]
+#         #         if len(values) == 0:
+#         #             zeros_m[i,:] = ['NaN' for n in range(0, len(centers_ap))]
+#         #         elif len(values) == len(centers_ap):
+#         #             zeros_m[i,:] = values
+#         #         elif len(values) == len(centers_ap) -1:
+#         #             default = ['NaN' for n in range(0, len(centers_ap))]
+#         #             a = min(centers_ap, key=lambda x:abs(x-values[0]))
+#         #             pos_bump = where(array(centers_ap)==a)[0][0]
+#         #             default[pos_bump] = values[0]
+#         #             zeros_m[i,:] = default
+
+
+#         #     zeros_m
+#         #     df = pd.DataFrame(zeros_m)
+#         #     #print(mean(df.iloc[:, 0] - st1)) #pos means attraction
+#         #     #print(mean(st2 - df.iloc[:, 1])) #pos means atraction
+
+#             # BIAS in the las rE
+#             width, width_p, i_pos, ang_pos, i_cent, ang_cent = spread_start(RE[:,-1])
+
+#             if len(width) ==0:
+#                 Interference = 'NaN'
+#             elif len(width) ==1:
+#                 dec_b1 = round(decode(RE)[-1][2],2)
+#                 bias_b1 = dec_b1 - degrees(pi - stim_sep) #pos att 
+#                 Interference = bias_b1
+#             elif len(width) ==2:
+#                 m_i = int(mean(i_cent))
+#                 rE = RE[:,-1]
+#                 b1 = rE[0:m_i]
+#                 b2 = rE[m_i::]
+#                 angle_mid = neur2angle(m_i)
+#                 dec_b1 = decode_rE_lim(b1, a_ini=0, a_fin=angle_mid)
+#                 dec_b2 = angle_mid + decode_rE_lim(b2, a_ini=0, a_fin=360-angle_mid)
+#                 bias_b1 = dec_b1 - degrees(pi - stim_sep) #pos att 
+#                 bias_b2 = degrees(pi + stim_sep) - dec_b2 #pos att
+#                 Interference =  bias_b1
+
+#             elif len(width)>2:
+#                 Interference = 'NaN'
             
             
             
             
-            if Interference != 'NaN':
-                Interference=round(Interference, 2)
+#             if Interference != 'NaN':
+#                 Interference=round(Interference, 2)
             
-            #print(Interference)
+#             #print(Interference)
 
-            Matrix.append([Interference, GEE, VALUE])
-            print(Interference, GEE, VALUE)
+#             Matrix.append([Interference, GEE, VALUE])
+#             print(Interference, GEE, VALUE)
