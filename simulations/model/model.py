@@ -102,15 +102,15 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
     ##
     # Stims
     if n_stims==2:
-    	stimulus1=zeros((N))
-    	stimulus2=zeros((N))
+        stimulus1=zeros((N))
+        stimulus2=zeros((N))
         for i in range(0, N):
             stimulus1[i]=2*e**(kappa_stim*cos(theta[i] + origin - stim_sep)) / (2*pi*scipy.special.i0(kappa_stim))
             stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin + stim_sep)) / (2*pi*scipy.special.i0(kappa_stim))
         stimulus= (stimulus1 + stimulus2);
         stimulus=reshape(stimulus, (N,1))
     elif n_stims==1:
-    	stimulus2=zeros((N));
+        stimulus2=zeros((N));
         for i in range(0, N):
             stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin)) / (2*pi*scipy.special.i0(kappa_stim))
         stimulus=stimulus2
