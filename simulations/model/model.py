@@ -190,13 +190,13 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     print('Simulation time: ' + str(total_time) + 's')
     
     ### Output
-    return(RE)
+    return(RE, interference)
 
 
 ###
 
-model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
-
+rate, interference = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
+print(interference)
 
 #         ### Plot of activity
 # #         # %matplotlib inline
