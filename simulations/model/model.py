@@ -59,83 +59,73 @@ def Interference_effects(target, response, reference):
             Err_interference=round( angle_err_abs, decimals) 
         else:
             Err_interference=round( -angle_err_abs, decimals)
-
         interferences.append(Err_interference)
     
     return interferences
 
 
 
-def model(totalTime, targ_onset, dist_onset, presentation_period, separation, plots, tauE=9, tauI=4,  n_stims=2,
-	 I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512 ):
-		
-		dt=2;
-        nsteps=int(floor(totalTime/dt));
-        origin = pi
 
-        rE=zeros((N,1));
-        rI=zeros((N,1));
-
-        #Connectivities
-        v_E=zeros((N));
-        v_I=zeros((N));
-        WE=zeros((N,N));
-        WI=zeros((N,N));
+# model(totalTime=2000, targ_onset=100, dist_onset=234, presentation_period=100, separation=2, plots=True) 
 
 
-        theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
-
-        for i in range(0, N):
-            v_E_new=[e**(kappa_E*cos(theta[f]))/(2*pi*scipy.special.i0(kappa_E)) for f in range(0, len(theta))]    
-            v_I_new=[e**(kappa_I*cos(theta[f]))/(2*pi*scipy.special.i0(kappa_I)) for f in range(0, len(theta))]
-            ###    
-            vE_NEW=roll(v_E_new,i)
-            vI_NEW=roll(v_I_new,i) #to roll
-            ###    
-            WE[:,i]=vE_NEW
-            WI[:,i]=vI_NEW
-
-
-
+def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
+ GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False ):
+    #
+    dt=2
+    nsteps=int(floor(totalTime/dt));
+    origin = pi
+    rE=zeros((N,1));
+    rI=zeros((N,1));
+    #Connectivities
+    v_E=zeros((N));
+    v_I=zeros((N));
+    WE=zeros((N,N));
+    WI=zeros((N,N));
+    theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
+    for i in range(0, N):
+        v_E_new=[e**(kappa_E*cos(theta[f]))/(2*pi*scipy.special.i0(kappa_E)) for f in range(0, len(theta))]    
+        v_I_new=[e**(kappa_I*cos(theta[f]))/(2*pi*scipy.special.i0(kappa_I)) for f in range(0, len(theta))]
+        ###    
+        vE_NEW=roll(v_E_new,i)
+        vI_NEW=roll(v_I_new,i) #to roll
+        ###    
+        WE[:,i]=vE_NEW
+        WI[:,i]=vI_NEW
+    #
+    # Plot of the connectivity profile
+    if plot_connectivity ==True:
         plt.figure()
         plt.plot(WE[250, :])
         plt.plot(WI[250, :])
         plt.show(block=False)
-
-        return (1)
-
-
-        # stims
-        if n_stims==2:
-            stimulus1=zeros((N))
-            stimulus2=zeros((N))
-            for i in range(0, N):
-                stimulus1[i]=2*e**(kappa_stim*cos(theta[i] + origin - stim_sep)) / (2*pi*scipy.special.i0(kappa_stim))
-                stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin + stim_sep)) / (2*pi*scipy.special.i0(kappa_stim))
-
-            stimulus= (stimulus1 + stimulus2);
-            stimulus=reshape(stimulus, (N,1))
-
-        elif n_stims==1:
-            stimulus2=zeros((N));
-            for i in range(0, N):
-                stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin)) / (2*pi*scipy.special.i0(kappa_stim))
-
-            stimulus=stimulus2
-            stimulus=reshape(stimulus, (N,1))
-
-
-        ######################
+    ##
+    # Stims
+    if n_stims==2:
+    	stimulus1=zeros((N))
+    	stimulus2=zeros((N))
+        for i in range(0, N):
+            stimulus1[i]=2*e**(kappa_stim*cos(theta[i] + origin - stim_sep)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin + stim_sep)) / (2*pi*scipy.special.i0(kappa_stim))
+        stimulus= (stimulus1 + stimulus2);
+        stimulus=reshape(stimulus, (N,1))
+    elif n_stims==1:
+    	stimulus2=zeros((N));
+        for i in range(0, N):
+            stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin)) / (2*pi*scipy.special.i0(kappa_stim))
+        stimulus=stimulus2
+        stimulus=reshape(stimulus, (N,1))
+    ###
+    ###
+    stimon = floor(targ_onset/dt);
+    stimoff = floor(targ_onset/dt) + floor(presentation_period/dt) ;
+    return(stimon)
 
 
-        stimon = floor(stim_onset/dt);
-        stimoff = floor(stim_offset/dt);
-
-
-        #Simulation
-        #generation of the noise and the connectivity between inhib and exit
-        RE=zeros((N,nsteps));
-        RI=zeros((N,nsteps));
+    #Simulation
+    #generation of the noise and the connectivity between inhib and exit
+    RE=zeros((N,nsteps));
+    RI=zeros((N,nsteps));
 
 
         f = lambda x : x*x*(x>0)*(x<1) + reshape(array([cmath.sqrt(4*x[i]-3) for i in range(0, len(x))]).real, (N,1)) * (x>=1)
