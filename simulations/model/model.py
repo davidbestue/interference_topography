@@ -182,19 +182,19 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
         plt.show(block=False)
     
     
-    # ## print time consumed
-    # end_sim =time.time()
-    # total_time= end_sim - st_sim 
-    # total_time = round(total_time, 1)
-    # print('Simulation time: ' + str(total_time) + 's')
+    ## print time consumed
+    end_sim =time.time()
+    total_time= end_sim - st_sim 
+    total_time = round(total_time, 1)
+    print('Simulation time: ' + str(total_time) + 's')
     
-    # ### Output
-    # return(RE)
+    ### Output
+    return(RE)
 
 
 ###
 
-model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2, plots=True) 
+model(totalTime=2000, targ_onset=100,  presentation_period=250, separation=8, plots=True) 
 
 
 
