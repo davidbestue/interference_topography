@@ -148,7 +148,9 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         RI[:,i] = rIr;
     #
     ## metrics
-    interference = Interference_effects( [decode_rE(stimulus1)], [decode_rE(rE)], [decode_rE(stimulus2)])[0]
+    if n_stims==2:
+        interference = Interference_effects( [decode_rE(stimulus1)], [decode_rE(rE)], [decode_rE(stimulus2)])[0]
+
     p_targ1 = int((N * np.degrees(origin + separation))/360)
     p_targ2 = int((N * np.degrees(origin - separation))/360)
     #
@@ -190,13 +192,13 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     print('Simulation time: ' + str(total_time) + 's')
     
     ### Output
-    return(RE, interference)
+    return(rE)
 
 
 ###
 
-rate, interference = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
-print(interference)
+rate = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
+
 
 #         ### Plot of activity
 # #         # %matplotlib inline
