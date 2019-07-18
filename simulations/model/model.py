@@ -66,11 +66,11 @@ def Interference_effects(target, response, reference):
 
 
 
-# model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2, plots=True) 
+# model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
 
 
-def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
- GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False ):
+def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
+ GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True ):
     #
     st_sim =time.time()
     dt=2
@@ -152,7 +152,7 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
     p_targ1 = int((N * np.degrees(origin + separation))/360)
     p_targ2 = int((N * np.degrees(origin - separation))/360)
     #
-    if plots==True:
+    if plot_rate==True:
     	#### plot dynamics
         fig = plt.figure()
         plt.title('Rate dynamics')
@@ -162,7 +162,7 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
         plt.ylabel('rate (Hz)')
         plt.legend()
         plt.show(block=False)
-        ##
+    if plot_hm==True:
         #### plot heatmap
         RE_sorted=flipud(RE)
         plt.figure(figsize=(9,6))
@@ -175,10 +175,10 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
         plt.yticks([])
         plt.xticks([])
         plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
-        plt.plot([stimon/2, stimon/2,], [0+20, N-20], 'k-', label='onset')
-        plt.plot([stimoff/2, stimoff/2,], [0+20, N-20], 'k--', label='offset')
-        plt.plot([stimon/2, stimon/2,], [0+20, N-20], 'k-')
-        plt.plot([stimoff/2, stimoff/2,], [0+20, N-20], 'k--')
+        plt.plot([stimon, stimon,], [0+20, N-20], 'k-', label='onset')
+        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
+        plt.plot([stimon, stimon,], [0+20, N-20], 'k-')
+        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--')
         plt.legend()
         plt.show(block=False)
     
@@ -195,8 +195,7 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
 
 ###
 
-model(totalTime=2000, targ_onset=100,  presentation_period=250, separation=8, plots=True) 
-
+model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
 
 
 #         ### Plot of activity
