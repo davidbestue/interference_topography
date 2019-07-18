@@ -83,6 +83,7 @@ def model(totalTime, targ_onset, presentation_period, separation, plots, tauE=9,
     v_I=zeros((N));
     WE=zeros((N,N));
     WI=zeros((N,N));
+    separation= pi/separation
     theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
     for i in range(0, N):
         v_E_new=[e**(kappa_E*cos(theta[f]))/(2*pi*scipy.special.i0(kappa_E)) for f in range(0, len(theta))]    
