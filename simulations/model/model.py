@@ -14,6 +14,9 @@ import seaborn as sns
 import time
 from joblib import Parallel, delayed
 import multiprocessing
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+import scipy.signal
 
 
 def decode_rE(rE, a_ini=0, a_fin=360, N=512):
@@ -70,7 +73,7 @@ def Interference_effects(target, response, reference):
 
 
 def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
- GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True ):
+ GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True):
     #
     st_sim =time.time()
     dt=2
@@ -190,6 +193,36 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     total_time= end_sim - st_sim 
     total_time = round(total_time, 1)
     print('Simulation time: ' + str(total_time) + 's')
+
+    ###### Final bias
+    y=np.reshape(rate, (N)) 
+    X=np.reshape(np.arange(0, N), (N,1)
+
+    # Visualizing the Polymonial Regression results
+    def viz_polymonial():
+        plt.figure()
+        plt.scatter(X, y, color='red')
+        plt.plot(X, pol_reg.predict(poly_reg.fit_transform(X)), color='blue')
+        plt.title('Fit Bump')
+        plt.xlabel('Neuron')
+        plt.ylabel('rate')
+        plt.show(block=False)
+        return
+
+    ### Fit
+    poly_reg = PolynomialFeatures(degree=6)
+    X_poly = poly_reg.fit_transform(X)
+    pol_reg = LinearRegression()
+    pol_reg.fit(X_poly, y)
+    #score = pol_reg.score(X_poly, y) 
+    if plot_fit==True:
+        viz_polymonial()
+
+    #
+
+
+
+
     
     ### Output
     return(rE)
@@ -201,11 +234,10 @@ rate = model(totalTime=2000, targ_onset=100,  presentation_period=100, separatio
 
 
 
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
-import scipy.signal
 
 
+N=512
+separation=2
 y=np.reshape(rate, (N)) 
 X=np.reshape(np.arange(0, N), (N,1))
 
@@ -234,9 +266,15 @@ viz_polymonial()
 
 
 line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
-
-
 pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
+
+
+theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
+ang_pb1=theta[pb1]
+bias b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+
+ang_pb2=theta[pb2]
+bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
 
 
 
