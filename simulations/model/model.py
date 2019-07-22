@@ -227,17 +227,18 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
             pb1, pb2 = peaks
             theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
             ang_pb1=theta[pb1]
-            bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+            bias_b1 = np.degrees( ang_pb1 - (pi-pi/separation) )## bias (positive means attraction)
             ang_pb2=theta[pb2]
-            bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
+            print((pi+pi/separation) - ang_pb2)
+            bias_b2 = np.degrees(  (pi+pi/separation) - ang_pb2  )## bias (positive means attraction)
             angles_final = [bias_b1, bias_b2]
         elif len(peaks)==1:   
             pb = peaks[0]
             theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
             ang_pb1=theta[pb]
-            bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+            bias_b1 = np.degrees( ang_pb1 - (pi-pi/separation) ) ## bias (positive means attraction)
             ang_pb2=theta[pb]
-            bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
+            bias_b2 = np.degrees( (pi+pi/separation) - ang_pb2 )## bias (positive means attraction)
             angles_final = [bias_b1, bias_b2]    
     
     # theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
@@ -258,9 +259,8 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
 ####
 
-rE, angles = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=0.1) 
-angles
-
+rE, angles = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=7) 
+print(angles)
 
 
 
