@@ -243,7 +243,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     # bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)ç
 
     ### Output
-    return(angles_final) #bias_b1, bias_b2)
+    return(rE, angles_final) #bias_b1, bias_b2)
 
 
 ###
@@ -253,7 +253,8 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
 ####
 
-b1, b2 = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=0.1) 
+rE, angles = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=0.1) 
+angles
 
 
 
