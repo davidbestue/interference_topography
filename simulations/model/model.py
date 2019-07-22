@@ -218,63 +218,74 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     if plot_fit==True:
         viz_polymonial()
 
-    #
-
-
-
-
+    #peaks bump
+    line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
+    pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
     
+    
+    theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
+    ang_pb1=theta[pb1]
+    bias b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+    
+    ang_pb2=theta[pb2]
+    bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)ç
+
     ### Output
-    return(rE)
+    return(bias b1, bias b2)
 
 
 ###
 
-rate = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
+
+
+
+####
+
+b1, b2 = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
 
 
 
 
 
-N=512
-separation=2
-y=np.reshape(rate, (N)) 
-X=np.reshape(np.arange(0, N), (N,1))
+# N=512
+# separation=2
+# y=np.reshape(rate, (N)) 
+# X=np.reshape(np.arange(0, N), (N,1))
 
 
 
-# Visualizing the Polymonial Regression results
-def viz_polymonial():
-    plt.figure()
-    plt.scatter(X, y, color='red')
-    plt.plot(X, pol_reg.predict(poly_reg.fit_transform(X)), color='blue')
-    plt.title('Fit Bump')
-    plt.xlabel('Neuron')
-    plt.ylabel('rate')
-    plt.show(block=False)
-    return
+# # Visualizing the Polymonial Regression results
+# def viz_polymonial():
+#     plt.figure()
+#     plt.scatter(X, y, color='red')
+#     plt.plot(X, pol_reg.predict(poly_reg.fit_transform(X)), color='blue')
+#     plt.title('Fit Bump')
+#     plt.xlabel('Neuron')
+#     plt.ylabel('rate')
+#     plt.show(block=False)
+#     return
 
 
 
-### Fit
-poly_reg = PolynomialFeatures(degree=6)
-X_poly = poly_reg.fit_transform(X)
-pol_reg = LinearRegression()
-pol_reg.fit(X_poly, y)
-#score = pol_reg.score(X_poly, y) 
-viz_polymonial()
+# ### Fit
+# poly_reg = PolynomialFeatures(degree=6)
+# X_poly = poly_reg.fit_transform(X)
+# pol_reg = LinearRegression()
+# pol_reg.fit(X_poly, y)
+# #score = pol_reg.score(X_poly, y) 
+# viz_polymonial()
 
 
-line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
-pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
+# line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
+# pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
 
 
-theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
-ang_pb1=theta[pb1]
-bias b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+# theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
+# ang_pb1=theta[pb1]
+# bias b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
 
-ang_pb2=theta[pb2]
-bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
+# ang_pb2=theta[pb2]
+# bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
 
 
 
