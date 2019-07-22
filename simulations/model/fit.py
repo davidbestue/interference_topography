@@ -60,8 +60,51 @@ plt.show(block=False)
 
 
 
-y=np.reshape(rate, (512)) 
+y=np.reshape(rE, (512)) 
 X=np.reshape(np.arange(0, 512), (512,1))
+
+
+
+
+# Fitting Polynomial Regression to the dataset
+def viz_polymonial():
+    plt.figure()
+    plt.scatter(X, y, color='red')
+    plt.plot(X, pol_reg.predict(poly_reg.fit_transform(X)), color='blue')
+    plt.title('Fit Bump')
+    plt.xlabel('Neuron')
+    plt.ylabel('rate')
+    plt.show(block=False)
+    return
+
+
+score=[]
+for deg_fir in range(1,20):    
+    poly_reg = PolynomialFeatures(degree=deg_fir)
+    X_poly = poly_reg.fit_transform(X)
+    pol_reg = LinearRegression()
+    pol_reg.fit(X_poly, y)
+    score.append( pol_reg.score(X_poly, y) )
+    viz_polymonial()
+
+
+
+plt.figure()
+plt.plot(np.arange(1,20), score)
+plt.show(block=False)
+
+
+
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+import scipy.signal
+
+
+y=np.reshape(rE, (N)) 
+X=np.reshape(np.arange(0, N), (N,1))
+
+
 
 # Visualizing the Polymonial Regression results
 def viz_polymonial():
@@ -75,28 +118,17 @@ def viz_polymonial():
     return
 
 
-# Fitting Polynomial Regression to the dataset
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
 
-score=[]
-for deg_fir in [6]:    
-    poly_reg = PolynomialFeatures(degree=deg_fir)
-    X_poly = poly_reg.fit_transform(X)
-    pol_reg = LinearRegression()
-    pol_reg.fit(X_poly, y)
-    score.append( pol_reg.score(X_poly, y) )
-    viz_polymonial()
-
-
-
-# plt.figure()
-# plt.plot(np.arange(1,10), score)
-# plt.show(block=False)
-
+### Fit
+poly_reg = PolynomialFeatures(degree=6)
+X_poly = poly_reg.fit_transform(X)
+pol_reg = LinearRegression()
+pol_reg.fit(X_poly, y)
+#score = pol_reg.score(X_poly, y) 
+viz_polymonial()
 
 
 line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
 
-import scipy.signal
+
 pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
