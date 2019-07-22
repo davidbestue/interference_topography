@@ -67,7 +67,15 @@ def Interference_effects(target, response, reference):
     return interferences
 
 
-
+def viz_polymonial():
+    plt.figure()
+    plt.scatter(X, y, color='red')
+    plt.plot(X, pol_reg.predict(poly_reg.fit_transform(X)), color='blue')
+    plt.title('Fit Bump')
+    plt.xlabel('Neuron')
+    plt.ylabel('rate')
+    plt.show(block=False)
+    return
 
 # model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
 
@@ -196,19 +204,8 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ###### Final bias
     y=np.reshape(rate, (N)) 
-    X=np.reshape(np.arange(0, N), (N,1)
-
+    X=np.reshape(np.arange(0, N), (N,1))
     # Visualizing the Polymonial Regression results
-    def viz_polymonial():
-        plt.figure()
-        plt.scatter(X, y, color='red')
-        plt.plot(X, pol_reg.predict(poly_reg.fit_transform(X)), color='blue')
-        plt.title('Fit Bump')
-        plt.xlabel('Neuron')
-        plt.ylabel('rate')
-        plt.show(block=False)
-        return
-
     ### Fit
     poly_reg = PolynomialFeatures(degree=6)
     X_poly = poly_reg.fit_transform(X)
@@ -225,7 +222,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     
     theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
     ang_pb1=theta[pb1]
-    bias b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+    bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
     
     ang_pb2=theta[pb2]
     bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)ç
