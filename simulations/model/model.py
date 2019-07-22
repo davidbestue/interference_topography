@@ -207,7 +207,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     X=np.reshape(np.arange(0, N), (N,1))
     # Visualizing the Polymonial Regression results
     ### Fit
-    poly_reg = PolynomialFeatures(degree=6) ## 6 is the optimal for both
+    poly_reg = PolynomialFeatures(degree=11) ## 6 is the optimal for both
     X_poly = poly_reg.fit_transform(X)
     pol_reg = LinearRegression()
     pol_reg.fit(X_poly, y)
