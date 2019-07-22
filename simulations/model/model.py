@@ -67,7 +67,7 @@ def Interference_effects(target, response, reference):
     return interferences
 
 
-def viz_polymonial():
+def viz_polymonial(X, y, poly_reg, pol_reg):
     plt.figure()
     plt.scatter(X, y, color='red')
     plt.plot(X, pol_reg.predict(poly_reg.fit_transform(X)), color='blue')
@@ -203,7 +203,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     print('Simulation time: ' + str(total_time) + 's')
 
     ###### Final bias
-    y=np.reshape(rate, (N)) 
+    y=np.reshape(rE, (N)) 
     X=np.reshape(np.arange(0, N), (N,1))
     # Visualizing the Polymonial Regression results
     ### Fit
@@ -213,22 +213,37 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     pol_reg.fit(X_poly, y)
     #score = pol_reg.score(X_poly, y) 
     if plot_fit==True:
-        viz_polymonial()
+        viz_polymonial(X, y, poly_reg, pol_reg)
 
     #peaks bump
     line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
-    pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
+    peaks = scipy.signal.find_peaks(line_pred)[0]
+
+    angles_final = [theta[peaks[x]] for x in range(len(peaks))]
+    #return angles_final
+
+    # if len(peaks) ==2:
+    #     pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
+    #     theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
+    #     ang_pb1=theta[pb1]
+    #     #bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+    #     ang_pb2=theta[pb2]
+    #     #bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
+    #     peaks=
+    # else:
+    #     bias_b1 = scipy.signal.find_peaks(line_pred)[0]
+
     
     
-    theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
-    ang_pb1=theta[pb1]
-    bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+    # theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
+    # ang_pb1=theta[pb1]
+    # bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
     
-    ang_pb2=theta[pb2]
-    bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)ç
+    # ang_pb2=theta[pb2]
+    # bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)ç
 
     ### Output
-    return(bias b1, bias b2)
+    return(angles_final) #bias_b1, bias_b2)
 
 
 ###
@@ -238,7 +253,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
 ####
 
-b1, b2 = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
+b1, b2 = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=0.1) 
 
 
 
