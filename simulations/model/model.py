@@ -207,7 +207,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     X=np.reshape(np.arange(0, N), (N,1))
     # Visualizing the Polymonial Regression results
     ### Fit
-    poly_reg = PolynomialFeatures(degree=11) ## 6 is the optimal for both
+    poly_reg = PolynomialFeatures(degree=6) ## 6 is the optimal for both
     X_poly = poly_reg.fit_transform(X)
     pol_reg = LinearRegression()
     pol_reg.fit(X_poly, y)
@@ -217,14 +217,14 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     #peaks bump
     line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
-    peaks = scipy.signal.find_peaks(line_pred)[0]
+    peaks = scipy.signal.find_peaks(line_pred, height=1)[0]
 
     angles_final = [theta[peaks[x]] for x in range(len(peaks))]
     #return angles_final
 
     if n_stims ==2:
         if len(peaks)==2:
-            pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
+            pb1, pb2 = peaks
             theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
             ang_pb1=theta[pb1]
             bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
@@ -232,7 +232,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
             bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
             angles_final = [bias_b1, bias_b2]
         elif len(peaks)==1:   
-            pb = scipy.signal.find_peaks(line_pred)[0]
+            pb = peaks
             theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
             ang_pb1=theta[pb]
             bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
