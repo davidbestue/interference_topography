@@ -230,8 +230,9 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
             angles_final = [bias_b1, bias_b2]
         elif len(peaks)==1:   
             pb = peaks[0]
-            bias_b1 =  np.degrees(pi-pi/separation) - np.degrees(theta[pb] )   ## bias (positive means attraction)
-            bias_b2 = np.degrees(theta[pb] ) - np.degrees( pi+pi/separation) ## bias (positive means attraction)
+            bias_b1 = np.degrees(theta[pb]) - np.degrees(pi - pi/separation) 
+            bias_b2 = np.degrees(pi + pi/separation) - np.degrees(theta[pb])  ## bias (positive means attraction)
+            #bias_b2 = np.degrees( pi+pi/separation) - np.degrees(theta[pb] )## bias (positive means attraction)
             angles_final = [bias_b1, bias_b2]    
     
     # theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
