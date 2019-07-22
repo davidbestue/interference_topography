@@ -223,14 +223,15 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     #return angles_final
 
     if n_stims ==2:
-        pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
-        theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
-        ang_pb1=theta[pb1]
-        bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
-        ang_pb2=theta[pb2]
-        bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
-        angles_final = [bias_b1, bias_b2]
-    
+        if len(peaks)==2:
+            pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
+            theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
+            ang_pb1=theta[pb1]
+            bias_b1 = ang_pb1 - (pi-pi/separation) ## bias (positive means attraction)
+            ang_pb2=theta[pb2]
+            bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)
+            angles_final = [bias_b1, bias_b2]
+	    
 
     
     
