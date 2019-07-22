@@ -166,7 +166,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     p_targ2 = int((N * np.degrees(origin - separation))/360)
     #
     if plot_rate==True:
-    	#### plot dynamics
+        #### plot dynamics
         fig = plt.figure()
         plt.title('Rate dynamics')
         plt.plot(RE[p_targ1, :], 'b', label='target1')
@@ -225,20 +225,13 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     if n_stims ==2:
         if len(peaks)==2:
             pb1, pb2 = peaks
-            theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
-            ang_pb1=theta[pb1]
-            bias_b1 = np.degrees( ang_pb1 - (pi-pi/separation) )## bias (positive means attraction)
-            ang_pb2=theta[pb2]
-            print((pi+pi/separation) - ang_pb2)
-            bias_b2 = np.degrees(  (pi+pi/separation) - ang_pb2  )## bias (positive means attraction)
+            bias_b1 = np.degrees(theta[pb1]) - np.degrees(pi - pi/7) 
+            bias_b2 =  np.degrees(pi + pi/7) - np.degrees(theta[pb2])
             angles_final = [bias_b1, bias_b2]
         elif len(peaks)==1:   
             pb = peaks[0]
-            theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
-            ang_pb1=theta[pb]
-            bias_b1 = np.degrees( ang_pb1 - (pi-pi/separation) ) ## bias (positive means attraction)
-            ang_pb2=theta[pb]
-            bias_b2 = np.degrees( (pi+pi/separation) - ang_pb2 )## bias (positive means attraction)
+            bias_b1 = np.degrees(theta[pb] ) - np.degrees(pi-pi/separation)  ## bias (positive means attraction)
+            bias_b2 = np.degrees( pi+pi/separation) - np.degrees(theta[pb] )## bias (positive means attraction)
             angles_final = [bias_b1, bias_b2]    
     
     # theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
@@ -249,18 +242,14 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     # bias_b2 = (pi+pi/separation) - ang_pb2 ## bias (positive means attraction)ç
 
     ### Output
-    return(rE, angles_final) #bias_b1, bias_b2)
+    return(rE, angles_final, peaks) #bias_b1, bias_b2)
 
 
 ###
-
-
-
-
 ####
 
-rE, angles = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=7) 
-print(angles)
+rE, angles, peaks = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=9) 
+print(angles, peaks)
 
 
 
