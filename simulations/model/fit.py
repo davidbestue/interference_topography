@@ -80,7 +80,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
 score=[]
-for deg_fir in range(1,10):    
+for deg_fir in [6]:    
     poly_reg = PolynomialFeatures(degree=deg_fir)
     X_poly = poly_reg.fit_transform(X)
     pol_reg = LinearRegression()
@@ -90,9 +90,13 @@ for deg_fir in range(1,10):
 
 
 
-plt.figure()
-plt.plot(np.arange(1,10), score)
-plt.show(block=False)
+# plt.figure()
+# plt.plot(np.arange(1,10), score)
+# plt.show(block=False)
 
 
 
+line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
+
+import scipy.signal
+pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
