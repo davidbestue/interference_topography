@@ -234,15 +234,15 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ### Output
     total_sep=np.degrees(2*separation)
-    return(final_bias, total_sep) #bias_b1, bias_b2)
+    return(final_bias[0], final_bias[1], total_sep) #bias_b1, bias_b2)
 
 
 ###
 ####
 
 ## Example
-bias, sep = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=16) 
-print(bias, sep)
+#bias, sep = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=16) 
+#print(bias, sep)
 
 
 
@@ -252,8 +252,8 @@ import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 3
 
-separations=[5,6,7,8,9,10,11]
+#separations=list(np.linspace(5,15,100)) 
+separations=list(np.linspace(5,15,3)) 
 
-
-results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, separation=seps)  for seps in [separations]) 
+results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps)  for seps in separations) 
 
