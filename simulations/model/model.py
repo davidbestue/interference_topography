@@ -250,8 +250,10 @@ print(bias, sep)
 from joblib import Parallel, delayed
 import multiprocessing
 
-Reconstructions_i = Parallel(n_jobs = numcores)(delayed(Representation)(signal, testing_angles_sh[n_rep], WM, WM_t, intercept=Inter, ref_angle=180, plot=False)  for signal in signal_paralel) 
+numcores = multiprocessing.cpu_count() - 3
+
+separations=[5,6,7,8,9,10,11]
 
 
-targets_timestamps  = Parallel(n_jobs = numcores)(delayed(enc_timestamps_targets)(beh_path, n_scans, sys_use='unix', hd=hd, TR=TR) for beh_path, n_scans in zip( beh_paths, scans_enc_runs))    ####
+results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, separation=seps)  for seps in [separations]) 
 
