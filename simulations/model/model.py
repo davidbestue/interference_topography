@@ -248,7 +248,7 @@ from joblib import Parallel, delayed
 import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 3
-separations=list(np.linspace(2.1,15,25)) * 4
+separations=list(np.linspace(2.1,20,25)) * 10
 gees=[0.021, 0.023]
 
 results_gee1 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[0])  for seps in separations) 
@@ -258,7 +258,7 @@ df_1 = pd.DataFrame(results_gee1)
 df_1.columns=['b1', 'b2', 'distance', 'GEE']
 df_2 = pd.DataFrame(results_gee2)
 df_2.columns=['b1', 'b2', 'distance', 'GEE']
-df = pd.concat([df_1, dfs])
+df = pd.concat([df_1, df_2])
 
 sns.lineplot( x="distance", y="b1", hue='GEE',  ci=95 , data=df) 
 plt.plot([0, max(df['distance'])], [0,0], 'k--') 
