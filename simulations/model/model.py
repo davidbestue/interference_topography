@@ -241,65 +241,66 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 ####
 
 ## Example
-#bias, sep = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=16) 
+bias_b1, bias_b2, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=3, plot_hm=True , tauE=9, tauI=4,  
+    n_stims=2, I0E=0.1, I0I=0.5, GEE=0.5, GEI=0.1, GIE=0.1 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=10, kappa_I=.75, kappa_stim=30, plot_fit=False) 
 #print(bias, sep)
 
-from joblib import Parallel, delayed
-import multiprocessing
+# from joblib import Parallel, delayed
+# import multiprocessing
 
-numcores = multiprocessing.cpu_count() - 3
-separations=list(np.linspace(2.1,20,25)) * 10
-gees=[0.021, 0.023]
+# numcores = multiprocessing.cpu_count() - 3
+# separations=list(np.linspace(2.1,20,10)) 
+# gees=[0.0205, 0.023]
 
-results_gee1 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[0])  for seps in separations) 
-results_gee2 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[1])  for seps in separations) 
+# results_gee1 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[0])  for seps in separations) 
+# results_gee2 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[1])  for seps in separations) 
 
-df_1 = pd.DataFrame(results_gee1)
-df_1.columns=['b1', 'b2', 'distance', 'GEE']
-df_2 = pd.DataFrame(results_gee2)
-df_2.columns=['b1', 'b2', 'distance', 'GEE']
-df = pd.concat([df_1, df_2])
+# df_1 = pd.DataFrame(results_gee1)
+# df_1.columns=['b1', 'b2', 'distance', 'GEE']
+# df_2 = pd.DataFrame(results_gee2)
+# df_2.columns=['b1', 'b2', 'distance', 'GEE']
+# df = pd.concat([df_1, df_2])
 
-sns.lineplot( x="distance", y="b1", hue='GEE',  ci=95 , data=df) 
-plt.plot([0, max(df['distance'])], [0,0], 'k--') 
-plt.title('Bias with distance') #condition title
-plt.gca().spines['right'].set_visible(False) #no right axis
-plt.gca().spines['top'].set_visible(False) #no  top axis
-plt.gca().get_xaxis().tick_bottom()
-plt.gca().get_yaxis().tick_left()
-plt.show(block=False)
-
-
-##fit
-###### Final bias
-y=np.reshape(df['b1'].values, (len(df))) 
-X=np.reshape(df['distance'].values, (len(df),1))
-# Visualizing the Polymonial Regression results
-### Fit
-poly_reg = PolynomialFeatures(degree=4) ## 6 is the optimal for both
-X_poly = poly_reg.fit_transform(X)
-pol_reg = LinearRegression()
-pol_reg.fit(X_poly, y)
-viz_polymonial(X, y, poly_reg, pol_reg)
-
-
-
-# score=[]
-# min_ = 1
-# max_ = 10
-# for deg_fir in range(min_,max_):    
-#     poly_reg = PolynomialFeatures(degree=deg_fir)
-#     X_poly = poly_reg.fit_transform(X)
-#     pol_reg = LinearRegression()
-#     pol_reg.fit(X_poly, y)
-#     score.append( pol_reg.score(X_poly, y) )
-#     viz_polymonial(X, y, poly_reg, pol_reg)
-
-
-
-
-# plt.figure()
-# plt.plot(np.arange(min_,max_), score)
+# sns.lineplot( x="distance", y="b1", hue='GEE',  ci=95 , data=df) 
+# plt.plot([0, max(df['distance'])], [0,0], 'k--') 
+# plt.title('Bias with distance') #condition title
+# plt.gca().spines['right'].set_visible(False) #no right axis
+# plt.gca().spines['top'].set_visible(False) #no  top axis
+# plt.gca().get_xaxis().tick_bottom()
+# plt.gca().get_yaxis().tick_left()
 # plt.show(block=False)
+
+
+# ##fit
+# ###### Final bias
+# y=np.reshape(df['b1'].values, (len(df))) 
+# X=np.reshape(df['distance'].values, (len(df),1))
+# # Visualizing the Polymonial Regression results
+# ### Fit
+# poly_reg = PolynomialFeatures(degree=4) ## 6 is the optimal for both
+# X_poly = poly_reg.fit_transform(X)
+# pol_reg = LinearRegression()
+# pol_reg.fit(X_poly, y)
+# viz_polymonial(X, y, poly_reg, pol_reg)
+
+
+
+# # score=[]
+# # min_ = 1
+# # max_ = 10
+# # for deg_fir in range(min_,max_):    
+# #     poly_reg = PolynomialFeatures(degree=deg_fir)
+# #     X_poly = poly_reg.fit_transform(X)
+# #     pol_reg = LinearRegression()
+# #     pol_reg.fit(X_poly, y)
+# #     score.append( pol_reg.score(X_poly, y) )
+# #     viz_polymonial(X, y, poly_reg, pol_reg)
+
+
+
+
+# # plt.figure()
+# # plt.plot(np.arange(min_,max_), score)
+# # plt.show(block=False)
 
 
