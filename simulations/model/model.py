@@ -251,9 +251,15 @@ numcores = multiprocessing.cpu_count() - 3
 separations=list(np.linspace(2.01,15,25)) * 4
 gees=[0.020, 0.023]
 
-results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gee)  for seps, gee in zip(separations, gees)) 
-df=pd.DataFrame(results)
-df.columns=['b1', 'b2', 'distance', 'GEE']
+results_gee1 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[0])  for seps in separations) 
+results_gee2 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[1])  for seps in separations) 
+
+df_1 = pd.DataFrame(results_gee1)
+df_1.columns=['b1', 'b2', 'distance', 'GEE']
+df_2 = pd.DataFrame(results_gee2)
+df_2.columns=['b1', 'b2', 'distance', 'GEE']
+df = pd.concat([df_1, dfs])
+
 sns.lineplot( x="distance", y="b1", hue='GEE',  ci=95 , data=df) 
 plt.plot([0, max(df['distance'])], [0,0], 'k--') 
 plt.title('Bias with distance') #condition title
