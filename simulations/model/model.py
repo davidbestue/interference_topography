@@ -248,8 +248,8 @@ from joblib import Parallel, delayed
 import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 3
-separations=list(np.linspace(2.01,15,25)) * 4
-gees=[0.020, 0.023]
+separations=list(np.linspace(2.1,15,25)) * 4
+gees=[0.021, 0.023]
 
 results_gee1 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[0])  for seps in separations) 
 results_gee2 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps, GEE=gees[1])  for seps in separations) 
