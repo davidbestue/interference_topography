@@ -244,9 +244,6 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #bias, sep = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=16) 
 #print(bias, sep)
 
-
-
-
 from joblib import Parallel, delayed
 import multiprocessing
 
