@@ -244,3 +244,14 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 bias, sep = model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=16) 
 print(bias, sep)
 
+
+
+
+from joblib import Parallel, delayed
+import multiprocessing
+
+Reconstructions_i = Parallel(n_jobs = numcores)(delayed(Representation)(signal, testing_angles_sh[n_rep], WM, WM_t, intercept=Inter, ref_angle=180, plot=False)  for signal in signal_paralel) 
+
+
+targets_timestamps  = Parallel(n_jobs = numcores)(delayed(enc_timestamps_targets)(beh_path, n_scans, sys_use='unix', hd=hd, TR=TR) for beh_path, n_scans in zip( beh_paths, scans_enc_runs))    ####
+
