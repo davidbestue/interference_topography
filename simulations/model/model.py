@@ -255,8 +255,8 @@ from joblib import Parallel, delayed
 import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 3
-separations=list(np.linspace(2.1,25,10)) * 100
-gees=[0.021, 0.023]
+separations=list(np.linspace(2.1,25,10)) * 10
+gees=[0.022, 0.024]
 
 results_gee1 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=seps, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=gees[0], GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=4, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for seps in separations) 
 results_gee2 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=seps, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=gees[1], GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=4, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for seps in separations) 
@@ -279,15 +279,15 @@ plt.show(block=False)
 
 ##fit
 ###### Final bias
-y=np.reshape(df['bias'].values, (len(df))) 
-X=np.reshape(df['distance'].values, (len(df),1))
-# Visualizing the Polymonial Regression results
-### Fit
-poly_reg = PolynomialFeatures(degree=4) ## 6 is the optimal for both
-X_poly = poly_reg.fit_transform(X)
-pol_reg = LinearRegression()
-pol_reg.fit(X_poly, y)
-viz_polymonial(X, y, poly_reg, pol_reg)
+# y=np.reshape(df['bias'].values, (len(df))) 
+# X=np.reshape(df['distance'].values, (len(df),1))
+# # Visualizing the Polymonial Regression results
+# ### Fit
+# poly_reg = PolynomialFeatures(degree=4) ## 6 is the optimal for both
+# X_poly = poly_reg.fit_transform(X)
+# pol_reg = LinearRegression()
+# pol_reg.fit(X_poly, y)
+# viz_polymonial(X, y, poly_reg, pol_reg)
 
 
 
