@@ -231,10 +231,13 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
             bias_b1 = np.degrees(theta[pb]) - np.degrees( pi - separation)
             bias_b2 = np.degrees(pi + separation) - np.degrees(theta[pb])  ## bias (positive means attraction)
             final_bias = [bias_b1, bias_b2]   
+        else:
+            final_bias=[0,0]
+            print('Error in simulation')
 
     ### Output
     total_sep=np.degrees(2*separation)
-    return(np.mean([bias_b1, bias_b2]), total_sep, GEE) #bias_b1, bias_b2)
+    return(np.mean(final_bias), total_sep, GEE) #bias_b1, bias_b2)
 
 
 ###
@@ -252,8 +255,8 @@ from joblib import Parallel, delayed
 import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 3
-separations=list(np.linspace(2.1,10,10)) 
-gees=[0.021, 0.024]
+separations=list(np.linspace(2.1,25,10)) *100
+gees=[0.021, 0.023]
 
 results_gee1 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=seps, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=gees[0], GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=4, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for seps in separations) 
 results_gee2 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=seps, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=gees[1], GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=4, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for seps in separations) 
@@ -264,7 +267,7 @@ df_2 = pd.DataFrame(results_gee2)
 df_2.columns=['bias', 'distance', 'GEE']
 df = pd.concat([df_1, df_2])
 
-sns.lineplot( x="distance", y="b1", hue='GEE',  ci=95 , data=df) 
+sns.lineplot( x="distance", y="bias", hue='GEE', ci=95 , palette='viridis', data=df) 
 plt.plot([0, max(df['distance'])], [0,0], 'k--') 
 plt.title('Bias with distance') #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
@@ -276,7 +279,7 @@ plt.show(block=False)
 
 ##fit
 ###### Final bias
-y=np.reshape(df['b1'].values, (len(df))) 
+y=np.reshape(df['bias'].values, (len(df))) 
 X=np.reshape(df['distance'].values, (len(df),1))
 # Visualizing the Polymonial Regression results
 ### Fit
