@@ -234,7 +234,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ### Output
     total_sep=np.degrees(2*separation)
-    return(final_bias[0], final_bias[1], total_sep) #bias_b1, bias_b2)
+    return(bias_b1, bias_b2, total_sep) #bias_b1, bias_b2)
 
 
 ###
@@ -251,9 +251,52 @@ from joblib import Parallel, delayed
 import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 3
+separations=list(np.linspace(2.01,15,25)) * 4
 
-#separations=list(np.linspace(5,15,100)) 
-separations=list(np.linspace(5,15,3)) 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=100, plot_hm=False , plot_fit=False, separation=seps)  for seps in separations) 
+df=pd.DataFrame(results)
+df.columns=['b1', 'b2', 'distance']
+sns.lineplot( x="distance", y="b1",  ci=95 , data=df) 
+plt.plot([0, max(df['distance'])], [0,0], 'k--') 
+plt.title('Bias with distance') #condition title
+plt.gca().spines['right'].set_visible(False) #no right axis
+plt.gca().spines['top'].set_visible(False) #no  top axis
+plt.gca().get_xaxis().tick_bottom()
+plt.gca().get_yaxis().tick_left()
+plt.show(block=False)
+
+
+##fit
+###### Final bias
+y=np.reshape(df['b1'].values, (len(df))) 
+X=np.reshape(df['distance'].values, (len(df),1))
+# Visualizing the Polymonial Regression results
+### Fit
+poly_reg = PolynomialFeatures(degree=5) ## 6 is the optimal for both
+X_poly = poly_reg.fit_transform(X)
+pol_reg = LinearRegression()
+pol_reg.fit(X_poly, y)
+viz_polymonial(X, y, poly_reg, pol_reg)
+
+
+
+# score=[]
+# min_ = 4
+# max_ = 10
+# for deg_fir in range(min_,max_):    
+#     poly_reg = PolynomialFeatures(degree=deg_fir)
+#     X_poly = poly_reg.fit_transform(X)
+#     pol_reg = LinearRegression()
+#     pol_reg.fit(X_poly, y)
+#     score.append( pol_reg.score(X_poly, y) )
+#     viz_polymonial(X, y, poly_reg, pol_reg)
+
+
+
+
+# plt.figure()
+# plt.plot(np.arange(min_,max_), score)
+# plt.show(block=False)
+
 
