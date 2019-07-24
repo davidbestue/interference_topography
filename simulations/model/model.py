@@ -205,6 +205,10 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     ###### Final bias
     y=np.reshape(rE, (N)) 
     X=np.reshape(np.arange(0, N), (N,1))
+
+    y=np.reshape(rE[int(N/4) : int(N*3/4)]  , (int(N/2)))  ### just use the center part of the data (N/2 points)
+    X=np.reshape(np.arange(0, int(N/2) ), (int(N/2) ,1))   ### just use the center part of the data (N/2 points)
+
     # Visualizing the Polymonial Regression results
     ### Fit
     poly_reg = PolynomialFeatures(degree=7) ## 6 is the optimal for both
@@ -307,26 +311,29 @@ print(bias, total_sep)
 
 
 
-score=[]
-min_ = 11
-max_ = 20
+# score=[]
+# min_ = 1
+# max_ = 20
 
-y=np.reshape(rE, (512)) 
-X=np.reshape(np.arange(0, 512), (512,1))
+# y=np.reshape(rE, (512)) 
+# X=np.reshape(np.arange(0, 512), (512,1))
 
-for deg_fir in range(min_,max_):    
-    poly_reg = PolynomialFeatures(degree=deg_fir)
-    X_poly = poly_reg.fit_transform(X)
-    pol_reg = LinearRegression()
-    pol_reg.fit(X_poly, y)
-    score.append( pol_reg.score(X_poly, y) )
-    viz_polymonial(X, y, poly_reg, pol_reg)
+# y=np.reshape(rE[int(512/4) : int(512*3/4)]  , (int(512/2)))  
+# X=np.reshape(np.arange(0, int(512/2) ), (int(512/2) ,1))
+
+# for deg_fir in range(min_,max_):    
+#     poly_reg = PolynomialFeatures(degree=deg_fir)
+#     X_poly = poly_reg.fit_transform(X)
+#     pol_reg = LinearRegression()
+#     pol_reg.fit(X_poly, y)
+#     score.append( pol_reg.score(X_poly, y) )
+#     viz_polymonial(X, y, poly_reg, pol_reg)
 
 
 
 
-plt.figure()
-plt.plot(np.arange(min_,max_), score)
-plt.show(block=False)
+# plt.figure()
+# plt.plot(np.arange(min_,max_), score)
+# plt.show(block=False)
 
 
