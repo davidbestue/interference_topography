@@ -247,7 +247,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #bias_b1, bias_b2, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
 # GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=5, kappa_stim=20, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
-bias, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.028, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=100, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
+bias, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.026, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=125, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 print(bias, total_sep)
 
 
