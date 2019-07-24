@@ -207,7 +207,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     X=np.reshape(np.arange(0, N), (N,1))
     # Visualizing the Polymonial Regression results
     ### Fit
-    poly_reg = PolynomialFeatures(degree=6) ## 6 is the optimal for both
+    poly_reg = PolynomialFeatures(degree=7) ## 6 is the optimal for both
     X_poly = poly_reg.fit_transform(X)
     pol_reg = LinearRegression()
     pol_reg.fit(X_poly, y)
@@ -237,7 +237,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ### Output
     total_sep=np.degrees(2*separation)
-    return(np.mean(final_bias), total_sep, GEE) #bias_b1, bias_b2)
+    return(np.mean(final_bias), total_sep, GEE, rE) #bias_b1, bias_b2)
 
 
 ###
@@ -247,7 +247,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #bias_b1, bias_b2, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
 # GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=5, kappa_stim=20, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
-bias, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.026, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=125, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
+bias, total_sep, GEE, rE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 print(bias, total_sep)
 
 
@@ -293,8 +293,8 @@ print(bias, total_sep)
 # plt.show(block=False)
 
 
-##fit
-###### Final bias
+# #fit
+# ##### Final bias
 # y=np.reshape(df['bias'].values, (len(df))) 
 # X=np.reshape(df['distance'].values, (len(df),1))
 # # Visualizing the Polymonial Regression results
@@ -307,22 +307,26 @@ print(bias, total_sep)
 
 
 
-# # score=[]
-# # min_ = 1
-# # max_ = 10
-# # for deg_fir in range(min_,max_):    
-# #     poly_reg = PolynomialFeatures(degree=deg_fir)
-# #     X_poly = poly_reg.fit_transform(X)
-# #     pol_reg = LinearRegression()
-# #     pol_reg.fit(X_poly, y)
-# #     score.append( pol_reg.score(X_poly, y) )
-# #     viz_polymonial(X, y, poly_reg, pol_reg)
+score=[]
+min_ = 11
+max_ = 20
+
+y=np.reshape(rE, (512)) 
+X=np.reshape(np.arange(0, 512), (512,1))
+
+for deg_fir in range(min_,max_):    
+    poly_reg = PolynomialFeatures(degree=deg_fir)
+    X_poly = poly_reg.fit_transform(X)
+    pol_reg = LinearRegression()
+    pol_reg.fit(X_poly, y)
+    score.append( pol_reg.score(X_poly, y) )
+    viz_polymonial(X, y, poly_reg, pol_reg)
 
 
 
 
-# # plt.figure()
-# # plt.plot(np.arange(min_,max_), score)
-# # plt.show(block=False)
+plt.figure()
+plt.plot(np.arange(min_,max_), score)
+plt.show(block=False)
 
 
