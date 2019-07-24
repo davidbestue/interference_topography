@@ -238,6 +238,8 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         else:
             final_bias=[0,0]
             print('Error in simulation')
+    else:
+        final_bias=0
 
     ### Output
     total_sep=np.degrees(2*separation)
