@@ -79,7 +79,7 @@ def viz_polymonial():
 
 
 score=[]
-for deg_fir in range(1,20):    
+for deg_fir in range(5,15):    
     poly_reg = PolynomialFeatures(degree=deg_fir)
     X_poly = poly_reg.fit_transform(X)
     pol_reg = LinearRegression()
@@ -90,7 +90,7 @@ for deg_fir in range(1,20):
 
 
 plt.figure()
-plt.plot(np.arange(1,20), score)
+plt.plot(np.arange(5,15), score)
 plt.show(block=False)
 
 
@@ -132,3 +132,172 @@ line_pred = pol_reg.predict(poly_reg.fit_transform(X))
 
 
 pb1, pb2 = scipy.signal.find_peaks(line_pred)[0]
+
+
+
+
+from pylab import *
+from scipy.optimize import curve_fit
+
+# y=np.reshape(rE, (512)) 
+# X=np.reshape(np.arange(0, 512), (512,1))
+
+
+data=concatenate((normal(1,.2,5000),normal(2,.2,2500)))
+data=np.reshape(rE, (512)) 
+y,x,_=hist(data,100,alpha=.3,label='data')
+
+
+y=np.reshape(rE, (512)) 
+y=scipy.stats.zscore(y)
+x=np.reshape(np.arange(0, 512), (512))
+
+#y=np.reshape(rE, (512)) 
+X=np.reshape(np.arange(0, 512), (512,1))
+
+#x=(x[1:]+x[:-1])/2 # for len(x)==len(y)
+
+def gauss(x,mu,sigma,A):
+    return A*exp(-(x-mu)**2/2/sigma**2)
+
+def bimodal(x,mu1,sigma1,A1,mu2,sigma2,A2):
+    return gauss(x,mu1,sigma1,A1)+gauss(x,mu2,sigma2,A2)
+
+
+params =curve_fit(bimodal,x,y)
+sigma=sqrt(diag(cov))
+plot(x,bimodal(x,*params),color='red',lw=3,label='model')
+legend()
+print(params,'\n',sigma)  
+
+
+sklearn.preprocessing.normalize(y)
+
+
+bias, total_sep, GEE, rE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+
+
+
+
+from pylab import *
+from scipy.optimize import curve_fit
+
+data=concatenate((normal(1,.2,5000),normal(2,.2,2500)))
+y,x,_=hist(data,100,alpha=.3,label='data')
+
+x=(x[1:]+x[:-1])/2 # for len(x)==len(y)
+
+def gauss(x,mu,sigma,A):
+    return A*exp(-(x-mu)**2/2/sigma**2)
+
+def bimodal(x,mu1,sigma1,A1,mu2,sigma2,A2):
+    return gauss(x,mu1,sigma1,A1)+gauss(x,mu2,sigma2,A2)
+
+expected=(1,.2,250,2,.2,125)
+params,cov=curve_fit(bimodal,x,y,expected)
+plt.figure()
+sigma=sqrt(diag(cov))
+plot(x,bimodal(x,*params),color='red',lw=3,label='model')
+legend()
+print(params,'\n',sigma)  
+plt.show()
+
+
+
+
+def gauss(x,mu,sigma,A):
+    return A*exp(-(x-mu)**2/2/sigma**2)
+
+
+
+x= np.arange(0,512, 1)
+y = rE.reshape(1, 512)[0]
+
+param, covs = curve_fit(gauss, x, y)
+#sigma=sqrt(diag(covs))
+#plot(x,gauss(x,*param),color='red',lw=3,label='model')
+#legend()
+#print(param,'\n',sigma)  
+
+  
+  
+print("Sine funcion coefficients:") 
+print(param) 
+print("Covariance of coefficients:") 
+print(param_cov) 
+  
+# ans stores the new y-data according to  
+# the coefficients given by curve-fit() function 
+ans = param[2]*exp(-(x-param[0])**2/2/param[1]**2)
+  
+'''Below 4 lines can be un-commented for plotting results  
+using matplotlib as shown in the first example. '''
+  
+plt.plot(x, y, 'o', color ='red', label ="data") 
+plt.plot(x, ans, '--', color ='blue', label ="optimized data") 
+plt.legend() 
+plt.show(block=False) 
+
+
+
+
+
+
+def gauss(x,mu,sigma,A):
+    return A*exp(-(x-mu)**2/2/sigma**2)
+
+def bimodal(x,mu1,sigma1,A1,mu2,sigma2,A2):
+    return gauss(x,mu1,sigma1,A1)+gauss(x,mu2,sigma2,A2)
+
+
+
+
+score=[]
+min_ = 1
+max_ = 20
+
+y=np.reshape(rE, (512)) 
+X=np.reshape(np.arange(0, 512), (512,1))
+
+#y=np.reshape(rE[int(512/4) : int(512*3/4)]  , (int(512/2)))  
+#X=np.reshape(np.arange(0, int(512/2) ), (int(512/2) ,1))
+
+for deg_fir in range(min_,max_):    
+    poly_reg = PolynomialFeatures(degree=deg_fir)
+    X_poly = poly_reg.fit_transform(X)
+    pol_reg = LinearRegression()
+    pol_reg.fit(X_poly, y)
+    score.append( pol_reg.score(X_poly, y) )
+    viz_polymonial(X, y, poly_reg, pol_reg)
+
+
+
+
+plt.figure()
+plt.plot(np.arange(min_,max_), score)
+plt.show(block=False)
+
+
+
+def gauss(x,mu,sigma,A):
+    return A*exp(-(x-mu)**2/2/sigma**2)
+
+
+
+y=np.reshape(rE, (512)) 
+#X=np.reshape(np.arange(0, 1, 512), (512))
+
+X=np.reshape(np.linspace(0,1, 512), 512)
+param, covs = curve_fit(gauss, X, y)
+
+
+ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2)
+  
+'''Below 4 lines can be un-commented for plotting results  
+using matplotlib as shown in the first example. '''
+  
+plt.plot(X, y, 'o', color ='red', label ="data") 
+plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
+plt.legend() 
+plt.show(block=False) 
+
