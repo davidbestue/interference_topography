@@ -310,11 +310,34 @@ estimated_angle=np.degrees(theta[int(param[0])])
 
 
 
+################ Bimodal
+
+
+
+N=512
+y=np.reshape(rE, (N)) 
+X=np.reshape(np.linspace(1, N, N), N)
+
+
+abs_du = np.abs(np.array(theta)- (pi - pi/5))
+orig_1 = np.where( abs_du == abs_du.min())[0][0]
+
+abs_du = np.abs(np.array(theta)- (pi + pi/5))
+orig_2 = np.where( abs_du == abs_du.min())[0][0]
+
+
+starting_point_std = 15
+starting_point_A = 5
+
+def gauss(x,mu,sigma,A):
+    return A*exp(-(x-mu)**2/2/sigma**2)
+
+
+
 def bimodal(x,mu1,sigma1,A1,mu2,sigma2,A2):
     return gauss(x,mu1,sigma1,A1)+gauss(x,mu2,sigma2,A2)
 
-
-param, covs = curve_fit(bimodal, X, y, p0 = np.array([200, 15, 5, 300, 15, 5] ))
+param, covs = curve_fit(bimodal, X, y, p0 = np.array([orig_1, starting_point_std, starting_point_A, orig_2, starting_point_std, starting_point_A] ))
 
 ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2) +   param[5]*exp(-(X-param[3])**2/2/param[4]**2) 
   
@@ -326,7 +349,12 @@ plt.legend()
 plt.show(block=False) 
 
 
+estimated_angle_1 = np.degrees(theta[int(param[0])] )
+estimated_angle_2 = np.degrees(theta[int(param[3])] )
+print(estimated_angle_1, estimated_angle_2)
 
+
+###########################
 
 def von_misses(x,mu,k):
     return (exp( k * cos(x-mu))) / (2*pi*scipy.special.i0(k)) 
@@ -369,5 +397,10 @@ plt.plot(X, y, 'o', color ='red', label ="data")
 plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
 plt.legend() 
 plt.show(block=False) 
+
+
+
+
+
 
 
