@@ -328,10 +328,6 @@ plt.show(block=False)
 
 
 
-
-
-
-
 def von_misses(x,mu,k):
     return (exp( k * cos(x-mu))) / (2*pi*scipy.special.i0(k)) 
 
@@ -345,7 +341,6 @@ param, covs = curve_fit(von_misses, X, y)
 
 ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
 
-param[2]*exp(-(X-param[0])**2/2/param[1]**2)
   
 '''Below 4 lines can be un-commented for plotting results  
 using matplotlib as shown in the first example. '''
@@ -355,3 +350,24 @@ plt.legend()
 plt.show(block=False) 
 
 estimated_angle=np.degrees(param[0]+pi)  
+
+
+
+
+
+def bi_von_misses(x,mu1,k1,mu2,k2):
+    return von_misses(x,mu1,k1) + von_misses(x,mu2,k2)
+
+
+param, covs = curve_fit(bi_von_misses, X, y)
+
+ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
+  
+'''Below 4 lines can be un-commented for plotting results  
+using matplotlib as shown in the first example. '''
+plt.plot(X, y, 'o', color ='red', label ="data") 
+plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
+plt.legend() 
+plt.show(block=False) 
+
+
