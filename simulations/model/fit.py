@@ -143,6 +143,18 @@ print(estimated_angle_1, estimated_angle_2 )
 
 
 
+############### Get score R2 of the fit with curve_fit() It can be applyied to all the previous methods
+
+residuals = y - ans
+ss_res = np.sum(residuals**2)
+ss_tot = np.sum((y-numpy.mean(y))**2)
+r_squared = 1 - (ss_res / ss_tot)
+print(r_squared)
+
+
+
+
+
 ##### Polinomial fit
 def viz_polymonial(X, y, poly_reg, pol_reg):
     plt.figure()
