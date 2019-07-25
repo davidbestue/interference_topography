@@ -144,6 +144,7 @@ print(estimated_angle_1, estimated_angle_2 )
 
 
 ############### Get score R2 of the fit with curve_fit() It can be applyied to all the previous methods
+############### Best fit = 1, worst fit = 0 
 
 residuals = y - ans
 ss_res = np.sum(residuals**2)
