@@ -295,7 +295,6 @@ ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2)
   
 '''Below 4 lines can be un-commented for plotting results  
 using matplotlib as shown in the first example. '''
-  
 plt.plot(X, y, 'o', color ='red', label ="data") 
 plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
 plt.legend() 
