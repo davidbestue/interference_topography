@@ -306,13 +306,10 @@ plt.show(block=False)
 theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
 
 estimated_angle=np.degrees(theta[int(param[0])])
-
-
+print(estimated_angle)
 
 
 ################ Bimodal
-
-
 
 N=512
 y=np.reshape(rE, (N)) 
@@ -354,7 +351,9 @@ estimated_angle_2 = np.degrees(theta[int(param[3])] )
 print(estimated_angle_1, estimated_angle_2)
 
 
-###########################
+
+
+########################### von misses
 
 def von_misses(x,mu,k):
     return (exp( k * cos(x-mu))) / (2*pi*scipy.special.i0(k)) 
@@ -378,6 +377,9 @@ plt.legend()
 plt.show(block=False) 
 
 estimated_angle=np.degrees(param[0]+pi)  
+
+print(estimated_angle)
+
 
 
 
