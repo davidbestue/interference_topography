@@ -290,7 +290,7 @@ starting_point_std = 15
 y=np.reshape(rE, (N)) 
 X=np.reshape(np.linspace(1, N, N), N)
 
-param, covs = curve_fit(gauss, X, y, p0 = np.array([1, starting_point_std, 1] ))
+param, covs = curve_fit(gauss, X, y, p0 = np.array([250, starting_point_std, 5] ))
 
 
 ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2)
@@ -302,7 +302,12 @@ plt.plot(X, ans, '--', color ='blue', label ="optimized data")
 plt.legend() 
 plt.show(block=False) 
 
-estimated_angle=np.degrees(param[0]+pi)  
+
+theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
+
+estimated_angle=np.degrees(theta[int(param[0])])
+
+
 
 
 def bimodal(x,mu1,sigma1,A1,mu2,sigma2,A2):
@@ -319,6 +324,10 @@ plt.plot(X, y, 'o', color ='red', label ="data")
 plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
 plt.legend() 
 plt.show(block=False) 
+
+
+
+
 
 
 
