@@ -278,16 +278,20 @@ plt.plot(np.arange(min_,max_), score)
 plt.show(block=False)
 
 
+
+
+
 def gauss(x,mu,sigma,A):
     return A*exp(-(x-mu)**2/2/sigma**2)
 
 
 
 y=np.reshape(rE, (512)) 
-#X=np.reshape(np.arange(0, 1, 512), (512))
-
 X=np.reshape(np.linspace(0,1, 512), 512)
-param, covs = curve_fit(gauss, X, y)
+
+X=np.reshape(np.linspace(1, 512, 512), 512)
+
+param, covs = curve_fit(gauss, X, y, p0 = np.array([1, 15, 1] ))
 
 
 ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2)
