@@ -1,9 +1,7 @@
 
 
-import numpy as np 
 from scipy.optimize import curve_fit 
-from matplotlib import pyplot as plt 
-from pylab import *
+
 
 
 #### Gaussian
@@ -45,6 +43,8 @@ N=512
 sep=5
 y=np.reshape(rE, (N)) 
 X=np.reshape(np.linspace(1, N, N), N)
+
+theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
 
 
 abs_du = np.abs(np.array(theta)- (pi - pi/sep))
