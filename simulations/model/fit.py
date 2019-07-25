@@ -1,10 +1,8 @@
 
-
 from scipy.optimize import curve_fit 
 
 
-
-#### Gaussian
+############## Gaussian
 
 def gauss(x,mu,sigma,A):
     return A*exp(-(x-mu)**2/2/sigma**2)
@@ -37,7 +35,7 @@ estimated_angle=np.degrees(theta[int(param[0])])
 print(estimated_angle)
 
 
-################ Bimodal
+############## Bimodal
 
 N=512
 sep=5
@@ -83,9 +81,7 @@ estimated_angle_2 = np.degrees(theta[int(param[3])] )
 print(estimated_angle_1, estimated_angle_2)
 
 
-
-
-########################### von misses
+###################### von misses
 
 def von_misses(x,mu,k):
     return (exp( k * cos(x-mu))) / (2*pi*scipy.special.i0(k)) 
@@ -114,9 +110,7 @@ print(estimated_angle)
 
 
 
-
-
-########################### von misses double
+################## von misses double
 
 
 def von_misses(x,mu,k):
