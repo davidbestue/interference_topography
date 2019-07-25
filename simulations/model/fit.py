@@ -278,7 +278,6 @@ plt.plot(np.arange(min_,max_), score)
 plt.show(block=False)
 
 
-
 def gauss(x,mu,sigma,A):
     return A*exp(-(x-mu)**2/2/sigma**2)
 
