@@ -430,7 +430,6 @@ plt.show(block=False)
 estimated_angle_1=np.degrees(param[0]+pi)  
 estimated_angle_2=np.degrees(param[2]+pi)  
 
-
 print(estimated_angle_1, estimated_angle_2 )
 
 
