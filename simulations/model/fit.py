@@ -111,8 +111,6 @@ print(estimated_angle)
 
 
 ################## von misses double
-
-
 def von_misses(x,mu,k):
     return (exp( k * cos(x-mu))) / (2*pi*scipy.special.i0(k)) 
 
@@ -145,5 +143,55 @@ print(estimated_angle_1, estimated_angle_2 )
 
 
 
+##### Polinomial fit
+def viz_polymonial(X, y, poly_reg, pol_reg):
+    plt.figure()
+    plt.scatter(X, y, color='red')
+    plt.plot(X, pol_reg.predict(poly_reg.fit_transform(X)), color='blue')
+    plt.title('Fit Bump')
+    plt.xlabel('Neuron')
+    plt.ylabel('rate')
+    plt.show(block=False)
+    return
+
+
+
+y=np.reshape(rE, (N)) 
+X=np.reshape(np.arange(0, N), (N,1))
+
+# Visualizing the Polymonial Regression results
+### Fit
+poly_reg = PolynomialFeatures(degree=7) ## 6 is the optimal for both
+X_poly = poly_reg.fit_transform(X)
+pol_reg = LinearRegression()
+pol_reg.fit(X_poly, y)
+viz_polymonial(X, y, poly_reg, pol_reg)
+
+#peaks bump
+line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
+peaks = scipy.signal.find_peaks(line_pred, height=1)[0]
+
+estimated_angle = np.degrees(theta[int(peaks[0])] )
+print(estimated_angle)
+
+### How to stablish the best degree of the polinomy:
+score=[]
+min_ = 1
+max_ = 5
+
+for deg_fir in range(min_,max_):    
+    poly_reg = PolynomialFeatures(degree=deg_fir)
+    X_poly = poly_reg.fit_transform(X)
+    pol_reg = LinearRegression()
+    pol_reg.fit(X_poly, y)
+    score.append( pol_reg.score(X_poly, y) )
+    viz_polymonial(X, y, poly_reg, pol_reg)
+
+
+
+
+plt.figure()
+plt.plot(np.arange(min_,max_), score)
+plt.show(block=False)
 
 
