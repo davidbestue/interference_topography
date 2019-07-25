@@ -416,6 +416,7 @@ ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (
   
 '''Below 4 lines can be un-commented for plotting results  
 using matplotlib as shown in the first example. '''
+plt.figure()
 plt.plot(X, y, 'o', color ='red', label ="data") 
 plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
 plt.legend() 
