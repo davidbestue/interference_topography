@@ -202,26 +202,52 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     total_time = round(total_time, 1)
     print('Simulation time: ' + str(total_time) + 's')
 
-    ###### Final bias
+    ###### Fit
+    def von_misses(x,mu,k):
+        return (exp( k * cos(x-mu))) / (2*pi*scipy.special.i0(k)) 
+
+    def bi_von_misses(x,mu1,k1,mu2,k2):
+        return von_misses(x,mu1,k1) + von_misses(x,mu2,k2)
+
+    ##
     y=np.reshape(rE, (N)) 
-    X=np.reshape(np.arange(0, N), (N,1))
+    X=np.reshape(np.linspace(-pi, pi, N), N)
 
-    y=np.reshape(rE[int(N/4) : int(N*3/4)]  , (int(N/2)))  ### just use the center part of the data (N/2 points)
-    X=np.reshape(np.arange(0, int(N/2) ), (int(N/2) ,1))   ### just use the center part of the data (N/2 points)
-
-    # Visualizing the Polymonial Regression results
     ### Fit
-    poly_reg = PolynomialFeatures(degree=7) ## 6 is the optimal for both
-    X_poly = poly_reg.fit_transform(X)
-    pol_reg = LinearRegression()
-    pol_reg.fit(X_poly, y)
-    #score = pol_reg.score(X_poly, y) 
-    if plot_fit==True:
-        viz_polymonial(X, y, poly_reg, pol_reg)
+    if n_stims ==2:
+        param, covs = curve_fit(bi_von_misses, X, y)
+        ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
+        estimated_angle_1=np.degrees(param[0]+pi)  
+        estimated_angle_2=np.degrees(param[2]+pi)  
+        bias_b1 = estimated_angle_1- np.degrees(pi - separation) 
+        bias_b2 =  estimated_angle_2 - np.degrees(theta[pb2])
+        final_bias = [bias_b1, bias_b2]
+    elif n_stims ==1:
+        param, covs = curve_fit(von_misses, X, y)
+        ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
+        estimated_angle=np.degrees(param[0]+pi)  
+        bias_b1 = estimated_angle - np.degrees( pi - separation)
+        bias_b2 = np.degrees(pi + separation) - estimated_angle  ## bias (positive means attraction)
+        final_bias = [bias_b1, bias_b2]  
 
-    #peaks bump
-    line_pred = pol_reg.predict(poly_reg.fit_transform(X)) 
-    peaks = scipy.signal.find_peaks(line_pred, height=1)[0]
+    else:
+        print('Error simultaion')
+        plot_fit=False
+
+    #error_fit (r_squared)
+    residuals = y - ans
+    ss_res = np.sum(residuals**2)
+    ss_tot = np.sum((y-numpy.mean(y))**2)
+    r_squared = 1 - (ss_res / ss_tot)
+
+    #plot fit
+    if plot_fit==True:
+        plt.figure()
+        plt.plot(X, y, 'o', color ='red', label ="data") 
+        plt.plot(X, ans, '--', color ='blue', label ="fit") 
+        plt.legend() 
+        plt.show(block=False) 
+
 
     #return final_bias
     if n_stims ==2:
@@ -243,7 +269,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ### Output
     total_sep=np.degrees(2*separation)
-    return(np.mean(final_bias), total_sep, GEE, rE) #bias_b1, bias_b2)
+    return(np.mean(final_bias), total_sep, GEE, rE, r_squared) #bias_b1, bias_b2)
 
 
 ###
@@ -253,7 +279,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #bias_b1, bias_b2, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
 # GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=5, kappa_stim=20, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
-bias, total_sep, GEE, rE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+bias, total_sep, GEE, rE, error = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 print(bias, total_sep)
 
 
