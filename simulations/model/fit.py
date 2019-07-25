@@ -311,7 +311,7 @@ ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2)
 using matplotlib as shown in the first example. '''
 plt.figure()
 plt.plot(X, y, 'o', color ='red', label ="data") 
-plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
+plt.plot(X, ans, '--', color ='blue', label ="fit") 
 plt.legend() 
 plt.show(block=False) 
 
@@ -356,7 +356,7 @@ ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2) +   param[5]*exp(-(X-param[3]
 using matplotlib as shown in the first example. '''
 plt.figure()
 plt.plot(X, y, 'o', color ='red', label ="data") 
-plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
+plt.plot(X, ans, '--', color ='blue', label ="fit") 
 plt.legend() 
 plt.show(block=False) 
 
@@ -387,7 +387,7 @@ ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1]))
 using matplotlib as shown in the first example. '''
 plt.figure()
 plt.plot(X, y, 'o', color ='red', label ="data") 
-plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
+plt.plot(X, ans, '--', color ='blue', label ="fit") 
 plt.legend() 
 plt.show(block=False) 
 
@@ -422,7 +422,7 @@ ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (
 using matplotlib as shown in the first example. '''
 plt.figure()
 plt.plot(X, y, 'o', color ='red', label ="data") 
-plt.plot(X, ans, '--', color ='blue', label ="optimized data") 
+plt.plot(X, ans, '--', color ='blue', label ="fit") 
 plt.legend() 
 plt.show(block=False) 
 
