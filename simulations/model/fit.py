@@ -290,7 +290,7 @@ starting_point_std = 15
 y=np.reshape(rE, (N)) 
 X=np.reshape(np.linspace(1, N, N), N)
 
-param, covs = curve_fit(gauss, X, y, p0 = np.array([250, starting_point_std, 5] ))
+param, covs = curve_fit(gauss, X, y, p0 = np.array([250, 15, 5] ))
 
 
 ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2)
@@ -314,9 +314,9 @@ def bimodal(x,mu1,sigma1,A1,mu2,sigma2,A2):
     return gauss(x,mu1,sigma1,A1)+gauss(x,mu2,sigma2,A2)
 
 
-param, covs = curve_fit(bimodal, X, y, p0 = np.array([1, starting_point_std, 1, 1, starting_point_std, 1] ))
+param, covs = curve_fit(bimodal, X, y, p0 = np.array([200, 15, 5, 300, 15, 5] ))
 
-ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2)
+ans = param[2]*exp(-(X-param[0])**2/2/param[1]**2) +   param[5]*exp(-(X-param[3])**2/2/param[4]**2) 
   
 '''Below 4 lines can be un-commented for plotting results  
 using matplotlib as shown in the first example. '''
