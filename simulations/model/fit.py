@@ -410,6 +410,10 @@ def bi_von_misses(x,mu1,k1,mu2,k2):
     return von_misses(x,mu1,k1) + von_misses(x,mu2,k2)
 
 
+N=512
+y=np.reshape(rE, (N)) 
+X=np.reshape(np.linspace(-pi, pi, N), N)
+
 param, covs = curve_fit(bi_von_misses, X, y)
 
 ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
@@ -423,6 +427,11 @@ plt.legend()
 plt.show(block=False) 
 
 
+estimated_angle_1=np.degrees(param[0]+pi)  
+estimated_angle_2=np.degrees(param[2]+pi)  
+
+
+print(estimated_angle_1, estimated_angle_2 )
 
 
 
