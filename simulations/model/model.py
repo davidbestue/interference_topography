@@ -216,8 +216,6 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     X=np.reshape(np.linspace(-pi, pi, N), N)
 
     ### Fit
-
-
     df_n_p=pd.DataFrame()
     df_n_p['rE'] = rE.reshape(512)
     r = df_n_p['rE'].rolling(window=20).mean()
