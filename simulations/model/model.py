@@ -220,7 +220,6 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     df_n_p['rE'] = rE.reshape(512)
     r = df_n_p['rE'].rolling(window=20).mean()
     number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
-    print(number_of_bumps)
 
     if number_of_bumps ==2:
         param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75])
@@ -271,7 +270,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ### Output
     total_sep=np.degrees(2*separation)
-    return(np.mean(final_bias), total_sep, GEE, rE, r_squared) #bias_b1, bias_b2)
+    return(np.mean(final_bias), total_sep, GEE, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
 
 
 ###
@@ -281,8 +280,8 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #bias_b1, bias_b2, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
 # GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=5, kappa_stim=20, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
-bias, total_sep, GEE, rE, error, success = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=20, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
-print(bias, total_sep)
+bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=20, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+print(bias, number_of_bumps, total_sep)
 
 
 # from joblib import Parallel, delayed
