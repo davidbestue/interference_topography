@@ -223,15 +223,15 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         print(estimated_angle_1)
         estimated_angle_2=np.degrees(param[2]+pi)  
         print(estimated_angle_2)
-        bias_b1 = estimated_angle_2- np.degrees(pi - separation) ### change the error stuff
-        bias_b2 =  np.degrees(pi + separation) - estimated_angle_1 
+        bias_b1 = estimated_angle_1- np.degrees(origin - separation) ### change the error stuff
+        bias_b2 =  np.degrees(origin + separation) - estimated_angle_2 
         final_bias = [bias_b1, bias_b2]
     elif n_stims ==1:
         param, covs = curve_fit(von_misses, X, y)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
         estimated_angle=np.degrees(param[0]+pi)  
-        bias_b1 = estimated_angle - np.degrees( pi - separation)
-        bias_b2 = np.degrees(pi + separation) - estimated_angle  ## bias (positive means attraction)
+        bias_b1 = estimated_angle - np.degrees( origin - separation)
+        bias_b2 = np.degrees(origin + separation) - estimated_angle  ## bias (positive means attraction)
         final_bias = [bias_b1, bias_b2]  
 
     else:
