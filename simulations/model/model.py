@@ -232,6 +232,8 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
         bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
         final_bias = [bias_b1, bias_b2]
+        skip_r_sq=False
+        success=True
 
     elif number_of_bumps ==1:
         param, covs = curve_fit(von_misses, X, y)
@@ -240,17 +242,23 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         bias_b1 = estimated_angle - np.degrees( origin - separation)
         bias_b2 = np.degrees(origin + separation) - estimated_angle  ## bias (positive means attraction)
         final_bias = [bias_b1, bias_b2]  
+        skip_r_sq=False
+        success=True
 
     else:
         print('Error simultaion')
         final_bias=[999, 999]
         plot_fit=False
+        skip_r_sq=True
+        r_squared=0
+        success=False ## to eliminate wrong simulations easily at the end
 
     #error_fit (r_squared)
-    residuals = y - ans
-    ss_res = np.sum(residuals**2)
-    ss_tot = np.sum((y-numpy.mean(y))**2)
-    r_squared = 1 - (ss_res / ss_tot)
+    if skip_r_sq==False:
+        residuals = y - ans
+        ss_res = np.sum(residuals**2)
+        ss_tot = np.sum((y-numpy.mean(y))**2)
+        r_squared = 1 - (ss_res / ss_tot)
 
     #plot fit
     if plot_fit==True:
@@ -273,7 +281,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #bias_b1, bias_b2, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
 # GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=5, kappa_stim=20, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
-bias, total_sep, GEE, rE, error = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=20, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+bias, total_sep, GEE, rE, error, success = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=20, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 print(bias, total_sep)
 
 
