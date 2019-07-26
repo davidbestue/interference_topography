@@ -120,14 +120,14 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         stimulus1=zeros((N))
         stimulus2=zeros((N))
         for i in range(0, N):
-            stimulus1[i]=2*e**(kappa_stim*cos(theta[i] + origin - separation)) / (2*pi*scipy.special.i0(kappa_stim))
-            stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin + separation)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus1[i]=e**(kappa_stim*cos(theta[i] + origin - separation)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus2[i]=e**(kappa_stim*cos(theta[i] + origin + separation)) / (2*pi*scipy.special.i0(kappa_stim))
         stimulus= (stimulus1 + stimulus2);
         stimulus=reshape(stimulus, (N,1))
     elif n_stims==1:
         stimulus2=zeros((N));
         for i in range(0, N):
-            stimulus2[i]=2*e**(kappa_stim*cos(theta[i] + origin)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus2[i]=e**(kappa_stim*cos(theta[i] + origin)) / (2*pi*scipy.special.i0(kappa_stim))
         stimulus=stimulus2
         stimulus=reshape(stimulus, (N,1))
     ###
@@ -280,7 +280,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #bias_b1, bias_b2, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
 # GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=5, kappa_stim=20, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
-bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=20, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=6, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 print(bias, number_of_bumps, total_sep)
 
 
