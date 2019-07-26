@@ -216,19 +216,25 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     X=np.reshape(np.linspace(-pi, pi, N), N)
 
     ### Fit
-    if n_stims ==2:
+
+
+    df_n_p=pd.DataFrame()
+    df_n_p['rE'] = rE.reshape(512)
+    r = df_n_p['rE'].rolling(window=20).mean()
+    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+
+    if number_of_bumps ==2:
         param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75])
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
         estimated_angle_1=np.degrees(param[0]+pi)  
         estimated_angle_2=np.degrees(param[2]+pi)  
         estimated_angles = [estimated_angle_1, estimated_angle_2]
         estimated_angles.sort()
-        print(estimated_angles)
-
         bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
         bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
         final_bias = [bias_b1, bias_b2]
-    elif n_stims ==1:
+
+    elif number_of_bumps ==1:
         param, covs = curve_fit(von_misses, X, y)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
         estimated_angle=np.degrees(param[0]+pi)  
@@ -238,6 +244,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     else:
         print('Error simultaion')
+        final_bias=[999, 999]
         plot_fit=False
 
     #error_fit (r_squared)
