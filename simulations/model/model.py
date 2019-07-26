@@ -217,7 +217,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ### Fit
     if n_stims ==2:
-        param, covs = curve_fit(bi_von_misses, X, y)
+        param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75])
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
         estimated_angle_1=np.degrees(param[0]+pi)  
         estimated_angle_2=np.degrees(param[2]+pi)  
