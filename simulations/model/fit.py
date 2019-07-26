@@ -124,7 +124,6 @@ y=np.reshape(rE, (N))
 X=np.reshape(np.linspace(-pi, pi, N), N)
 
 param, covs = curve_fit(bi_von_misses, X, y)
-
 ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
   
 '''Below 4 lines can be un-commented for plotting results  
@@ -207,4 +206,12 @@ plt.figure()
 plt.plot(np.arange(min_,max_), score)
 plt.show(block=False)
 
+
+#####
+df=pd.DataFrame()
+df['rE'] = rE.reshape(512)
+r = df['rE'].rolling(window=20).mean()
+number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+plt.plot(r)
+plt.show()
 
