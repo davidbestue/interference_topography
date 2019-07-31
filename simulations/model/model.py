@@ -315,7 +315,7 @@ plt.show(block=False)
 
 
 #df_gee_25 = df
-rep_dist = 5
+rep_dist = 1
 n_gges= 4 
 n_sepa = 9
 
@@ -325,6 +325,13 @@ Gees = [0.022] *n_sepa*rep_dist + [0.023]*n_sepa*rep_dist + [0.024]*n_sepa*rep_d
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=gees, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for seps, gees in zip(separations, Gees)) 
 
 
+
+biases = [results[i][0] for i in range(len(results))]
+separationts = [results[i][1] for i in range(len(results))]   
+geess = [results[i][2] for i in range(len(results))]                                                             
+succs = [results[i][5] for i in range(len(results))]   
+
+df=pd.DataFrame({'bias':biases, 'separation':separationts, 'GEE':geess, 'success':succs })
 
 # from joblib import Parallel, delayed
 # import multiprocessing
