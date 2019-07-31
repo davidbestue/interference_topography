@@ -288,12 +288,12 @@ import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 1
 #separations=list(np.linspace(2.1,30,10)) 
-separations=[5, 7, 10, 12, 15, 17, 20]
+separations=[5, 7, 10, 12, 13, 14, 15, 17, 20] * 10
 
 
 results=[]
 for sep in separations:
-    bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+    bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False) 
     print(bias, total_sep)
     results.append( [bias, total_sep, GEE, success] )
 
