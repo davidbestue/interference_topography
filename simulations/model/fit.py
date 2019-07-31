@@ -210,8 +210,17 @@ plt.show(block=False)
 #####
 df=pd.DataFrame()
 df['rE'] = rE.reshape(512)
-r = df['rE'].rolling(window=20).mean()
+r = df['rE'].rolling(window=15).mean()
 number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+print(number_of_bumps)
+plt.figure()
 plt.plot(r)
-plt.show()
+plt.show(block=False)
 
+
+for i in range(1,50):
+    df=pd.DataFrame()
+    df['rE'] = rE.reshape(512)
+    r = df['rE'].rolling(window=i).mean()
+    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+    print(number_of_bumps)

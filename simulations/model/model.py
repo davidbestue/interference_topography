@@ -288,14 +288,35 @@ import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 1
 #separations=list(np.linspace(2.1,30,10)) 
-separations=[5, 7, 10, 12, 13, 14, 15, 17, 20] * 10
+separations=[5, 7, 10, 12, 13, 14, 15, 17, 20] #* 10
 
 
 results=[]
 for sep in separations:
-    bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False) 
+    bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.023, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False) 
     print(bias, total_sep)
     results.append( [bias, total_sep, GEE, success] )
+
+
+
+###Plot Almeida et al
+
+df = pd.DataFrame(results)
+df.columns=['bias', 'separation', 'GEE', 'success' ]
+df = df.loc[df['success']==True] 
+plt.figure()
+sns.lineplot( x="separation", y="bias", hue='GEE', ci=95 , palette='viridis', data=df) 
+plt.plot([0, max(df['separation'])], [0,0], 'k--') 
+plt.title('Bias with separation') #condition title
+plt.gca().spines['right'].set_visible(False) #no right axis
+plt.gca().spines['top'].set_visible(False) #no  top axis
+plt.gca().get_xaxis().tick_bottom()
+plt.gca().get_yaxis().tick_left()
+plt.show(block=False)
+
+
+#df_gee_25 = df
+
 
 #results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=seps,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.024, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=4, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)  for seps in separations) 
 
