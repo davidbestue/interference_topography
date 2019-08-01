@@ -271,7 +271,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     ### Output
     total_sep=np.degrees(2*separation)
     #print(total_sep)
-    return(np.mean(final_bias), total_sep, GEE, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
+    return(np.mean(final_bias), total_sep, kappa_E, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
 
 
 ###
@@ -308,27 +308,27 @@ numcores = multiprocessing.cpu_count() - 1
 #df_gee_25 = df
 
 distances_test = [5, 7, 10, 12, 13, 14, 15, 17, 20]
-gees_test = [100, 200] #[0.024, 0.025]
-rep_dist = 20
-n_gges= len(gees_test)
+kappa_e_test = [100, 200] #[0.024, 0.025]
+rep_dist = 3
+n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
 
-separations= distances_test * rep_dist * n_gges
+separations= distances_test * rep_dist * n_kappas
 
-Gees=[]
-for g in gees_test:
-    Gees = Gees + [g]*n_sepa*rep_dist
+kappas_e=[]
+for k in kappa_e_test:
+    kappas_e = kappas_e + [k]*n_sepa*rep_dist
 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
- GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=gees, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, gees in zip(separations, Gees)) 
+ GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=kappas, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kappas in zip(separations, kappas_e)) 
 
 biases = [results[i][0] for i in range(len(results))]
 separationts = [results[i][1] for i in range(len(results))]   
-geess = [results[i][2] for i in range(len(results))]                                                             
+kappas = [results[i][2] for i in range(len(results))]                                                             
 succs = [results[i][5] for i in range(len(results))]   
 
-df=pd.DataFrame({'bias':biases, 'separation':separationts, 'GEE':geess, 'success':succs })
+df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas, 'success':succs })
 
 
 ###Plot Almeida et al
@@ -337,7 +337,7 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'GEE':geess, 'success
 
 df = df.loc[df['success']==True] 
 plt.figure()
-sns.lineplot( x="separation", y="bias", hue='GEE', ci=95 , palette='viridis', data=df) 
+sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='viridis', data=df) 
 plt.plot([0, max(df['separation'])], [0,0], 'k--') 
 plt.title('Bias with separation') #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
