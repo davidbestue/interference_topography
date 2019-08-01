@@ -307,9 +307,9 @@ numcores = multiprocessing.cpu_count() - 1
 
 #df_gee_25 = df
 
-distances_test = [5, 7, 10, 12, 13, 14, 15, 17, 20]
+distances_test = [5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
 kappa_e_test = [100, 200] #[0.024, 0.025]
-rep_dist = 3
+rep_dist = 50
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
 
@@ -329,7 +329,6 @@ kappas = [results[i][2] for i in range(len(results))]
 succs = [results[i][5] for i in range(len(results))]   
 
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas, 'success':succs })
-
 
 ###Plot Almeida et al
 #df = pd.DataFrame(results)
