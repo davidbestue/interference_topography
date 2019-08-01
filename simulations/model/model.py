@@ -277,33 +277,15 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 ###
 ####
 ## Example
-#bias_b1, bias_b2, total_sep, GEE = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5,tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
-# GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=5, kappa_stim=20, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 #bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 #print(bias, number_of_bumps, total_sep)
 
+
+## 2 bumps radial
 # from joblib import Parallel, delayed
 # import multiprocessing
 
 # numcores = multiprocessing.cpu_count() - 1
-#separations=list(np.linspace(2.1,30,10)) 
-# separations=[5, 7, 10, 12, 13, 14, 15, 17, 20] #* 10
-
-# bias, total_sep, GEE, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7, tauE=9,
-#  tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, 
-#  plot_connectivity=False,  plot_rate=False, plot_hm=True , plot_fit=False)  
-# print(bias, GEE, total_sep)
-
-# results=[]
-# for sep in separations:
-#     bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.023, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False) 
-#     print(bias, total_sep)
-#     results.append( [bias, total_sep, GEE, success] )
-
-
-
-
-
 # distances_test = [5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
 # kappa_e_test = [100, 200] #[0.024, 0.025]
 # rep_dist = 50
@@ -315,7 +297,6 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 # kappas_e=[]
 # for k in kappa_e_test:
 #     kappas_e = kappas_e + [k]*n_sepa*rep_dist
-
 
 # results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
 #  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=kappas, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kappas in zip(separations, kappas_e)) 
@@ -330,6 +311,8 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
 
 
+### 1 bump 3 ridus
 
-
-
+bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=100, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+print(bias)
