@@ -282,10 +282,10 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=5, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 #print(bias, number_of_bumps, total_sep)
 
-from joblib import Parallel, delayed
-import multiprocessing
+# from joblib import Parallel, delayed
+# import multiprocessing
 
-numcores = multiprocessing.cpu_count() - 1
+# numcores = multiprocessing.cpu_count() - 1
 #separations=list(np.linspace(2.1,30,10)) 
 # separations=[5, 7, 10, 12, 13, 14, 15, 17, 20] #* 10
 
@@ -301,65 +301,35 @@ numcores = multiprocessing.cpu_count() - 1
 #     results.append( [bias, total_sep, GEE, success] )
 
 
-distances_test = [5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
-kappa_e_test = [100, 200] #[0.024, 0.025]
-rep_dist = 50
-n_kappas= len(kappa_e_test)
-n_sepa = len(distances_test)
-
-separations= distances_test * rep_dist * n_kappas
-
-kappas_e=[]
-for k in kappa_e_test:
-    kappas_e = kappas_e + [k]*n_sepa*rep_dist
-
-
-results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
- GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=kappas, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kappas in zip(separations, kappas_e)) 
-
-biases = [results[i][0] for i in range(len(results))]
-separationts = [results[i][1] for i in range(len(results))]   
-kappas = [results[i][2] for i in range(len(results))]                                                             
-succs = [results[i][5] for i in range(len(results))]   
-
-df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas, 'success':succs })
-
-###Plot Almeida et al
-#df = pd.DataFrame(results)
-#df.columns=['bias', 'separation', 'GEE', 'success' ]
-
-df = df.loc[df['success']==True] 
-plt.figure()
-sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='viridis', data=df) 
-plt.plot([0, max(df['separation'])], [0,0], 'k--') 
-plt.title('Bias with separation') #condition title
-plt.gca().spines['right'].set_visible(False) #no right axis
-plt.gca().spines['top'].set_visible(False) #no  top axis
-plt.gca().get_xaxis().tick_bottom()
-plt.gca().get_yaxis().tick_left()
-plt.show(block=False)
 
 
 
-# separations=list(np.linspace(2.1,25,20)) * 100
-# gees=[0.021, 0.024]
+# distances_test = [5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
+# kappa_e_test = [100, 200] #[0.024, 0.025]
+# rep_dist = 50
+# n_kappas= len(kappa_e_test)
+# n_sepa = len(distances_test)
 
-# results_gee1 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=seps, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=gees[0], GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=4, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for seps in separations) 
-# results_gee2 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=seps, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=gees[1], GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.5, sigI=1.6, kappa_E=100, kappa_I=4, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for seps in separations) 
+# separations= distances_test * rep_dist * n_kappas
 
-# df_1 = pd.DataFrame(results_gee1)
-# df_1.columns=['bias', 'distance', 'GEE']
-# df_2 = pd.DataFrame(results_gee2)
-# df_2.columns=['bias', 'distance', 'GEE']
-# df = pd.concat([df_1, df_2])
+# kappas_e=[]
+# for k in kappa_e_test:
+#     kappas_e = kappas_e + [k]*n_sepa*rep_dist
 
-# sns.lineplot( x="distance", y="bias", hue='GEE', ci=95 , palette='viridis', data=df) 
-# plt.plot([0, max(df['distance'])], [0,0], 'k--') 
-# plt.title('Bias with distance') #condition title
-# plt.gca().spines['right'].set_visible(False) #no right axis
-# plt.gca().spines['top'].set_visible(False) #no  top axis
-# plt.gca().get_xaxis().tick_bottom()
-# plt.gca().get_yaxis().tick_left()
-# plt.show(block=False)
+
+# results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
+#  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=kappas, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kappas in zip(separations, kappas_e)) 
+
+# biases = [results[i][0] for i in range(len(results))]
+# separationts = [results[i][1] for i in range(len(results))]   
+# kappas = [results[i][2] for i in range(len(results))]                                                             
+# succs = [results[i][5] for i in range(len(results))]   
+
+# df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas, 'success':succs })
+# df.to_excel('simulations_2bumps.xlsx')
+
+
+
+
 
 
