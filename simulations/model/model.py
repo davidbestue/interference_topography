@@ -333,6 +333,9 @@ plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
 plt.show(block=False)
 
+
+
+
 # from joblib import Parallel, delayed
 # import multiprocessing
 
@@ -373,29 +376,5 @@ plt.show(block=False)
 
 
 
-# score=[]
-# min_ = 1
-# max_ = 20
-
-# y=np.reshape(rE, (512)) 
-# X=np.reshape(np.arange(0, 512), (512,1))
-
-# y=np.reshape(rE[int(512/4) : int(512*3/4)]  , (int(512/2)))  
-# X=np.reshape(np.arange(0, int(512/2) ), (int(512/2) ,1))
-
-# for deg_fir in range(min_,max_):    
-#     poly_reg = PolynomialFeatures(degree=deg_fir)
-#     X_poly = poly_reg.fit_transform(X)
-#     pol_reg = LinearRegression()
-#     pol_reg.fit(X_poly, y)
-#     score.append( pol_reg.score(X_poly, y) )
-#     viz_polymonial(X, y, poly_reg, pol_reg)
-
-
-
-
-# plt.figure()
-# plt.plot(np.arange(min_,max_), score)
-# plt.show(block=False)
 
 
