@@ -343,8 +343,6 @@ plt.gca().get_yaxis().tick_left()
 plt.show(block=False)
 
 
-
-
 # from joblib import Parallel, delayed
 # import multiprocessing
 
