@@ -305,8 +305,6 @@ numcores = multiprocessing.cpu_count() - 1
 #     results.append( [bias, total_sep, GEE, success] )
 
 
-#df_gee_25 = df
-
 distances_test = [5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
 kappa_e_test = [100, 200] #[0.024, 0.025]
 rep_dist = 50
