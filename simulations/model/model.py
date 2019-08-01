@@ -345,8 +345,8 @@ plt.show(block=False)
 
 # from joblib import Parallel, delayed
 # import multiprocessing
-
 # numcores = multiprocessing.cpu_count() - 1
+
 # separations=list(np.linspace(2.1,25,20)) * 100
 # gees=[0.021, 0.024]
 
