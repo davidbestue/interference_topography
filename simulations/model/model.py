@@ -295,7 +295,6 @@ numcores = multiprocessing.cpu_count() - 1
 # bias, total_sep, GEE, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7, tauE=9,
 #  tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, 
 #  plot_connectivity=False,  plot_rate=False, plot_hm=True , plot_fit=False)  
-
 # print(bias, GEE, total_sep)
 
 # results=[]
@@ -372,17 +371,6 @@ plt.show(block=False)
 # plt.show(block=False)
 
 
-# #fit
-# ##### Final bias
-# y=np.reshape(df['bias'].values, (len(df))) 
-# X=np.reshape(df['distance'].values, (len(df),1))
-# # Visualizing the Polymonial Regression results
-# ### Fit
-# poly_reg = PolynomialFeatures(degree=4) ## 6 is the optimal for both
-# X_poly = poly_reg.fit_transform(X)
-# pol_reg = LinearRegression()
-# pol_reg.fit(X_poly, y)
-# viz_polymonial(X, y, poly_reg, pol_reg)
 
 
 
