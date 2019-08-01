@@ -270,7 +270,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ### Output
     total_sep=np.degrees(2*separation)
-    print(total_sep)
+    #print(total_sep)
     return(np.mean(final_bias), total_sep, GEE, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
 
 
@@ -292,6 +292,12 @@ numcores = multiprocessing.cpu_count() - 1
 # separations=[5, 7, 10, 12, 13, 14, 15, 17, 20] #* 10
 
 
+bias, total_sep, GEE, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7, tauE=9,
+ tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, 
+ plot_connectivity=False,  plot_rate=False, plot_hm=True , plot_fit=False)  
+
+print(bias, GEE, total_sep)
+
 # results=[]
 # for sep in separations:
 #     bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.023, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False) 
@@ -302,7 +308,7 @@ numcores = multiprocessing.cpu_count() - 1
 #df_gee_25 = df
 
 distances_test = [5, 7, 10, 12, 13, 14, 15, 17, 20]
-gees_test = [0.023, 0.026]
+gees_test = [0.024, 0.025]
 rep_dist = 5
 n_gges= len(gees_test)
 n_sepa = len(distances_test)
@@ -326,7 +332,8 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'GEE':geess, 'success
 
 ###Plot Almeida et al
 #df = pd.DataFrame(results)
-df.columns=['bias', 'separation', 'GEE', 'success' ]
+#df.columns=['bias', 'separation', 'GEE', 'success' ]
+
 df = df.loc[df['success']==True] 
 plt.figure()
 sns.lineplot( x="separation", y="bias", hue='GEE', ci=95 , palette='viridis', data=df) 
