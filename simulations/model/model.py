@@ -275,8 +275,15 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
     ### Output
     total_sep=np.degrees(2*separation)
+    final_bias = np.mean(final_bias)
     #print(total_sep)
-    return(np.mean(final_bias), total_sep, kappa_E, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
+
+    if n_stims==1:
+        bias = decode_rE(rE) 
+        final_bias = abs(180 - bias)
+
+
+    return(final_bias, total_sep, kappa_E, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
 
 
 ###
@@ -318,6 +325,37 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 
 ### 1 bump 3 ridus
 
-bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
-  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
-print(bias)
+# bias, total_sep, GEE, rE, error, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+#  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=100, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+
+from joblib import Parallel, delayed
+import multiprocessing
+
+numcores = multiprocessing.cpu_count() - 1
+
+kappa_e_test = [100, 150, 200] #[0.024, 0.025]
+rep_dist = 200
+kappas_e=kappa_e_test*rep_dist
+
+results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+    GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=kappas, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False ,
+     plot_fit=False)  for  kappas in  kappas_e)
+
+
+biases = [results[i][0] for i in range(len(results))]
+kappas = [results[i][2] for i in range(len(results))]                                                             
+succs = [results[i][5] for i in range(len(results))]   
+
+df=pd.DataFrame({'bias':biases, 'kappas_E':kappas, 'success':succs })
+
+df = df.loc[df['success']==True] 
+plt.figure(figsize=(8,6))
+linares_plot( x="kappas_E", y="bias", order=[100, 150, 200],  pallete='viridis', alpha=1, point_size=3, df=df) 
+plt.title('Drift with eccentricity separation', fontsize=15) #condition title
+plt.gca().spines['right'].set_visible(False) #no right axis
+plt.gca().spines['top'].set_visible(False) #no  top axis
+plt.gca().get_xaxis().tick_bottom()
+plt.gca().get_yaxis().tick_left()
+#plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
+plt.show(block=False)
+
