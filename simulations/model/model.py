@@ -347,6 +347,7 @@ kappas = [results[i][2] for i in range(len(results))]
 succs = [results[i][5] for i in range(len(results))]   
 
 df=pd.DataFrame({'bias':biases, 'kappas_E':kappas, 'success':succs })
+df.to_excel('single_item_drift_eccentricity.xlsx')
 
 df = df.loc[df['success']==True] 
 plt.figure(figsize=(8,6))
