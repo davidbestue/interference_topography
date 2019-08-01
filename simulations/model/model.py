@@ -292,11 +292,11 @@ numcores = multiprocessing.cpu_count() - 1
 # separations=[5, 7, 10, 12, 13, 14, 15, 17, 20] #* 10
 
 
-bias, total_sep, GEE, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7, tauE=9,
- tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, 
- plot_connectivity=False,  plot_rate=False, plot_hm=True , plot_fit=False)  
+# bias, total_sep, GEE, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7, tauE=9,
+#  tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, 
+#  plot_connectivity=False,  plot_rate=False, plot_hm=True , plot_fit=False)  
 
-print(bias, GEE, total_sep)
+# print(bias, GEE, total_sep)
 
 # results=[]
 # for sep in separations:
@@ -308,8 +308,8 @@ print(bias, GEE, total_sep)
 #df_gee_25 = df
 
 distances_test = [5, 7, 10, 12, 13, 14, 15, 17, 20]
-gees_test = [0.024, 0.025]
-rep_dist = 5
+gees_test = [100, 200] #[0.024, 0.025]
+rep_dist = 20
 n_gges= len(gees_test)
 n_sepa = len(distances_test)
 
@@ -320,7 +320,8 @@ for g in gees_test:
     Gees = Gees + [g]*n_sepa*rep_dist
 
 
-results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=gees, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, gees in zip(separations, Gees)) 
+results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
+ GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=gees, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, gees in zip(separations, Gees)) 
 
 biases = [results[i][0] for i in range(len(results))]
 separationts = [results[i][1] for i in range(len(results))]   
