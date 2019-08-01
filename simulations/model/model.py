@@ -369,8 +369,3 @@ plt.show(block=False)
 # plt.show(block=False)
 
 
-
-
-
-
-
