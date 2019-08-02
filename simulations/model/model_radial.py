@@ -180,8 +180,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         #### plot dynamics
         fig = plt.figure()
         plt.title('Rate dynamics')
-        plt.plot(RE[p_targ1, :], 'b', label='target1')
-        plt.plot(RE[p_targ2, :], 'r', label='target2')
+        plt.plot(rE)
         plt.xlabel('time (ms)')
         plt.ylabel('rate (Hz)')
         plt.legend()
