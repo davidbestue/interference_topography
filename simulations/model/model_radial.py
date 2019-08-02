@@ -88,7 +88,6 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     st_sim =time.time()
     dt=2
     nsteps=int(floor(totalTime/dt));
-    origin = pi
     rE=zeros((N,1));
     rI=zeros((N,1));
     #Connectivities
@@ -128,14 +127,14 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         stimulus1=zeros((N))
         stimulus2=zeros((N))
         for i in range(0, N):
-            stimulus1[i]=e**(kappa_stim*cos(theta[i] + origin - p1)) / (2*pi*scipy.special.i0(kappa_stim))
-            stimulus2[i]=e**(kappa_stim*cos(theta[i] + origin + p2)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus1[i]=e**(kappa_stim*cos(theta[i] +  p1)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus2[i]=e**(kappa_stim*cos(theta[i] +  p2)) / (2*pi*scipy.special.i0(kappa_stim))
         stimulus= (stimulus1 + stimulus2);
         stimulus=reshape(stimulus, (N,1))
     elif n_stims==1:
         stimulus2=zeros((N));
         for i in range(0, N):
-            stimulus2[i]=e**(kappa_stim*cos(theta[i] + origin)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus2[i]=e**(kappa_stim*cos(theta[i] + p1)) / (2*pi*scipy.special.i0(kappa_stim))
         stimulus=stimulus2
         stimulus=reshape(stimulus, (N,1))
     ###
@@ -171,8 +170,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     ## metrics
     if n_stims==2:
         interference = Interference_effects( [decode_rE(stimulus1)], [decode_rE(rE)], [decode_rE(stimulus2)])[0]
-        p_targ1 = int((N * np.degrees(origin + p1))/360)
-        p_targ2 = int((N * np.degrees(origin - p2))/360)
+        p_targ1 = int((N * np.degrees(p1))/360)
+        p_targ2 = int((N * np.degrees(p2))/360)
     #
     if plot_rate==True:
         #### plot dynamics
@@ -235,8 +234,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         estimated_angle_2=np.degrees(param[2]+pi)  
         estimated_angles = [estimated_angle_1, estimated_angle_2]
         estimated_angles.sort()
-        bias_b1 = estimated_angles[0] -  np.degrees(origin - p1) ### change the error stuff
-        bias_b2 =  np.degrees(origin + p1) - estimated_angles[1]
+        bias_b1 = estimated_angles[0] -  np.degrees(p1) ### change the error stuff
+        bias_b2 =  np.degrees(p2) - estimated_angles[1]
         final_bias = [bias_b1, bias_b2]
         skip_r_sq=False
         success=True
@@ -245,8 +244,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         param, covs = curve_fit(von_misses, X, y)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
         estimated_angle=np.degrees(param[0]+pi)  
-        bias_b1 = estimated_angle - np.degrees( origin - p1)
-        bias_b2 = np.degrees(origin + p1) - estimated_angle  ## bias (positive means attraction)
+        bias_b1 = estimated_angle - np.degrees(p1)
+        bias_b2 = np.degrees(p2) - estimated_angle  ## bias (positive means attraction)
         final_bias = [bias_b1, bias_b2]  
         skip_r_sq=False
         success=True
@@ -282,7 +281,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
     if n_stims==1:
         bias = decode_rE(rE) 
-        final_bias = abs(180 - bias)
+        final_bias = abs(np.degrees(p1) - bias)
 
 
     return(final_bias, total_sep, kappa_E, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
@@ -360,6 +359,6 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
 
 
-model(totalTime=2000, targ_onset=100,  presentation_period=350, positions=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+model(totalTime=2000, targ_onset=100,  presentation_period=350, positions=1.5*pi, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
     GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=100, kappa_I=20, kappa_stim=75, N=512,
     plot_connectivity=True, plot_rate=False, plot_hm=True , plot_fit=True)
