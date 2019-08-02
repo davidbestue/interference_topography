@@ -337,7 +337,6 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 #     GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=kappas, kappa_I=20, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False ,
 #      plot_fit=False)  for  kappas in  kappas_e)
 
-
 # biases = [results[i][0] for i in range(len(results))]
 # kappas = [results[i][2] for i in range(len(results))]                                                             
 # succs = [results[i][5] for i in range(len(results))]   
