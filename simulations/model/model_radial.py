@@ -192,8 +192,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         plt.title('BUMP activity')
         plt.ylabel('Angle')
         plt.xlabel('time')
-        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
-        plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
+        #plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
+        #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
         plt.yticks([])
         plt.xticks([])
         plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
@@ -229,14 +229,14 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
 
     if number_of_bumps ==2:
-        param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75])
+        param, covs = curve_fit(bi_von_misses, X, y, p0=[p1, 75, -p1, 75])
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
         estimated_angle_1=np.degrees(param[0]+pi)  
         estimated_angle_2=np.degrees(param[2]+pi)  
         estimated_angles = [estimated_angle_1, estimated_angle_2]
         estimated_angles.sort()
-        bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
-        bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
+        bias_b1 = estimated_angles[0] -  np.degrees(origin - p1) ### change the error stuff
+        bias_b2 =  np.degrees(origin + p1) - estimated_angles[1]
         final_bias = [bias_b1, bias_b2]
         skip_r_sq=False
         success=True
@@ -245,8 +245,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         param, covs = curve_fit(von_misses, X, y)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
         estimated_angle=np.degrees(param[0]+pi)  
-        bias_b1 = estimated_angle - np.degrees( origin - separation)
-        bias_b2 = np.degrees(origin + separation) - estimated_angle  ## bias (positive means attraction)
+        bias_b1 = estimated_angle - np.degrees( origin - p1)
+        bias_b2 = np.degrees(origin + p1) - estimated_angle  ## bias (positive means attraction)
         final_bias = [bias_b1, bias_b2]  
         skip_r_sq=False
         success=True
@@ -276,7 +276,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
 
     ### Output
-    total_sep=np.degrees(2*separation)
+    total_sep=np.degrees(2*p1)
     final_bias = np.mean(final_bias)
     #print(total_sep)
 
@@ -362,4 +362,4 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
 model(totalTime=2000, targ_onset=100,  presentation_period=350, positions=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
     GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=100, kappa_I=20, kappa_stim=75, N=512,
-    plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)
+    plot_connectivity=True, plot_rate=False, plot_hm=True , plot_fit=True)
