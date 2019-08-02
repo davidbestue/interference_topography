@@ -106,6 +106,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
 
     kappas_e_range= np.linspace(50, 250, N)
+    kappas_e_range = np.flip(kappas_e_range)
     for i in range(0, N):
         v_E_new=[e**(kappas_e_range[i]*cos(theta[f]))/(2*pi*scipy.special.i0(kappas_e_range[i])) for f in range(0, len(theta))]    
         v_I_new=[e**(kappa_I*cos(theta[f]))/(2*pi*scipy.special.i0(kappa_I)) for f in range(0, len(theta))]
@@ -119,8 +120,9 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     # Plot of the connectivity profile
     if plot_connectivity ==True:
         plt.figure()
-        plt.plot(WE[250, :])
-        plt.plot(WI[250, :])
+        for con_we in [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475]:
+            plt.plot(WE[con_we, :], 'b')
+            plt.plot(WI[con_we, :], 'r')
         plt.show(block=False)
     ##
     # Stims
@@ -361,8 +363,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
 
 final_bias, total_sep, kappa_E, rE, r_squared, success, number_of_bumps =model(totalTime=2000, targ_onset=100,  presentation_period=350,
- positions=0.5*pi, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+ positions=pi + pi/2, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
     GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=100, kappa_I=20, kappa_stim=75, N=512,
-    plot_connectivity=True, plot_rate=False, plot_hm=True , plot_fit=True)
+    plot_connectivity=True, plot_rate=True, plot_hm=True , plot_fit=True)
 
 print(final_bias)
