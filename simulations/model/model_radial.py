@@ -128,8 +128,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         stimulus1=zeros((N))
         stimulus2=zeros((N))
         for i in range(0, N):
-            stimulus1[i]=e**(kappa_stim*cos(theta[i] + origin - separation)) / (2*pi*scipy.special.i0(kappa_stim))
-            stimulus2[i]=e**(kappa_stim*cos(theta[i] + origin + separation)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus1[i]=e**(kappa_stim*cos(theta[i] + origin - p1)) / (2*pi*scipy.special.i0(kappa_stim))
+            stimulus2[i]=e**(kappa_stim*cos(theta[i] + origin + p2)) / (2*pi*scipy.special.i0(kappa_stim))
         stimulus= (stimulus1 + stimulus2);
         stimulus=reshape(stimulus, (N,1))
     elif n_stims==1:
@@ -171,9 +171,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     ## metrics
     if n_stims==2:
         interference = Interference_effects( [decode_rE(stimulus1)], [decode_rE(rE)], [decode_rE(stimulus2)])[0]
-
-    p_targ1 = int((N * np.degrees(origin + separation))/360)
-    p_targ2 = int((N * np.degrees(origin - separation))/360)
+        p_targ1 = int((N * np.degrees(origin + p1))/360)
+        p_targ2 = int((N * np.degrees(origin - p2))/360)
     #
     if plot_rate==True:
         #### plot dynamics
