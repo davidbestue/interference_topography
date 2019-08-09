@@ -116,8 +116,13 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     # Plot of the connectivity profile
     if plot_connectivity ==True:
         plt.figure()
-        plt.plot(WE[250, :])
-        plt.plot(WI[250, :])
+        plt.plot(WE[250, :], label='E')
+        plt.plot(WI[250, :], label = 'I')
+        plt.ylim(0,6)
+        plt.gca().spines['right'].set_visible(False) #no right axis
+        plt.gca().spines['top'].set_visible(False) #no  top axis
+        plt.gca().get_xaxis().tick_bottom()
+        plt.gca().get_yaxis().tick_left()
         plt.show(block=False)
     ##
     # Stims
