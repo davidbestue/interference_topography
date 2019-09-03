@@ -61,16 +61,13 @@ kappa_e_test = [100, 150, 200]
 kappa_i_test = [15, 17.5, 20] 
 rep_dist = 50
 n_kappas= len(kappa_e_test)
-n_sepa = len(distances_test)
-
-separations= distances_test * rep_dist * n_kappas
 
 kappas_e=[]
 kappas_i=[]
 
 for idx, k in enumerate(kappa_e_test):
-    kappas_e = kappas_e + [k]*n_sepa*rep_dist
-    kappas_i = kappas_i + [kappa_i_test[idx]]*n_sepa*rep_dist
+    kappas_e = kappas_e + [k]*rep_dist
+    kappas_i = kappas_i + [kappa_i_test[idx]]*rep_dist
 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
