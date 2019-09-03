@@ -7,8 +7,8 @@ import multiprocessing
 numcores = multiprocessing.cpu_count() - 2
 
 distances_test = [5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
-kappa_e_test = [150, 200] 
-kappa_i_test = [10, 20] 
+kappa_e_test = [100, 200] 
+kappa_i_test = [15, 20] 
 rep_dist = 10
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
@@ -56,7 +56,7 @@ plt.show(block=False)
 
 
 # final_bias, total_sep, kappa_E, kappa_I, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  
-#     presentation_period=350, separation=15, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
-#     GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=100, kappa_I=10, kappa_stim=75, N=512,
+#     presentation_period=350, separation=15, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+#     GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512,
 #     plot_connectivity=True, plot_rate=False, plot_hm=True , plot_fit=True)
 
