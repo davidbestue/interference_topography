@@ -33,7 +33,7 @@ kappas__i = [results[i][3] for i in range(len(results))]
 succs = [results[i][6] for i in range(len(results))]   
 
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
-#df.to_excel('simulations_2bumps.xlsx')
+df.to_excel('simulations_2bumps_ke_ki.xlsx')
 
 df = df.loc[df['success']==True] 
 
