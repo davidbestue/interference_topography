@@ -59,7 +59,7 @@ numcores = multiprocessing.cpu_count() - 2
 
 kappa_e_test = [120, 200] 
 kappa_i_test = [10,  20] 
-rep_dist = 50
+rep_dist = 20
 n_kappas= len(kappa_e_test)
 
 kappas_e=[]
