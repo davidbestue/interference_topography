@@ -58,7 +58,7 @@ import multiprocessing
 numcores = multiprocessing.cpu_count() - 2
 
 kappa_e_test = [100, 200] 
-kappa_i_test = [6,  20] 
+kappa_i_test = [8,  20] 
 rep_dist = 20
 n_kappas= len(kappa_e_test)
 
