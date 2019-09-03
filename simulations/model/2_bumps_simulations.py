@@ -58,7 +58,7 @@ import multiprocessing
 numcores = multiprocessing.cpu_count() - 2
 
 kappa_e_test = [120, 200] 
-kappa_i_test = [10,  20] 
+kappa_i_test = [12,  20] 
 rep_dist = 20
 n_kappas= len(kappa_e_test)
 
@@ -86,7 +86,7 @@ df=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'suc
 
 df = df.loc[df['success']==True] 
 plt.figure(figsize=(8,6))
-linares_plot( x="kappas_E", y="bias", order=[100, 200],  palette='viridis', alpha=0.4, point_size=5, df=df) 
+linares_plot( x="kappas_E", y="bias", order=[120, 200],  palette='viridis', alpha=0.4, point_size=5, df=df) 
 plt.title('Drift with eccentricity separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
@@ -96,3 +96,14 @@ plt.gca().get_yaxis().tick_left()
 plt.show(block=False)
 
 
+
+
+
+bias, total_sep, GEE, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=13, tauE=9, tauI=4,  n_stims=2, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.4, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
+      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+
+
+bias, total_sep, GEE, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=13, tauE=9, tauI=4,  n_stims=2, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.4, sigI=1.6, kappa_E=120, kappa_I=12, kappa_stim=75,
+      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
