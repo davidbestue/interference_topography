@@ -86,3 +86,16 @@ succs = [results[i][6] for i in range(len(results))]
 df=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 df.to_excel('single_item_drift_eccentricity_ke_ki.xlsx')
 
+
+df = df.loc[df['success']==True] 
+plt.figure(figsize=(8,6))
+linares_plot( x="kappas_E", y="bias", order=[100, 150, 200],  palette='viridis', alpha=0.4, point_size=5, df=df) 
+plt.title('Drift with eccentricity separation', fontsize=15) #condition title
+plt.gca().spines['right'].set_visible(False) #no right axis
+plt.gca().spines['top'].set_visible(False) #no  top axis
+plt.gca().get_xaxis().tick_bottom()
+plt.gca().get_yaxis().tick_left()
+#plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
+plt.show(block=False)
+
+
