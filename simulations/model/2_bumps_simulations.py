@@ -81,7 +81,7 @@ succs = [results[i][6] for i in range(len(results))]
 
 
 df=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
-df.to_excel('single_item_drift_eccentricity_ke_ki.xlsx')
+#df.to_excel('single_item_drift_eccentricity_ke_ki.xlsx')
 
 
 df = df.loc[df['success']==True] 
