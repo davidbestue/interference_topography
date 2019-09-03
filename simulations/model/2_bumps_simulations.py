@@ -35,14 +35,6 @@ succs = [results[i][6] for i in range(len(results))]
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 #df.to_excel('simulations_2bumps.xlsx')
 
-
-
-# final_bias, total_sep, kappa_E, kappa_I, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  
-#     presentation_period=350, separation=13, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
-#     GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75, N=512,
-#     plot_connectivity=True, plot_rate=False, plot_hm=True , plot_fit=True)
-
-
 df = df.loc[df['success']==True] 
 
 plt.figure(figsize=(8,6))
@@ -56,3 +48,15 @@ plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
 plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
 plt.show(block=False)
+
+
+
+
+
+
+
+# final_bias, total_sep, kappa_E, kappa_I, rE, r_squared, success, number_of_bumps = model(totalTime=2000, targ_onset=100,  
+#     presentation_period=350, separation=15, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
+#     GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=100, kappa_I=10, kappa_stim=75, N=512,
+#     plot_connectivity=True, plot_rate=False, plot_hm=True , plot_fit=True)
+
