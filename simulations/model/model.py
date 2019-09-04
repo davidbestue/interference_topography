@@ -191,7 +191,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         #### plot heatmap
         RE_sorted=flipud(RE)
         plt.figure(figsize=(9,6))
-        sns.heatmap(RE_sorted, cmap='viridis')
+        sns.heatmap(RE_sorted, cmap='viridis', vmax=8)
         plt.title('BUMP activity')
         plt.ylabel('Angle')
         plt.xlabel('time')
