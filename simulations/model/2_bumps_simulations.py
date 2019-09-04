@@ -35,6 +35,7 @@ succs = [results[i][6] for i in range(len(results))]
 
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 df.to_excel('simulations_2bumps_ke_ki2.xlsx')
+
 df = df.loc[df['success']==True] 
 
 plt.figure(figsize=(8,6))
