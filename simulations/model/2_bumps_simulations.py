@@ -134,7 +134,7 @@ numcores = multiprocessing.cpu_count() -2
 
 distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
 kappa_e_test = [200, 150] 
-kappa_i_test = [50, 25] 
+kappa_i_test = [20, 25] 
 rep_dist = 10
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
@@ -150,7 +150,7 @@ for idx, k in enumerate(kappa_e_test):
 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
- GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kape, kapi in zip(separations, kappas_e, kappas_i)) 
+ GEE=0.026, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kape, kapi in zip(separations, kappas_e, kappas_i)) 
 
 biases = [results[i][0] for i in range(len(results))]
 separationts = [results[i][1] for i in range(len(results))]   
@@ -173,6 +173,7 @@ plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
 plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_e_test] )
+plt.xlim(0,70)
 plt.show(block=False)
 
 
@@ -188,7 +189,7 @@ for idx, k in enumerate(kappa_e_test):
 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
- GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for kape, kapi in zip( kappas_e, kappas_i)) 
+ GEE=0.026, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for kape, kapi in zip( kappas_e, kappas_i)) 
 
 biases = [results[i][0] for i in range(len(results))]
 separationts = [results[i][1] for i in range(len(results))]   
