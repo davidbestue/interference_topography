@@ -135,7 +135,7 @@ numcores = multiprocessing.cpu_count() -2
 distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
 kappa_e_test = [200, 150] 
 kappa_i_test = [20, 25] 
-rep_dist = 10
+rep_dist = 20
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
 
