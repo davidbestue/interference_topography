@@ -103,27 +103,38 @@ import multiprocessing
 # print(res_m.summary())
 
 
-# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-#       I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
-#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
+      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
-# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-#       I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=100, kappa_I=6, kappa_stim=75,
-#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=240, kappa_I=40, kappa_stim=75,
+      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
 
 
-###### pruebas
+df_n_p=pd.DataFrame()
+df_n_p['rE'] = rE.reshape(512)
+peaks_list=[]
+for n_w_s in range(1, 20):
+    r = df_n_p['rE'].rolling(window=n_w_s).mean()
+    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+    peaks_list.append(number_of_bumps)
+
+number_of_bumps=min(peaks_list)
+number_of_bumps
+
+# ###### pruebas
 
 
 ##### 2 bumps
 numcores = multiprocessing.cpu_count() -2
 
 distances_test =  [5, 7, 9, 11, 13, 15, 19, 25]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
-kappa_e_test = [200, 200] 
-kappa_i_test = [30, 20] 
+kappa_e_test = [100, 200] 
+kappa_i_test = [10, 20] 
 rep_dist = 5
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
@@ -153,7 +164,7 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e,
 df = df.loc[df['success']==True] 
 
 plt.figure(figsize=(8,6))
-g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , hue_order=[100,200], palette='viridis', 
+g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , hue_order=[220,200], palette='viridis', 
                  data=df, legend=False) 
 plt.plot([0, max(df['separation'])], [0,0], 'k--') 
 plt.title('Bias with separation', fontsize=15) #condition title
@@ -161,5 +172,7 @@ plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
-plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
+plt.legend(title='kappaE', loc='upper right', labels=['close', 'far'])
 plt.show(block=False)
+
+
