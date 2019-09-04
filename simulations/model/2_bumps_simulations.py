@@ -132,10 +132,10 @@ number_of_bumps
 ##### 2 bumps
 numcores = multiprocessing.cpu_count() -2
 
-distances_test =  [5, 7, 9, 11, 13, 15, 19, 25]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
-kappa_e_test = [200, 100] 
-kappa_i_test = [20, 7] 
-rep_dist = 5
+distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
+kappa_e_test = [200, 150] 
+kappa_i_test = [50, 25] 
+rep_dist = 10
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
 
@@ -218,3 +218,14 @@ res_m = smf.ols(formula='bias ~ kappas_E', data=df).fit()
 print(res_m.summary())
 
 
+
+
+
+# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+#       I0I=0.5,  GEE=0.026, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=50, kappa_stim=75,
+#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+
+
+# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+#       I0I=0.5,  GEE=0.026, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=150, kappa_I=25, kappa_stim=75,
+#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
