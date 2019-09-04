@@ -229,12 +229,13 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     df_n_p=pd.DataFrame()
     df_n_p['rE'] = rE.reshape(512)
     peaks_list=[]
-    for n_w_s in range(1, 40):
+    for n_w_s in range(1, 50):
         r = df_n_p['rE'].rolling(window=n_w_s).mean()
         number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
         peaks_list.append(number_of_bumps)
 
     number_of_bumps=min(peaks_list)
+
 
     ### Fit
     #df_n_p=pd.DataFrame()
