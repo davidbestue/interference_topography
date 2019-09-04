@@ -3,6 +3,7 @@ from model import *
 from joblib import Parallel, delayed
 import multiprocessing
 
+
 ##### 2 bumps
 numcores = multiprocessing.cpu_count() -2
 
