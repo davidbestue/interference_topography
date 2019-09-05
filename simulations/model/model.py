@@ -18,8 +18,7 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 import scipy.signal
 from scipy.optimize import curve_fit 
-import statistics 
-from statistics import mode 
+
 
 
 
@@ -50,9 +49,14 @@ def circ_dist(a1,a2):
     return min(options)
 
 
-def most_common(List): 
-    return(mode(List)) 
-
+def most_frequent(List): 
+    dict = {} 
+    count, itm = 0, '' 
+    for item in reversed(List): 
+        dict[item] = dict.get(item, 0) + 1
+        if dict[item] >= count : 
+            count, itm = dict[item], item 
+    return(itm) 
 
 
 def Interference_effects(target, response, reference):
