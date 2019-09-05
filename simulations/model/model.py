@@ -234,7 +234,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
         peaks_list.append(number_of_bumps)
 
-    number_of_bumps=min(peaks_list)
+    number_of_bumps=most_common(peaks_list)
 
 
     ### Fit
