@@ -114,19 +114,7 @@ r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7
 
 
 
-
-df_n_p=pd.DataFrame()
-df_n_p['rE'] = rE.reshape(512)
-peaks_list=[]
-for n_w_s in range(1, 20):
-    r = df_n_p['rE'].rolling(window=n_w_s).mean()
-    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
-    peaks_list.append(number_of_bumps)
-
-number_of_bumps=min(peaks_list)
-number_of_bumps
-
-# ###### pruebas
+###### pruebas
 
 
 ##### 2 bumps
@@ -218,3 +206,28 @@ import statsmodels.formula.api as smf
 res_m = smf.ols(formula='bias ~ kappas_E', data=df).fit()
 print(res_m.summary())
 
+
+
+rE=r[-4]
+
+df_n_p=pd.DataFrame()
+df_n_p['rE'] = rE.reshape(512)
+peaks_list=[]
+for n_w_s in range(1, 128):
+    r = df_n_p['rE'].rolling(window=n_w_s).mean()
+    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+    peaks_list.append(number_of_bumps)
+
+number_of_bumps=min(peaks_list)
+number_of_bumps
+peaks_list
+
+
+import statistics 
+from statistics import mode 
+  
+def most_common(List): 
+    return(mode(List)) 
+
+
+print(most_common(peaks_list)) 
