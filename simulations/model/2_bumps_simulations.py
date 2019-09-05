@@ -103,6 +103,12 @@ import multiprocessing
 # print(res_m.summary())
 
 
+from model import *
+from joblib import Parallel, delayed
+import multiprocessing
+
+
+
 r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
       I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
@@ -208,26 +214,16 @@ print(res_m.summary())
 
 
 
-rE=r[-4]
+# rE=r[-4]
+# df_n_p=pd.DataFrame()
+# df_n_p['rE'] = rE.reshape(512)
+# peaks_list=[]
+# for n_w_s in range(1, 100):
+#     r = df_n_p['rE'].rolling(window=n_w_s).mean()
+#     number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+#     peaks_list.append(number_of_bumps)
 
-df_n_p=pd.DataFrame()
-df_n_p['rE'] = rE.reshape(512)
-peaks_list=[]
-for n_w_s in range(1, 128):
-    r = df_n_p['rE'].rolling(window=n_w_s).mean()
-    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
-    peaks_list.append(number_of_bumps)
-
-number_of_bumps=min(peaks_list)
-number_of_bumps
-peaks_list
+# number_of_bumps=most_common(peaks_list)
 
 
-import statistics 
-from statistics import mode 
-  
-def most_common(List): 
-    return(mode(List)) 
-
-
-print(most_common(peaks_list)) 
+# number_of_bumps
