@@ -19,6 +19,9 @@ from sklearn.linear_model import LinearRegression
 import scipy.signal
 from scipy.optimize import curve_fit 
 
+import statistics 
+from statistics import mode 
+
 
 
 def decode_rE(rE, a_ini=0, a_fin=360, N=512):
@@ -48,6 +51,9 @@ def circ_dist(a1,a2):
     return min(options)
 
 
+ 
+def most_common(List): 
+    return(mode(List)) 
 
 
 def Interference_effects(target, response, reference):
