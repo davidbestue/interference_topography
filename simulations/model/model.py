@@ -18,6 +18,8 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 import scipy.signal
 from scipy.optimize import curve_fit 
+import statistics 
+from statistics import mode 
 
 
 
@@ -47,6 +49,9 @@ def circ_dist(a1,a2):
     options=[op1,op2]
     return min(options)
 
+
+def most_common(List): 
+    return(mode(List)) 
 
 
 
