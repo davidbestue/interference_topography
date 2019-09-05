@@ -235,7 +235,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         peaks_list.append(number_of_bumps)
 
     number_of_bumps=most_common(peaks_list)
-    print(number_of_bumps)
+    #print(number_of_bumps)
 
 
     ### Fit
