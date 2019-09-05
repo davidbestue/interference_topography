@@ -103,14 +103,14 @@ import multiprocessing
 # print(res_m.summary())
 
 
-# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-#       I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=100, kappa_I=7, kappa_stim=75,
-#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
+      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
-# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=2, tauE=9, tauI=4,  n_stims=2, I0E=0.1,
-#       I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=150, kappa_I=25, kappa_stim=75,
-#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7, tauE=9, tauI=4,  n_stims=2, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=150, kappa_I=6, kappa_stim=75,
+      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
 
@@ -177,7 +177,7 @@ plt.xlim(0,70)
 plt.show(block=False)
 
 
-rep_dist = 25
+rep_dist = 50
 n_kappas= len(kappa_e_test)
 
 kappas_e=[]
@@ -221,12 +221,24 @@ print(res_m.summary())
 
 
 
+df_n_p=pd.DataFrame()
+df_n_p['rE'] = rE.reshape(512)
+peaks_list=[]
+for n_w_s in range(1, 128):
+    r = df_n_p['rE'].rolling(window=n_w_s).mean()
+    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+    peaks_list.append(number_of_bumps)
 
-# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-#       I0I=0.5,  GEE=0.026, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=50, kappa_stim=75,
-#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+number_of_bumps=min(peaks_list)
+number_of_bumps
+peaks_list
 
 
-# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-#       I0I=0.5,  GEE=0.026, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=150, kappa_I=25, kappa_stim=75,
-#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+import statistics 
+from statistics import mode 
+  
+def most_common(List): 
+    return(mode(List)) 
+
+
+print(most_common(peaks_list)) 
