@@ -159,8 +159,8 @@ distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]    #[5, 7, 9, 10, 
 # kappa_e_test = [ 100, 300, 250, 200] 
 # kappa_i_test = [ 10, 30, 15, 20] 
 
-kappa_e_test = [ 240, 200] 
-kappa_i_test = [ 11, 20] 
+kappa_e_test = [ 200, 200] 
+kappa_i_test = [ 9, 20] 
 rep_dist = 10
 
 n_kappas= len(kappa_e_test)
@@ -191,7 +191,7 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e,
 df = df.loc[df['success']==True] 
 
 plt.figure(figsize=(8,6))
-g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , hue_order=kappa_e_test, palette='viridis', 
+g = sns.lineplot( x="separation", y="bias", hue='kappas_I', ci=95 , hue_order=kappa_i_test, palette='viridis', 
                  data=df, legend=False) 
 plt.plot([0, max(df['separation'])], [0,0], 'k--') 
 plt.title('Bias with separation', fontsize=15) #condition title
@@ -199,7 +199,7 @@ plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
-plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_e_test] )
+plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_i_test] )
 #plt.xlim(0,70)
 plt.show(block=False)
 
@@ -209,7 +209,7 @@ kappa_e_test = [ 200, 200]
 kappa_i_test = [ 9, 20] 
 
 
-rep_dist = 50
+rep_dist = 400
 n_kappas= len(kappa_e_test)
 
 kappas_e=[]
@@ -235,7 +235,7 @@ df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'su
 df1 = df1.loc[df1['success']==True] 
 #df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
 plt.figure(figsize=(8,6))
-linares_plot( x="kappas_E", y="bias", order=kappa_i_test,  palette='viridis', alpha=0.4, point_size=5, df=df1) 
+linares_plot( x="kappas_I", y="bias", order=kappa_i_test,  palette='viridis', alpha=0.4, point_size=5, df=df1) 
 plt.title('Drift with eccentricity separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
