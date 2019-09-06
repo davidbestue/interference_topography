@@ -127,14 +127,16 @@ r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7
 
 
 r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=250, kappa_I=15, kappa_stim=75,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=240, kappa_I=11, kappa_stim=75,
       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
 
 r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=100, kappa_I=10, kappa_stim=75,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+
+
 
 
 rE = r[-4]
@@ -215,7 +217,12 @@ plt.xlim(0,70)
 plt.show(block=False)
 
 
-rep_dist = 10
+
+kappa_e_test = [ 240, 200] 
+kappa_i_test = [ 11, 20] 
+
+
+rep_dist = 50
 n_kappas= len(kappa_e_test)
 
 kappas_e=[]
@@ -227,7 +234,7 @@ for idx, k in enumerate(kappa_e_test):
 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
- GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for kape, kapi in zip( kappas_e, kappas_i)) 
+ GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.6, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for kape, kapi in zip( kappas_e, kappas_i)) 
 
 biases = [results[i][0] for i in range(len(results))]
 separationts = [results[i][1] for i in range(len(results))]   
@@ -239,7 +246,7 @@ succs = [results[i][6] for i in range(len(results))]
 df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 
 df1 = df1.loc[df1['success']==True] 
-df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
+#df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
 plt.figure(figsize=(8,6))
 linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='viridis', alpha=0.4, point_size=5, df=df1) 
 plt.title('Drift with eccentricity separation', fontsize=15) #condition title
