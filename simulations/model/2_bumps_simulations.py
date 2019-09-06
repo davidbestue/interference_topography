@@ -109,14 +109,55 @@ import multiprocessing
 
 
 
-r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
+# r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+#       I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
+#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+
+
+r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7, tauE=9, tauI=4,  n_stims=2, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=300, kappa_I=30, kappa_stim=75,
       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
 r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7, tauE=9, tauI=4,  n_stims=2, I0E=0.1,
-      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=150, kappa_I=6, kappa_stim=75,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=200, kappa_I=20, kappa_stim=75,
       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+
+
+
+
+r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=250, kappa_I=15, kappa_stim=75,
+      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+
+
+
+r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.9, sigI=1.6, kappa_E=100, kappa_I=10, kappa_stim=75,
+      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+
+
+rE = r[-4]
+### Fit
+df_n_p=pd.DataFrame()
+df_n_p['rE'] = rE.reshape(512)
+peaks_list=[]
+for n_w_s in range(1, 100):
+    r = df_n_p['rE'].rolling(window=n_w_s).mean()
+    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+    peaks_list.append(number_of_bumps)
+
+number_of_bumps=most_frequent(peaks_list)
+if number_of_bumps == 0:
+    if peaks_list==[0 for i in range(len(peaks_list))]:
+        number_of_bumps = 0
+    else:
+        peaks_list[:] = (value for value in peaks_list if value != 0)
+        number_of_bumps=most_frequent(peaks_list)
+
+
+
+peaks_list[:] = (value for value in peaks_list if value != 0)
 
 
 
@@ -126,10 +167,13 @@ r = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=7
 ##### 2 bumps
 numcores = multiprocessing.cpu_count() -2
 
-distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
-kappa_e_test = [200, 150] 
-kappa_i_test = [20, 25] 
-rep_dist = 20
+distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
+# kappa_e_test = [200, 150, 100, 300, 250] 
+# kappa_i_test = [20, 25, 10, 30, 15] 
+
+kappa_e_test = [ 100, 300, 250, 200] 
+kappa_i_test = [ 10, 30, 15, 20] 
+rep_dist = 5
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
 
@@ -171,7 +215,7 @@ plt.xlim(0,70)
 plt.show(block=False)
 
 
-rep_dist = 50
+rep_dist = 10
 n_kappas= len(kappa_e_test)
 
 kappas_e=[]
@@ -192,11 +236,12 @@ kappas__i = [results[i][3] for i in range(len(results))]
 succs = [results[i][6] for i in range(len(results))]   
 
 
-df=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
+df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 
-df = df.loc[df['success']==True] 
+df1 = df1.loc[df1['success']==True] 
+df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
 plt.figure(figsize=(8,6))
-linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='viridis', alpha=0.4, point_size=5, df=df) 
+linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='viridis', alpha=0.4, point_size=5, df=df1) 
 plt.title('Drift with eccentricity separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
@@ -209,7 +254,7 @@ plt.show(block=False)
 
 import statsmodels.formula.api as smf
 
-res_m = smf.ols(formula='bias ~ kappas_E', data=df).fit()
+res_m = smf.ols(formula='bias ~ kappas_E', data=df1).fit()
 print(res_m.summary())
 
 
