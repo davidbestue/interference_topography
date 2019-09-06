@@ -242,7 +242,14 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         r = df_n_p['rE'].rolling(window=n_w_s).mean()
         number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
         peaks_list.append(number_of_bumps)
-
+    #
+    if number_of_bumps == 0:
+        if peaks_list==[0 for i in range(len(peaks_list))]:
+            number_of_bumps = 0
+        else:
+            peaks_list[:] = (value for value in peaks_list if value != 0)
+            number_of_bumps=most_frequent(peaks_list)
+    #
     number_of_bumps=most_frequent(peaks_list)
     #print(number_of_bumps)
 
