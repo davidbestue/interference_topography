@@ -160,8 +160,8 @@ distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]    #[5, 7, 9, 10, 
 # kappa_e_test = [ 100, 300, 250, 200] 
 # kappa_i_test = [ 10, 30, 15, 20] 
 
-kappa_e_test = [ 200, 250, 201] 
-kappa_i_test = [ 9, 30, 30] 
+kappa_e_test = [ 200, 250, 201, 300, 100] 
+kappa_i_test = [ 9, 30, 30, 30, 10] 
 rep_dist = 10
 
 n_kappas= len(kappa_e_test)
