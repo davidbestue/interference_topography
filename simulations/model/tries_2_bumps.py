@@ -54,3 +54,54 @@ plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_e_te
 #plt.xlim(0,70)
 plt.show(block=False)
 
+
+
+
+
+rep_dist = 100
+n_kappas= len(kappa_e_test)
+
+kappas_e=[]
+kappas_i=[]
+
+for idx, k in enumerate(kappa_e_test):
+    kappas_e = kappas_e + [k]*rep_dist
+    kappas_i = kappas_i + [kappa_i_test[idx]]*rep_dist
+
+
+results2 = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+ GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for kape, kapi in zip( kappas_e, kappas_i)) 
+
+biases = [results2[i][0] for i in range(len(results2))]
+separationts = [results2[i][1] for i in range(len(results2))]   
+kappas__e = [results2[i][2] for i in range(len(results2))]      
+kappas__i = [results2[i][3] for i in range(len(results2))]                                                         
+succs = [results2[i][6] for i in range(len(results2))]   
+num_bumps = [results2[i][-1] for i in range(len(results2))]  
+
+
+df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs, 'n_bumps':num_bumps })
+
+df1_corr = df1.loc[df1['success']==True] 
+df1_corr = df1_corr.loc[df1_corr['n_bumps']==1] 
+
+
+#df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
+plt.figure(figsize=(8,6))
+linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='viridis', alpha=0.4, point_size=5, df=df1_corr) 
+plt.title('Drift with eccentricity separation', fontsize=15) #condition title
+plt.gca().spines['right'].set_visible(False) #no right axis
+plt.gca().spines['top'].set_visible(False) #no  top axis
+plt.gca().get_xaxis().tick_bottom()
+plt.gca().get_yaxis().tick_left()
+plt.ylim(0, 20)
+#plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
+plt.show(block=False)
+
+
+import statsmodels.formula.api as smf
+
+res_m = smf.ols(formula='bias ~ kappas_I', data=df1_corr).fit()
+print(res_m.summary())
+
+
