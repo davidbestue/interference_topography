@@ -206,7 +206,6 @@ plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_e_te
 plt.show(block=False)
 
 
-
 kappa_e_test = [ 200, 201, 300] 
 kappa_i_test = [ 8, 30, 30] 
 
