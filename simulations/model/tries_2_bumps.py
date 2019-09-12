@@ -11,7 +11,7 @@ distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]
 
 kappa_e_test = [ 200, 250, 201, 300, 100] 
 kappa_i_test = [ 9, 30, 30, 30, 10] 
-rep_dist = 10
+rep_dist = 20
 
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
