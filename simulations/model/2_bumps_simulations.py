@@ -190,9 +190,10 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e,
 #df.to_excel('simulations_2bumps_ke_ki2.xlsx')
 
 df = df.loc[df['success']==True] 
+#df_x = df.loc[df['kappas_E']!=250] 
 
 plt.figure(figsize=(8,6))
-g = sns.lineplot( x="separation", y="bias", hue='kappas_I', ci=95 , hue_order=kappa_e_test, palette='viridis', 
+g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , hue_order=kappa_e_test, palette='tab10', 
                  data=df, legend=False) 
 plt.plot([0, max(df['separation'])], [0,0], 'k--') 
 plt.title('Bias with separation', fontsize=15) #condition title
