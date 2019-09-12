@@ -115,9 +115,10 @@ r1 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=
 
 
 
-r2 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=200, kappa_I=8, kappa_stim=75,
-      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+for n in range(0,10):
+    r2 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+          I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=200, kappa_I=8, kappa_stim=75,
+          N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
 
@@ -159,8 +160,8 @@ distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]    #[5, 7, 9, 10, 
 # kappa_e_test = [ 100, 300, 250, 200] 
 # kappa_i_test = [ 10, 30, 15, 20] 
 
-kappa_e_test = [ 200, 200] 
-kappa_i_test = [ 9, 20] 
+kappa_e_test = [ 200, 250, 201] 
+kappa_i_test = [ 9, 30, 30] 
 rep_dist = 10
 
 n_kappas= len(kappa_e_test)
@@ -177,7 +178,7 @@ for idx, k in enumerate(kappa_e_test):
 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
- GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.6, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kape, kapi in zip(separations, kappas_e, kappas_i)) 
+ GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.0, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kape, kapi in zip(separations, kappas_e, kappas_i)) 
 
 biases = [results[i][0] for i in range(len(results))]
 separationts = [results[i][1] for i in range(len(results))]   
@@ -191,7 +192,7 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e,
 df = df.loc[df['success']==True] 
 
 plt.figure(figsize=(8,6))
-g = sns.lineplot( x="separation", y="bias", hue='kappas_I', ci=95 , hue_order=kappa_i_test, palette='viridis', 
+g = sns.lineplot( x="separation", y="bias", hue='kappas_I', ci=95 , hue_order=kappa_e_test, palette='viridis', 
                  data=df, legend=False) 
 plt.plot([0, max(df['separation'])], [0,0], 'k--') 
 plt.title('Bias with separation', fontsize=15) #condition title
@@ -199,13 +200,13 @@ plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
-plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_i_test] )
+plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_e_test] )
 #plt.xlim(0,70)
 plt.show(block=False)
 
 
 
-kappa_e_test = [ 200, 205] 
+kappa_e_test = [ 200, 250] 
 kappa_i_test = [ 8, 30] 
 
 
@@ -228,27 +229,31 @@ separationts = [results[i][1] for i in range(len(results))]
 kappas__e = [results[i][2] for i in range(len(results))]      
 kappas__i = [results[i][3] for i in range(len(results))]                                                         
 succs = [results[i][6] for i in range(len(results))]   
+num_bumps = [results[i][-1] for i in range(len(results))]  
 
 
-df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
+df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs, 'n_bumps':num_bumps })
 
-df1 = df1.loc[df1['success']==True] 
+df1_corr = df1.loc[df1['success']==True] 
+df1_corr = df1_corr.loc[df1_corr['n_bumps']==1] 
+
+
 #df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
 plt.figure(figsize=(8,6))
-linares_plot( x="kappas_I", y="bias", order=kappa_i_test,  palette='viridis', alpha=0.4, point_size=5, df=df1) 
+linares_plot( x="kappas_I", y="bias", order=kappa_i_test,  palette='viridis', alpha=0.4, point_size=5, df=df1_corr) 
 plt.title('Drift with eccentricity separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
-plt.ylim(0, 20)
+#plt.ylim(0, 20)
 #plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
 plt.show(block=False)
 
 
 import statsmodels.formula.api as smf
 
-res_m = smf.ols(formula='bias ~ kappas_I', data=df1).fit()
+res_m = smf.ols(formula='bias ~ kappas_I', data=df1_corr).fit()
 print(res_m.summary())
 
 
