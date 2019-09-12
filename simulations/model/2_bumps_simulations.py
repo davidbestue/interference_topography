@@ -263,5 +263,4 @@ print(res_m.summary())
 
 # number_of_bumps=most_common(peaks_list)
 
-
 # number_of_bumps
