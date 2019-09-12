@@ -151,7 +151,7 @@ peaks_list[:] = (value for value in peaks_list if value != 0)
 
 
 ##### 2 bumps
-numcores = multiprocessing.cpu_count() -2
+numcores = multiprocessing.cpu_count() 
 
 distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
 # kappa_e_test = [200, 150, 100, 300, 250] 
