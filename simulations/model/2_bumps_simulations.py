@@ -207,8 +207,8 @@ plt.show(block=False)
 
 
 
-kappa_e_test = [ 200, 250] 
-kappa_i_test = [ 8, 30] 
+kappa_e_test = [ 200, 201, 300] 
+kappa_i_test = [ 8, 30, 30] 
 
 
 rep_dist = 100
@@ -241,13 +241,13 @@ df1_corr = df1_corr.loc[df1_corr['n_bumps']==1]
 
 #df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
 plt.figure(figsize=(8,6))
-linares_plot( x="kappas_I", y="bias", order=kappa_i_test,  palette='viridis', alpha=0.4, point_size=5, df=df1_corr) 
+linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='viridis', alpha=0.4, point_size=5, df=df1_corr) 
 plt.title('Drift with eccentricity separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
-#plt.ylim(0, 20)
+plt.ylim(0, 20)
 #plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
 plt.show(block=False)
 
