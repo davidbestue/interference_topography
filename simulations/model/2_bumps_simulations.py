@@ -233,7 +233,6 @@ num_bumps = [results[i][-1] for i in range(len(results))]
 
 
 df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs, 'n_bumps':num_bumps })
-
 df1_corr = df1.loc[df1['success']==True] 
 df1_corr = df1_corr.loc[df1_corr['n_bumps']==1] 
 
