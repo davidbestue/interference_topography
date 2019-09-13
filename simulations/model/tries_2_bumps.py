@@ -68,7 +68,7 @@ plt.show(block=False)
 
 
 
-rep_dist = 100
+rep_dist = 250
 n_kappas= len(kappa_e_test)
 
 kappas_e=[]
