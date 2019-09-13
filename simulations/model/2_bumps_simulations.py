@@ -206,11 +206,11 @@ plt.gca().get_yaxis().tick_left()
 plt.show(block=False)
 
 
-kappa_e_test = [ 200, 201, 300] 
-kappa_i_test = [ 8, 30, 30] 
+# kappa_e_test = [ 200, 201, 300] 
+# kappa_i_test = [ 8, 30, 30] 
 
 
-rep_dist = 100
+rep_dist = 300
 n_kappas= len(kappa_e_test)
 
 kappas_e=[]
