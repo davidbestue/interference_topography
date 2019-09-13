@@ -110,14 +110,14 @@ import multiprocessing
 
 
 r1 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=200, kappa_I=30, kappa_stim=75,
+      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=225, kappa_I=15, kappa_stim=75,
       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
 
 for n in range(0,10):
     r2 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-          I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=200, kappa_I=8, kappa_stim=75,
+          I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=300, kappa_I=30, kappa_stim=75,
           N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
@@ -160,9 +160,9 @@ distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]    #[5, 7, 9, 10, 
 # kappa_e_test = [ 100, 300, 250, 200] 
 # kappa_i_test = [ 10, 30, 15, 20] 
 
-kappa_e_test = [ 200, 250, 201, 300, 100] 
-kappa_i_test = [ 9, 30, 30, 30, 10] 
-rep_dist = 10
+kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
+kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
+rep_dist = 20
 
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
@@ -201,7 +201,7 @@ plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
-plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_e_test] )
+#plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_e_test] )
 #plt.xlim(0,70)
 plt.show(block=False)
 
