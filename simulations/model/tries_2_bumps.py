@@ -7,11 +7,16 @@ import multiprocessing
 ##### 2 bumps
 numcores = multiprocessing.cpu_count() 
 
-distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]    
+distances_test =  range(2,35)   
 
-kappa_e_test = [ 200, 250, 201, 300, 100] 
-kappa_i_test = [ 9, 30, 30, 30, 10] 
-rep_dist = 20
+# kappa_e_test = [ 200, 250, 201, 300, 100] 
+# kappa_i_test = [ 9, 30, 30, 30, 10] 
+
+
+kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
+kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
+
+rep_dist = 25
 
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
@@ -41,16 +46,21 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e,
 df = df.loc[df['success']==True] 
 #df_x = df.loc[df['kappas_E']!=250] 
 
+df_300 = df.loc[df['kappas_E']==300]
+df_201 = df.loc[df['kappas_E']==201]
+df_250 = df.loc[df['kappas_E']==250]
+df_test = df_250 # pd.concat([df_300, df_201, df_250])
+
 plt.figure(figsize=(8,6))
-g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , hue_order=kappa_e_test, palette='tab10', 
-                 data=df, legend=False) 
+g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='tab10', data=df_test) 
 plt.plot([0, max(df['separation'])], [0,0], 'k--') 
 plt.title('Bias with separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
-plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in kappa_e_test] )
+g.legend()
+#lt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in [201, 300]] )
 #plt.xlim(0,70)
 plt.show(block=False)
 
@@ -84,17 +94,18 @@ df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'su
 
 df1_corr = df1.loc[df1['success']==True] 
 df1_corr = df1_corr.loc[df1_corr['n_bumps']==1] 
-
+df3 = df1_corr.reset_index()
 
 #df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
 plt.figure(figsize=(8,6))
-linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='viridis', alpha=0.4, point_size=5, df=df1_corr) 
+linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='tab10', alpha=0.4, point_size=5, df=df3) 
+sns.boxplot(x='kappas_E', y="bias",  df=df3)
 plt.title('Drift with eccentricity separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
 plt.gca().get_xaxis().tick_bottom()
 plt.gca().get_yaxis().tick_left()
-plt.ylim(0, 20)
+#plt.ylim(0, 20)
 #plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
 plt.show(block=False)
 
