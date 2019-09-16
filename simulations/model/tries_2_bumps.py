@@ -35,6 +35,9 @@ kappas__e = [results[i][2] for i in range(len(results))]
 kappas__i = [results[i][3] for i in range(len(results))]                                                         
 succs = [results[i][6] for i in range(len(results))]   
 
+## historia (en el antiguo egipto), mcguffin (giobbi secreto), objeto (egene burguer), afirmación (os voy a hacer el mejor truco siglo XX), gesto (deja vu), pregunta (¿entierro clandestino?)
+## alusión (kiko matrix), gestualidad (mano vacias garndes ilusiones), música (mirco)
+
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 ###df.to_excel('/home/david/Desktop/nice_all.xlsx')
 #df.to_excel('simulations_2bumps_ke_ki2.xlsx')
@@ -43,13 +46,14 @@ df_x = df.loc[df['success']==True]
 
 plt.figure(figsize=(8,6))
 g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='tab10', data=df_x, legend=False) 
-plt.plot([0, max(df_x['separation'])], [0,0], 'k--') 
+plt.plot([0, max(df_x['separation'])], [0,0], 'k--') ## plot the 0 line (separate attraction from repulsion)
 plt.title('Bias with separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
-plt.gca().get_xaxis().tick_bottom()
-plt.gca().get_yaxis().tick_left()
-plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in [225, 300]] )
+plt.gca().get_xaxis().tick_bottom() # remove the bottom ticks
+plt.gca().get_yaxis().tick_left() # remove the left ticks
+plt.ylabel('Attraction bias (deg)')
+plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in [225, 300]] ) # add the legend
 plt.show(block=False)
 
 
@@ -105,4 +109,4 @@ plt.show(block=False)
 # res_m = smf.ols(formula='bias ~ kappas_I', data=df3).fit()
 # print(res_m.summary())
 
-
+###
