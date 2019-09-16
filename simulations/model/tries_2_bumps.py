@@ -39,11 +39,11 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e,
 ###df.to_excel('/home/david/Desktop/nice_all.xlsx')
 #df.to_excel('simulations_2bumps_ke_ki2.xlsx')
 
-df = df.loc[df['success']==True] 
+df_x = df.loc[df['success']==True] 
 
 plt.figure(figsize=(8,6))
-g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='tab10', data=df, legend=False) 
-plt.plot([0, max(df['separation'])], [0,0], 'k--') 
+g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='tab10', data=df_x, legend=False) 
+plt.plot([0, max(df_x['separation'])], [0,0], 'k--') 
 plt.title('Bias with separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
