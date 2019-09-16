@@ -41,7 +41,6 @@ df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e,
 
 df = df.loc[df['success']==True] 
 
-
 plt.figure(figsize=(8,6))
 g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='tab10', data=df, legend=False) 
 plt.plot([0, max(df['separation'])], [0,0], 'k--') 
