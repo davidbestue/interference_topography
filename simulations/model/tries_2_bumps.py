@@ -39,6 +39,8 @@ kappas__i = [results[i][3] for i in range(len(results))]
 succs = [results[i][6] for i in range(len(results))]   
 
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
+###df.to_excel('/home/david/Desktop/nice_all.xlsx')
+
 #df.to_excel('simulations_2bumps_ke_ki2.xlsx')
 
 df = df.loc[df['success']==True] 
@@ -50,7 +52,7 @@ df_250 = df.loc[df['kappas_E']==250]
 df_test = df_250 # pd.concat([df_300, df_201, df_250])
 
 plt.figure(figsize=(8,6))
-g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='tab10', data=df_test) 
+g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='tab10', data=df) 
 plt.plot([0, max(df['separation'])], [0,0], 'k--') 
 plt.title('Bias with separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
@@ -90,14 +92,16 @@ num_bumps = [results2[i][-1] for i in range(len(results2))]
 
 df1=pd.DataFrame({'bias':biases, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs, 'n_bumps':num_bumps })
 
+
+####df1.to_excel('/home/david/Desktop/nice_1.xlsx')
 df1_corr = df1.loc[df1['success']==True] 
 df1_corr = df1_corr.loc[df1_corr['n_bumps']==1] 
 df3 = df1_corr.reset_index()
 
 #df1 = df1.loc[(df1['kappas_E']==200) | (df1['kappas_E']==300) ] 
 plt.figure(figsize=(8,6))
-linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='tab10', alpha=0.4, point_size=5, df=df3) 
-sns.boxplot(x='kappas_E', y="bias",  df=df3)
+linares_plot( x="kappas_E", y="bias", order=kappa_e_test,  palette='viridis', alpha=0.4, point_size=5, df=df3) 
+#sns.boxplot(x='kappas_E', y="bias",  df=df3)
 plt.title('Drift with eccentricity separation', fontsize=15) #condition title
 plt.gca().spines['right'].set_visible(False) #no right axis
 plt.gca().spines['top'].set_visible(False) #no  top axis
@@ -110,7 +114,7 @@ plt.show(block=False)
 
 import statsmodels.formula.api as smf
 
-res_m = smf.ols(formula='bias ~ kappas_I', data=df1_corr).fit()
+res_m = smf.ols(formula='bias ~ kappas_I', data=df3).fit()
 print(res_m.summary())
 
 
