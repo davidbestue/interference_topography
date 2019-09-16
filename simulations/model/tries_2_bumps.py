@@ -37,10 +37,6 @@ succs = [results[i][6] for i in range(len(results))]
 
 
 
-
-## historia (en el antiguo egipto...), mcguffin (giobbi secreto), objeto (egene burguer), afirmación (os voy a hacer el mejor truco siglo XX), gesto/accion (ian frish), pregunta (¿entierro clandestino?)
-## alusión (kiko matrix), gestualidad (mano vacias garndes ilusiones), música (mirco). 
-
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 ###df.to_excel('/home/david/Desktop/nice_all.xlsx')
 #df.to_excel('simulations_2bumps_ke_ki2.xlsx')
