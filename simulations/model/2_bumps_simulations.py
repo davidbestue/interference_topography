@@ -146,9 +146,7 @@ if number_of_bumps == 0:
 peaks_list[:] = (value for value in peaks_list if value != 0)
 
 
-
 ###### pruebas
-
 
 ##### 2 bumps
 numcores = multiprocessing.cpu_count() 
