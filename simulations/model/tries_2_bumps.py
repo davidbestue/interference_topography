@@ -13,7 +13,7 @@ kappa_i_test = [ 30, 15]
 
 rep_dist = 100
 
-n_kappas= len(kappa_e_test)
+n_kappas= len(kappa_e_test) # len of kappas 
 n_sepa = len(distances_test)
 
 separations= distances_test * rep_dist * n_kappas
@@ -35,8 +35,14 @@ kappas__e = [results[i][2] for i in range(len(results))]
 kappas__i = [results[i][3] for i in range(len(results))]                                                         
 succs = [results[i][6] for i in range(len(results))]   
 
+
+
+
+
+
+
 ## historia (en el antiguo egipto), mcguffin (giobbi secreto), objeto (egene burguer), afirmación (os voy a hacer el mejor truco siglo XX), gesto (deja vu), pregunta (¿entierro clandestino?)
-## alusión (kiko matrix), gestualidad (mano vacias garndes ilusiones), música (mirco)
+## alusión (kiko matrix), gestualidad (mano vacias garndes ilusiones), música (mirco), 
 
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 ###df.to_excel('/home/david/Desktop/nice_all.xlsx')
