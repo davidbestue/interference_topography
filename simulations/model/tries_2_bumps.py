@@ -3,8 +3,10 @@ from model import *
 from joblib import Parallel, delayed
 import multiprocessing
 
+
+
 ##### 2 bumps simultaneous
-numcores = multiprocessing.cpu_count() 
+numcores = multiprocessing.cpu_count() ## run in paralel, in the cluster use all the cores available (for simulations)
 
 distances_test =  list(np.linspace(1.5, 35, 150))  #range(2,35)   
 
@@ -55,6 +57,8 @@ succs = [results[i][6] for i in range(len(results))]
 ### americana: externo derecho( premios loteria, boli), externo izquierdo (billete 10, baraja), interior derecho (impares), interior izquierdo (cartera,varita, boli), pecho (pañuelo)
 ### pantalon: delante dercho (3 monedas), delantero izq (nada), tras derecho (fp), tras izqu (nada - cargador monedas)
 ## fuera (cascarilla, bolsa y huevo)
+
+## Espacio visto espectadores (derecha a izquierda) Altavoz, mesa con tapete
 
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 ###df.to_excel('/home/david/Desktop/nice_all.xlsx')
