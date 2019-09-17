@@ -3,7 +3,7 @@ from model import *
 from joblib import Parallel, delayed
 import multiprocessing
 
-##### 2 bumps
+##### 2 bumps simultaneous
 numcores = multiprocessing.cpu_count() 
 
 distances_test =  list(np.linspace(1.5, 35, 150))  #range(2,35)   
