@@ -36,6 +36,19 @@ kappas__i = [results[i][3] for i in range(len(results))]
 succs = [results[i][6] for i in range(len(results))]   
 
 
+## manos (distension, gag, me va a petar la cabeza...)
+## invisible (milagro, historias, participaremos, magia fuerte, elegante) "imaginación se hace real"
+## cambio de villete (historia, no es posible, elegante, magiaa) "transformación"
+## slot machine (historias, habilidoso, no le pillaré, wtf??) "desapariciones y multiplicación"
+## coins accross (elegante, muy mágico, este es bueno...) "viaje"
+## suma rapida ('me cuenta su vida, será verdad, mago diferente, interesante') "habilidad matematica"
+## cuadrado mágico (¿magia? ¿habilidad? que me estas contando??????) "habilidad matematica"
+## bolsa y huevo (elegante pero es un cachondo.. jajaja participamos, que bueno ) "apariciones y desapariciones"
+## sorteo (uuuuh, a ver si me toca, jajaja que lo eliinan al tio este... vaya mierda de premio, espera... what???) "prediccion"
+## roleplayer (que tio mas intersante, tambien es tahur... jajaja... no puede ser!!!) "localización"
+## travellers (elegante, historia, no way.... imposible, detallista, venga va en la cartera con el dia de hoy??????) "viaje"
+
+
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
 ###df.to_excel('/home/david/Desktop/nice_all.xlsx')
 #df.to_excel('simulations_2bumps_ke_ki2.xlsx')
