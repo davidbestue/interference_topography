@@ -57,7 +57,6 @@ plt.show(block=False)
 
 ###################### 1 bump
 
-
 # rep_dist = 250
 # n_kappas= len(kappa_e_test)
 
