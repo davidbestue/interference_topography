@@ -55,24 +55,6 @@ plt.legend(title='kappaE', loc='upper right', labels=[str(i) for i in [225, 300]
 plt.show(block=False)
 
 
-### show de 45 min (cerca - salon)
-
-### manos
-### invisible
-### slot machine
-### coins across
-
-### suma veloz
-### cuadrado mágico
-
-### bolsa y huevo
-### sorteo
-
-### role player
-### travellers
-
-
-
 ###################### 1 bump
 # rep_dist = 250
 # n_kappas= len(kappa_e_test)
