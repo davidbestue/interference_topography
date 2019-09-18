@@ -4,7 +4,6 @@ from joblib import Parallel, delayed
 import multiprocessing
 
 
-
 ##### 2 bumps simultaneous
 numcores = multiprocessing.cpu_count() ## run in paralel, in the cluster use all the cores available (for simulations)
 
@@ -39,7 +38,7 @@ succs = [results[i][6] for i in range(len(results))]
 
 
 df=pd.DataFrame({'bias':biases, 'separation':separationts, 'kappas_E':kappas__e, 'kappas_I':kappas__i, 'success':succs })
-###df.to_excel('/home/david/Desktop/nice_all.xlsx')
+df.to_excel('/home/david/Desktop/nice_all.xlsx')
 #df.to_excel('simulations_2bumps_ke_ki2.xlsx')
 
 df_x = df.loc[df['success']==True] 
