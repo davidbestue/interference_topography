@@ -43,6 +43,7 @@ df.to_excel('/home/david/Desktop/nice_all.xlsx')
 
 df_x = df.loc[df['success']==True] 
 
+#plot the figure separating by kappa_E 8confidence interval of 95%
 plt.figure(figsize=(8,6))
 g = sns.lineplot( x="separation", y="bias", hue='kappas_E', ci=95 , palette='tab10', data=df_x, legend=False) 
 plt.plot([0, max(df_x['separation'])], [0,0], 'k--') ## plot the 0 line (separate attraction from repulsion)
