@@ -253,7 +253,6 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     number_of_bumps=most_frequent(peaks_list)
     #print(number_of_bumps)
 
-
     ### Fit
     #df_n_p=pd.DataFrame()
     #df_n_p['rE'] = rE.reshape(512)
