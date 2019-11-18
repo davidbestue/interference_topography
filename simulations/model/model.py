@@ -388,4 +388,13 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
 # plt.show(block=False)
 
 
+#### Plot the gain function
+#f = lambda x : x*x*(x>0)*(x<1) + reshape(array([cmath.sqrt(4*x[i]-3) for i in range(0, len(x))]).real, (N,1)) * (x>=1)
+#N=512
+#a=[]
+#for i in np.linspace(0,5,1000):
+#    a.append( f( i+random.randn(512,1)*0    )[0][0])
+#
+#plt.plot(np.linspace(0,5,1000), a)
+#
 
