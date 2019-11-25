@@ -206,7 +206,6 @@ df = df.loc[df['success']==True]
 # #plt.xlim(0,70)
 # plt.show(block=False)
 
-
 # # kappa_e_test = [ 200, 201, 300] 
 # # kappa_i_test = [ 8, 30, 30] 
 
