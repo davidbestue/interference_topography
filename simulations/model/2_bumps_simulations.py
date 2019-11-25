@@ -103,47 +103,47 @@ import multiprocessing
 # print(res_m.summary())
 
 
-from model import *
-from joblib import Parallel, delayed
-import multiprocessing
+# from model import *
+# from joblib import Parallel, delayed
+# import multiprocessing
 
 
 
-r1 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-      I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=225, kappa_I=15, kappa_stim=75,
-      N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+# r1 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+#       I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=225, kappa_I=15, kappa_stim=75,
+#       N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
 
-for n in range(0,10):
-    r2 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
-          I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=300, kappa_I=30, kappa_stim=75,
-          N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
+# for n in range(0,10):
+#     r2 = model(totalTime=2000, targ_onset=100,  presentation_period=350, separation=0, tauE=9, tauI=4,  n_stims=1, I0E=0.1,
+#           I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.6, kappa_E=300, kappa_I=30, kappa_stim=75,
+#           N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)
 
 
 
 
-rE = r[-4]
-### Fit
-df_n_p=pd.DataFrame()
-df_n_p['rE'] = rE.reshape(512)
-peaks_list=[]
-for n_w_s in range(1, 100):
-    r = df_n_p['rE'].rolling(window=n_w_s).mean()
-    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
-    peaks_list.append(number_of_bumps)
+# rE = r[-4]
+# ### Fit
+# df_n_p=pd.DataFrame()
+# df_n_p['rE'] = rE.reshape(512)
+# peaks_list=[]
+# for n_w_s in range(1, 100):
+#     r = df_n_p['rE'].rolling(window=n_w_s).mean()
+#     number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+#     peaks_list.append(number_of_bumps)
 
-number_of_bumps=most_frequent(peaks_list)
-if number_of_bumps == 0:
-    if peaks_list==[0 for i in range(len(peaks_list))]:
-        number_of_bumps = 0
-    else:
-        peaks_list[:] = (value for value in peaks_list if value != 0)
-        number_of_bumps=most_frequent(peaks_list)
+# number_of_bumps=most_frequent(peaks_list)
+# if number_of_bumps == 0:
+#     if peaks_list==[0 for i in range(len(peaks_list))]:
+#         number_of_bumps = 0
+#     else:
+#         peaks_list[:] = (value for value in peaks_list if value != 0)
+#         number_of_bumps=most_frequent(peaks_list)
 
 
 
-peaks_list[:] = (value for value in peaks_list if value != 0)
+# peaks_list[:] = (value for value in peaks_list if value != 0)
 
 
 ###### pruebas
