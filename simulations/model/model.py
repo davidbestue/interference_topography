@@ -278,7 +278,8 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         estimated_angle=np.degrees(param[0]+pi)  
         bias_b1 = estimated_angle - np.degrees( origin - separation)
         bias_b2 = np.degrees(origin + separation) - estimated_angle  ## bias (positive means attraction)
-        final_bias = [bias_b1, bias_b2]  
+        ###final_bias = [bias_b1, bias_b2]  
+        final_bias = [bias_b1, bias_b1] # de la otra manera estas forzando la media todo el rato
         skip_r_sq=False
         success=True
 

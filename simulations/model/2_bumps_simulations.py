@@ -151,7 +151,7 @@ import multiprocessing
 ##### 2 bumps
 numcores = multiprocessing.cpu_count() 
 
-distances_test =  [2,3,4,5, 7, 9, 11, 13, 15, 19, 25, 30, 35]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
+distances_test =  [2,3,4,5, 7, 9, 11, 13, 14, 15, 16, 17, 18, 19, 25, 30, 35]    #[5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
 # kappa_e_test = [200, 150, 100, 300, 250] 
 # kappa_i_test = [20, 25, 10, 30, 15] 
 # kappa_e_test = [ 100, 300, 250, 200] 
