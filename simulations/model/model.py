@@ -268,7 +268,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
         estimated_angles.sort()
         bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
         bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
-        final_bias = [bias_b1, bias_b2]
+        final_bias = [bias_b1, bias_b1]
         skip_r_sq=False
         success=True
 
