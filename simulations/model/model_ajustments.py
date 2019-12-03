@@ -108,7 +108,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     separation =  angle_separation*pi/360
     angle_target=180+angle_separation/2
     angle_distractor=180-angle_separation/2
-    elif n_stims==1:
+    if n_stims==1:
         separation=0
 
 
