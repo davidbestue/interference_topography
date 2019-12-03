@@ -346,7 +346,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 from joblib import Parallel, delayed
 import multiprocessing
 
-numcores = multiprocessing.cpu_count() - 1
+numcores = multiprocessing.cpu_count() - 8
 
 
 distances_test = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 35, 40, 45, 50, 60, 70, 80, 90]
