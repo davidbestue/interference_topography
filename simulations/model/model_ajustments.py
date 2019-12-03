@@ -329,7 +329,7 @@ m = model(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separa
     I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=20, 
     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 
-m[5]
+print(m[5], decode_rE(m[3]))
 
 
 ## Example
