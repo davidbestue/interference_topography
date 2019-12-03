@@ -276,7 +276,11 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     elif number_of_bumps ==1:
         param, covs = curve_fit(von_misses, X, y, maxfev=10000)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
-        estimated_angles=np.degrees(param[0]+pi)  
+        if param[0]<0:
+            estimated_angles =decode_rE(rE)
+        else:
+            estimated_angles=np.degrees(param[0]+pi)  
+        #
         bias_b1 = estimated_angles - np.degrees( origin - separation)
         bias_b2 = np.degrees(origin + separation) - estimated_angles  ## bias (positive means attraction)
         ###final_bias = [bias_b1, bias_b2]  
@@ -325,8 +329,8 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 ####
 
 
-m = model(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=20, tauE=9, tauI=4,  n_stims=2, 
-    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.2, sigI=1.9, kappa_E=200, kappa_I=20, 
+m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=20, tauE=9, tauI=4,  n_stims=2, 
+    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1, sigI=1.9, kappa_E=200, kappa_I=20, 
     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 
 print(m[5], decode_rE(m[3]))
