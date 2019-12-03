@@ -318,7 +318,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         final_bias = abs(180 - bias)
 
 
-    return(final_bias, bias_b1, bias_b2, rE, RE, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
+    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
 
 
 ###
@@ -326,7 +326,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 
 
 m = model(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=20, tauE=9, tauI=4,  n_stims=2, 
-    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=200, kappa_I=20, 
+    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.8, sigI=1.6, kappa_E=200, kappa_I=20, 
     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 
 
