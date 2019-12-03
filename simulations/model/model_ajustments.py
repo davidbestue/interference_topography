@@ -276,9 +276,9 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     elif number_of_bumps ==1:
         param, covs = curve_fit(von_misses, X, y, maxfev=10000)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
-        estimated_angle=np.degrees(param[0]+pi)  
-        bias_b1 = estimated_angle - np.degrees( origin - separation)
-        bias_b2 = np.degrees(origin + separation) - estimated_angle  ## bias (positive means attraction)
+        estimated_angles=np.degrees(param[0]+pi)  
+        bias_b1 = estimated_angles - np.degrees( origin - separation)
+        bias_b2 = np.degrees(origin + separation) - estimated_angles  ## bias (positive means attraction)
         ###final_bias = [bias_b1, bias_b2]  
         final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
         skip_r_sq=False
@@ -318,7 +318,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         final_bias = abs(180 - bias)
 
 
-    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angle, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
+    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
 
 
 ###
