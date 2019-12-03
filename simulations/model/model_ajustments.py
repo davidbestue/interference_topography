@@ -272,6 +272,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         final_bias = [bias_b1, bias_b2]
         skip_r_sq=False
         success=True
+        decode_func = 0
 
     elif number_of_bumps ==1:
         param, covs = curve_fit(von_misses, X, y, maxfev=10000)
@@ -279,8 +280,10 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         if param[0]<0:
             estimated_angles =decode_rE(rE)
             print('1 - with decode function')
+            decode_func = 1
         else:
-            estimated_angles=np.degrees(param[0]+pi)  
+            estimated_angles=np.degrees(param[0]+pi) 
+            decode_func = 0 
         #
         bias_b1 = estimated_angles - np.degrees( origin - separation)
         bias_b2 = np.degrees(origin + separation) - estimated_angles  ## bias (positive means attraction)
@@ -299,6 +302,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         skip_r_sq=True
         r_squared=0
         success=False ## to eliminate wrong simulations easily at the end
+        decode_func = 0
 
     #error_fit (r_squared)
     if skip_r_sq==False:
@@ -324,9 +328,10 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     if n_stims==1:
         bias = decode_rE(rE) 
         final_bias = abs(180 - bias)
+        decode_func = 1
 
 
-    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
+    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func) #bias_b1, bias_b2)
 
 
 ###
@@ -365,8 +370,9 @@ separations = [results[i][6] for i in range(len(results))]
 kappas_e = [results[i][7] for i in range(len(results))]  
 kappas_i = [results[i][8] for i in range(len(results))]                                                              
 succs = [results[i][10] for i in range(len(results))]   
+decode_f = [results[i][11] for i in range(len(results))]  
 
-df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  'kappas_I':kappas_i, 'success':succs })
+df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  'kappas_I':kappas_i, 'success':succs, 'decod_f':decode_f })
 
 
 
