@@ -278,6 +278,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
         if param[0]<0:
             estimated_angles =decode_rE(rE)
+            print('1 - with decode function')
         else:
             estimated_angles=np.degrees(param[0]+pi)  
         #
