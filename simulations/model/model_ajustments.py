@@ -318,7 +318,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         final_bias = abs(180 - bias)
 
 
-    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
+    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angle, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
 
 
 ###
