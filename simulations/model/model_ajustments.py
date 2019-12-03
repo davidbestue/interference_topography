@@ -269,7 +269,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         estimated_angles.sort()
         bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
         bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
-        final_bias = [bias_b1, bias_b1]
+        final_bias = [bias_b1, bias_b2]
         skip_r_sq=False
         success=True
 
@@ -280,7 +280,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         bias_b1 = estimated_angle - np.degrees( origin - separation)
         bias_b2 = np.degrees(origin + separation) - estimated_angle  ## bias (positive means attraction)
         ###final_bias = [bias_b1, bias_b2]  
-        final_bias = [bias_b1, bias_b1] # de la otra manera estas forzando la media todo el rato
+        final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
         skip_r_sq=False
         success=True
 
@@ -318,7 +318,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         final_bias = abs(180 - bias)
 
 
-    return(final_bias, bias_b1, bias_b2, total_sep, kappa_E, kappa_I, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
+    return(final_bias, bias_b1, bias_b2, rE, RE, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
 
 
 ###
