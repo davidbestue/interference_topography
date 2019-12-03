@@ -333,7 +333,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 ####
 
 # m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=2, 
-#     I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.2, sigI=1.9, kappa_E=200, kappa_I=20, 
+#     I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=200, kappa_I=20, 
 #     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 
 
@@ -342,8 +342,8 @@ from joblib import Parallel, delayed
 import multiprocessing
 
 numcores = multiprocessing.cpu_count() - 1
-distances_test = [5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
-distances_test = [ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 28, 30, 35, 40, 45, 50, 55, 60, 70, 80, 90]
+#distances_test = [5, 7, 9, 10, 11, 12, 13, 14, 15, 17, 20, 22, 24]
+distances_test = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 35, 40, 45, 50, 60, 70, 80, 90]
 kappa_e_test = [100, 200] #[0.024, 0.025]
 rep_dist = 100
 n_kappas= len(kappa_e_test)
