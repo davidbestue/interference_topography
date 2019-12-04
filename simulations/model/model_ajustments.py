@@ -348,7 +348,6 @@ import multiprocessing
 
 numcores = multiprocessing.cpu_count() 
 
-
 distances_test = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 35, 40, 45, 50, 60, 70, 80, 90]
 
 kappa_e_test = [ 300, 225, 220] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
