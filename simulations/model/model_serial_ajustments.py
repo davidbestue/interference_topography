@@ -329,6 +329,14 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         decode_func = 1
 
 
+    #### Save a txt after each simulation in case it crashes
+    savetxt(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func) #bias_b1, bias_b2)
+
+
+
+
+
+
     return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func) #bias_b1, bias_b2)
 
 
