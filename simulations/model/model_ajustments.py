@@ -416,7 +416,7 @@ print('Numer cores: '+ str(numcores))
 kappa_e_test = [ 300, 225] 
 kappa_i_test = [ 30, 15]      
 
-rep_dist = 10
+rep_dist = 1000
 
 kappas_e=[]
 kappas_i=[]
