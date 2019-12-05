@@ -306,14 +306,15 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         success=True
 
         if n_stims==1:
-            bias_b1 = np.degrees(origin) - estimated_angles ## el que quiero, con fit (a veces sera el de cedode_rE tbn)
-            bias_b2 = 180 - decode_rE(rE) ## siempre del de rE just in case
-            final_bias = [abs(bias_b1), abs(bias_b1)]
+            estimated_angles=np.degrees(param[0]+pi)
+            bias_b1 = np.degrees(origin) - estimated_angles ## con fit
+            bias_b2 = 180 - decode_rE(rE) ## scon decode_rE
+            final_bias = [abs(bias_b2), abs(bias_b2)]
     ##
     else:
         print('Error simultaion')
         bias_b1=999
-        bias_b2=999
+        bias_b2=decode_rE(rE)
         estimated_angles=999
         final_bias=[999, 999]
         plot_fit=False
@@ -421,7 +422,7 @@ rep_dist = 500
 
 m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
     I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=225, kappa_I=15, 
-    kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
+    kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 
 
 
