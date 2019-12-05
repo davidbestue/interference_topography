@@ -395,7 +395,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 # kappas_e = [results[i][7] for i in range(len(results))]  
 # kappas_i = [results[i][8] for i in range(len(results))]                                                              
 # succs = [results[i][10] for i in range(len(results))]   
-# decode_f = [results[i][11] for i in range(len(results))]  
+# decode_f = [results[i][-1] for i in range(len(results))]  
 
 # df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  'kappas_I':kappas_i, 'success':succs, 'decod_f':decode_f })
 # ###df.to_excel('please.xlsx')
@@ -437,9 +437,12 @@ separations = [results[i][6] for i in range(len(results))]
 kappas_e = [results[i][7] for i in range(len(results))]  
 kappas_i = [results[i][8] for i in range(len(results))]                                                              
 succs = [results[i][10] for i in range(len(results))]   
-decode_f = [results[i][11] for i in range(len(results))]  
+decode_f = [results[i][-1] for i in range(len(results))]  
+number_bumps = [results[i][-2] for i in range(len(results))]  
 
-df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  'kappas_I':kappas_i, 'success':succs, 'decod_f':decode_f })
+
+df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  
+    'kappas_I':kappas_i, 'success':succs, 'decod_f':decode_f, 'number_bumps':number_bumps })
 
 
 
