@@ -392,11 +392,17 @@ numcores = multiprocessing.cpu_count()
 
 
 
+# 1 bumps 
 
 
+kappa_e_test = [ 300, 225] 
+kappa_i_test = [ 30, 15]      
 
+rep_dist = 500
 
-
+# for idx, k in enumerate(kappa_e_test):
+#     kappas_e = kappas_e + [k]*n_sepa*rep_dist
+#     kappas_i = kappas_i + [kappa_i_test[idx]]*n_sepa*rep_dist
 
 
 
