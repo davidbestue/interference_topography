@@ -427,7 +427,7 @@ m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separa
 
 
 
-
+print(m[1], m[2])
 
 
 
