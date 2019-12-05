@@ -342,54 +342,70 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 #     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
 
-# 2 bumps radial
 from joblib import Parallel, delayed
 import multiprocessing
 
 numcores = multiprocessing.cpu_count() 
 
-distances_test = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 35, 40, 45, 50, 60, 70, 80, 90]
 
-kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
-kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
-rep_dist = 100
-
-n_kappas= len(kappa_e_test)
-n_sepa = len(distances_test)
-
-separations= distances_test * rep_dist * n_kappas
-
-kappas_e=[]
-kappas_i=[]
-
-for idx, k in enumerate(kappa_e_test):
-    kappas_e = kappas_e + [k]*n_sepa*rep_dist
-    kappas_i = kappas_i + [kappa_i_test[idx]]*n_sepa*rep_dist
+# 2 bumps 
 
 
-#results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
-# GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.0, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kape, kapi in zip(separations, kappas_e, kappas_i)) 
+# distances_test = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 35, 40, 45, 50, 60, 70, 80, 90]
+
+# kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
+# kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
+# rep_dist = 100
+
+# n_kappas= len(kappa_e_test)
+# n_sepa = len(distances_test)
+
+# separations= distances_test * rep_dist * n_kappas
+
+# kappas_e=[]
+# kappas_i=[]
+
+# for idx, k in enumerate(kappa_e_test):
+#     kappas_e = kappas_e + [k]*n_sepa*rep_dist
+#     kappas_i = kappas_i + [kappa_i_test[idx]]*n_sepa*rep_dist
 
 
-results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
- GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kape, kapi in zip(separations, kappas_e, kappas_i)) 
+# #results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
+# # GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.0, sigI=1.6, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kape, kapi in zip(separations, kappas_e, kappas_i)) 
 
 
-final_biases = [results[i][0] for i in range(len(results))]
-b1 = [results[i][1] for i in range(len(results))]
-b2 = [results[i][2] for i in range(len(results))]
-separations = [results[i][6] for i in range(len(results))]   
-kappas_e = [results[i][7] for i in range(len(results))]  
-kappas_i = [results[i][8] for i in range(len(results))]                                                              
-succs = [results[i][10] for i in range(len(results))]   
-decode_f = [results[i][11] for i in range(len(results))]  
-
-df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  'kappas_I':kappas_i, 'success':succs, 'decod_f':decode_f })
+# results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=sep, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
+#  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for sep, kape, kapi in zip(separations, kappas_e, kappas_i)) 
 
 
+# final_biases = [results[i][0] for i in range(len(results))]
+# b1 = [results[i][1] for i in range(len(results))]
+# b2 = [results[i][2] for i in range(len(results))]
+# separations = [results[i][6] for i in range(len(results))]   
+# kappas_e = [results[i][7] for i in range(len(results))]  
+# kappas_i = [results[i][8] for i in range(len(results))]                                                              
+# succs = [results[i][10] for i in range(len(results))]   
+# decode_f = [results[i][11] for i in range(len(results))]  
+
+# df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  'kappas_I':kappas_i, 'success':succs, 'decod_f':decode_f })
+# ###df.to_excel('please.xlsx')
 
 
-# df.to_excel('simulations_2bumps.xlsx')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
