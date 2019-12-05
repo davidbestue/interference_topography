@@ -359,6 +359,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 
 
 #numcores = multiprocessing.cpu_count() 
+#print('Numer cores: '+ str(numcores))
 
 # distances_test = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 35, 40, 45, 50, 60, 70, 80, 90]
 
