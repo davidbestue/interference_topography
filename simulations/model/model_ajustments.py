@@ -399,7 +399,6 @@ df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations
 # ###df.to_excel('please.xlsx')
 # ###df.to_excel('please_close.xlsx')
 
-
 # 1 bumps 
 
 # m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
