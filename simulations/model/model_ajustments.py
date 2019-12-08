@@ -407,8 +407,6 @@ df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations
 
 # numcores = multiprocessing.cpu_count() 
 # print('Numer cores: '+ str(numcores))
-
-
 # kappa_e_test = [ 300, 225] 
 # kappa_i_test = [ 30, 15]      
 
