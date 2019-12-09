@@ -588,11 +588,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="119.51106"
-     inkscape:cy="674.15199"
+     inkscape:zoom="0.7"
+     inkscape:cx="-71.576701"
+     inkscape:cy="717.52136"
      inkscape:document-units="mm"
-     inkscape:current-layer="matplotlib.axis_2-9"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
@@ -617,17 +617,17 @@
      id="layer1">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.82724953px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.47068122;stroke-linecap:butt;stroke-linejoin:round"
-       x="12.659636"
-       y="17.157713"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.95106697px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.57377666;stroke-linecap:butt;stroke-linejoin:round"
+       x="12.558285"
+       y="16.873798"
        id="text49207-6"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan49205-2"
-         x="12.659636"
-         y="17.157713"
-         style="font-size:6.27574921px;stroke-width:0.47068122;stroke-linecap:butt;stroke-linejoin:round">Figure 3: Behaviour multiple item</tspan></text>
+         x="12.558285"
+         y="16.873798"
+         style="font-size:7.65035486px;stroke-width:0.57377666;stroke-linecap:butt;stroke-linejoin:round">Figure 3: Behaviour multiple item</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.8823204px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.29705808;stroke-linecap:butt;stroke-linejoin:round"
