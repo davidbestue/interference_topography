@@ -340,48 +340,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func) #bias_b1, bias_b2)
 
 
-Aprovecho para comentaros bastantes cosas. 
-
-Empiezo por los experimentos de memorabilidad de Gea.
-
-Para empezar, deciros que ya tengo casi lista la digitalización de los datos así como diversas propuestas para el analisis de los datos (ya sabéis que sólo 
-le puedo ir dedicando ratitos libres así que espero que no tengáis una prisa excesiva). En segundo lugar, deciros que coincido con vosotros en que el 
-análisis de las "saliencias" es muy interesante. Al principio no me parecía que analizarlas como tal por separado añadiese mucho al estudio,  
-ya que además de suponer una limitación estadística de peso, no aclaraba ninguna de las hipótesis de interacciones orden y tiempo que nos planteamos.
-Ya le comenté a Jordi que me parecían más una curiosidad a incluir en las conclusiones más que en el análisis per se. 
-Sin embargo, ahora creo que sí pueden reforzar el análisis si las usamos para cuantificar la "riqueza" del juego e introducir el número de saliencias
-como factor paramétrico en el análisis (por ejemplo: el jugo 1 en t=0 tenía 3 saliencias de media y en t=1 solamente 1). No sé si es esto a lo que os
-referías cuando me lo comentastéis pero, sea como fuere, creo que estamos de acuerdo en analizarlas.
-
-Con más detalle os conatré los análisis que creo que son más interesantes y también como tengo pensado hacer la cuenta de las saliencias para evitar 
-al máximo el problema de que sea yo el mismo que digitaliza los datos y el que los analiza...
-
-Para acabar con este tema, ya le comenté a Jordi mi pequeña obsesión con el p-hacking y harking, así que antes de correr ningún análisis en datos 
-reales, quiero tener todos los scripts hechos y consensuados con vosotros. Espero que os parezca bien.
-
-
-El segundo tema es principalmente para Luis, ya que te pasé la última versión de paper que escribí sobre Neuromagia y quería saber si habías tenido tiempo
-de ojearlo... también aprovecho para felicitaros con el tema del paper de Sandra, que parece que ya está en revisión!! :)
-
-El último de los temas es una propuesta. Hace algunos meses os comenté la idea de que tal vez las figuras que son más realistas (con color carne)
-fomentan que la gente apueste más (jugando a poker, por ejemplo) que las que son menos realistas (con color blanco). Le he dado algunas vueltas y he 
-consultado bibliografía para acabrme de convencer que es un experimento interesante tanto en cuando evalua si el realismo del estímulo es un factor 
-importante a la hora de tomar decisiones. 
-
-Si os parece interesante (a vosotros o a Alex) y sabéis de alguien con tiempo para correr los experimentos, estaría encantado de hechar una mano.
-Os dejo un enlace al Github del proyecto donde podéis leer un poco más del tema.
-
-
-Me parece que es un experimento de los que Luis llama (win-win), ya que si no hay efecto es interesante ya que somos capaces de hacer una abstracción 
-a un factor que está muy presente en nuestras vidas como es el "realismo" de los objectso. Si hay un efecto, es todavía más interesante ya que se está 
-controlando por "aprendizaje" (suele ser un porblema en este tipo de tareas), por "experise" (objetiva y subjetiva) y también por "risky" (no se fomentan
-las decisiones arriesgada, que es un problema en este tipo de paradigmas). 
-Asimismo, el hecho de usar el factor "realismo" tiene mucho sentido sobre el mecanismo, ya que es un factor modulado por VMPFC, que es una area clave en 
-modelos de toma de decisiones, por lo que se podrían exprapolar hipotésis sobre el Somatic marker hypothesis si también mirasemos el HR o skyn conductance
-durnate la tarea (en un follow up?)  
-
-
-
+    
 
 
 from joblib import Parallel, delayed

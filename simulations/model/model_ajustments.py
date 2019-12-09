@@ -483,4 +483,4 @@ df=pd.DataFrame({'gaussian_std':gaussian_std,  'kappas_E':kappas_e,
 
 
 
-#df.to_excel('please_fit_gauss.xlsx')
+df.to_excel('please_fit_gauss.xlsx')
