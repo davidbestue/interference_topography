@@ -206,15 +206,15 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #plt.title('BUMP activity')
         #plt.ylabel('Angle')
         plt.xlabel('time')
-        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=5) ## flipped, so it is p_target 
+        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=2) ## flipped, so it is p_target 
         #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
         plt.yticks([])
         plt.xticks([])
         plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
         #plt.plot([stimon, stimon,], [0+20, N-20], 'k-', label='onset')
         #plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
-        plt.plot([stimon, stimon,], [0+20, N-20], 'k-', linewidth=3)
-        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k-', linewidth=3)
+        plt.plot([stimon, stimon,], [0+20, N-20], 'k-', linewidth=0.5)
+        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k-', linewidth=0.5)
         #plt.legend()
         plt.show(block=False)
     
@@ -410,16 +410,16 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 # ###df.to_excel('please_close.xlsx')
 
 # 1 bumps 
-m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
-    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=300, kappa_I=30, 
-    kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
+# m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
+#     I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=300, kappa_I=30, 
+#     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
 
 
 
-m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
-    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=225, kappa_I=15, 
-    kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
+# m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
+#     I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=225, kappa_I=15, 
+#     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
 
 # numcores = multiprocessing.cpu_count() 
