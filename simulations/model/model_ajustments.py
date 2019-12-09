@@ -215,7 +215,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
         plt.plot([stimon, stimon,], [0+20, N-20], 'k-')
         plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--')
-        plt.legend()
+        #plt.legend()
         plt.show(block=False)
     
     
