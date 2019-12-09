@@ -203,16 +203,16 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         RE_sorted=flipud(RE)
         plt.figure(figsize=(9,6))
         sns.heatmap(RE_sorted, cmap='viridis', vmax=8)
-        plt.title('BUMP activity')
-        plt.ylabel('Angle')
+        #plt.title('BUMP activity')
+        #plt.ylabel('Angle')
         plt.xlabel('time')
         plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
-        plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
+        #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
         plt.yticks([])
         plt.xticks([])
         plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
-        plt.plot([stimon, stimon,], [0+20, N-20], 'k-', label='onset')
-        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
+        #plt.plot([stimon, stimon,], [0+20, N-20], 'k-', label='onset')
+        #plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
         plt.plot([stimon, stimon,], [0+20, N-20], 'k-')
         plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--')
         plt.legend()
@@ -410,10 +410,16 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 # ###df.to_excel('please_close.xlsx')
 
 # 1 bumps 
-# m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
-#     I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=300, kappa_I=30, 
-#     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
+    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=300, kappa_I=30, 
+    kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
+
+
+
+m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
+    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=225, kappa_I=15, 
+    kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
 
 
 # numcores = multiprocessing.cpu_count() 
@@ -453,34 +459,34 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 
 ### Simulations fitting a gaussian to get the std (width of a bump)
 
-numcores = multiprocessing.cpu_count() - 3
-print('Numer cores: '+ str(numcores))
-kappa_e_test = [ 300, 225] 
-kappa_i_test = [ 30, 15]      
+# numcores = multiprocessing.cpu_count() - 3
+# print('Numer cores: '+ str(numcores))
+# kappa_e_test = [ 300, 225] 
+# kappa_i_test = [ 30, 15]      
 
-rep_dist = 50
+# rep_dist = 50
 
-kappas_e=[]
-kappas_i=[]
-for idx, k in enumerate(kappa_e_test):
-    kappas_e = kappas_e + [k]*rep_dist
-    kappas_i = kappas_i + [kappa_i_test[idx]]*rep_dist
-
-
-results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
- GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for kape, kapi in zip(kappas_e, kappas_i)) 
+# kappas_e=[]
+# kappas_i=[]
+# for idx, k in enumerate(kappa_e_test):
+#     kappas_e = kappas_e + [k]*rep_dist
+#     kappas_i = kappas_i + [kappa_i_test[idx]]*rep_dist
 
 
-
-kappas_e = [results[i][7] for i in range(len(results))]  
-kappas_i = [results[i][8] for i in range(len(results))]                                                              
-succs = [results[i][10] for i in range(len(results))]   
-gaussian_std = [results[i][-1] for i in range(len(results))]  
-
-
-df=pd.DataFrame({'gaussian_std':gaussian_std,  'kappas_E':kappas_e,  
-    'kappas_I':kappas_i, 'success':succs })
+# results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+#  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for kape, kapi in zip(kappas_e, kappas_i)) 
 
 
 
-df.to_excel('please_fit_gauss.xlsx')
+# kappas_e = [results[i][7] for i in range(len(results))]  
+# kappas_i = [results[i][8] for i in range(len(results))]                                                              
+# succs = [results[i][10] for i in range(len(results))]   
+# gaussian_std = [results[i][-1] for i in range(len(results))]  
+
+
+# df=pd.DataFrame({'gaussian_std':gaussian_std,  'kappas_E':kappas_e,  
+#     'kappas_I':kappas_i, 'success':succs })
+
+
+
+# df.to_excel('please_fit_gauss.xlsx')
