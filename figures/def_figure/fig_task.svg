@@ -17,7 +17,7 @@
    version="1.1"
    id="svg37594"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="figures.svg">
+   sodipodi:docname="fig_task.svg">
   <defs
      id="defs37588">
     <marker
@@ -19009,7 +19009,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.9983453"
      inkscape:cx="479.87705"
-     inkscape:cy="1070.0456"
+     inkscape:cy="909.78043"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -19026,7 +19026,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -19054,17 +19054,17 @@
        inkscape:export-ydpi="96" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.77664852px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.39441618;stroke-linecap:butt;stroke-linejoin:round"
-       x="12.624659"
-       y="18.68733"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.67664146px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.44191602;stroke-linecap:butt;stroke-linejoin:round"
+       x="7.8075695"
+       y="16.701368"
        id="text49207-6"
        inkscape:export-xdpi="96"
        inkscape:export-ydpi="96"><tspan
          sodipodi:role="line"
          id="tspan49205-2"
-         x="12.624659"
-         y="18.68733"
-         style="font-size:5.25888252px;stroke-width:0.39441618;stroke-linecap:butt;stroke-linejoin:round">Figure 1: Task</tspan></text>
+         x="7.8075695"
+         y="16.701368"
+         style="font-size:5.89221382px;stroke-width:0.44191602;stroke-linecap:butt;stroke-linejoin:round">Figure 1: Task</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:1.10270321px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:none;fill-opacity:1;stroke:none;stroke-width:0.09189191;stroke-linecap:butt;stroke-linejoin:round"
