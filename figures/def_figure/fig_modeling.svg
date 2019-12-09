@@ -2008,9 +2008,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="-24.706082"
-     inkscape:cy="564.22264"
+     inkscape:zoom="1"
+     inkscape:cx="330.31386"
+     inkscape:cy="673.52781"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -27146,19 +27146,37 @@ QmCC
        height="38.061783"
        width="56.714577"
        style="stroke-linecap:butt;stroke-linejoin:round" />
-    <rect
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#e66101;stroke-width:0.48292524;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.80392157"
-       id="rect76728"
-       width="52.205952"
-       height="37.417339"
-       x="91.319572"
-       y="40.667984" />
-    <rect
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#5e3c99;stroke-width:0.48376885;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect76728-8"
-       width="52.205112"
-       height="37.548786"
-       x="146.03244"
-       y="40.502075" />
-  </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot7564-67-5-5-6-9"
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#e66101;fill-opacity:1;stroke:none;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100000"
+       transform="matrix(0.10674348,0,0,0.10679756,74.62039,-136.22685)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><flowRegion
+         id="flowRegion7566-5-1-4-7-8"
+         style="font-family:sans-serif;fill:#e66101;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100000"><rect
+           id="rect7568-6-8-6-0-4"
+           width="644.48639"
+           height="101.38357"
+           x="236"
+           y="1618.6139"
+           style="font-family:sans-serif;fill:#e66101;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100000" /></flowRegion><flowPara
+         id="flowPara7570-4-1-7-3-2"
+         style="font-size:40px;line-height:1.25;font-family:sans-serif;fill:#e66101;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100000">radius 1: k=300</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot7564-67-5-5-6-9-0"
+       style="font-style:normal;font-weight:normal;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#5e3c99;fill-opacity:1;stroke:none;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100000;stroke-opacity:1"
+       transform="matrix(0.10674348,0,0,0.10679756,129.0728,-136.16612)"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><flowRegion
+         id="flowRegion7566-5-1-4-7-8-4"
+         style="font-family:sans-serif;fill:#5e3c99;fill-opacity:1;stroke:none;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100000;stroke-opacity:1"><rect
+           id="rect7568-6-8-6-0-4-7"
+           width="644.48639"
+           height="101.38357"
+           x="236"
+           y="1618.6139"
+           style="font-family:sans-serif;fill:#5e3c99;fill-opacity:1;stroke:none;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100000;stroke-opacity:1" /></flowRegion><flowPara
+         id="flowPara7570-4-1-7-3-2-1"
+         style="font-size:40px;line-height:1.25;font-family:sans-serif;fill:#5e3c99;fill-opacity:1;stroke:none;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100000;stroke-opacity:1">radius 3: k=225</flowPara></flowRoot>  </g>
 </svg>
