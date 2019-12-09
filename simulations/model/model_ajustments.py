@@ -480,3 +480,7 @@ gaussian_std = [results[i][-1] for i in range(len(results))]
 
 df=pd.DataFrame({'gaussian_std':gaussian_std,  'kappas_E':kappas_e,  
     'kappas_I':kappas_i, 'success':succs })
+
+
+
+#df.to_excel('please_fit_gauss.xlsx')
