@@ -235,6 +235,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     def gauss(x,mu,sigma,A):
         return A*exp(-(x-mu)**2/2/sigma**2)
 
+    std_g = 999
     ##
     y=np.reshape(rE, (N)) 
     X=np.reshape(np.linspace(-pi, pi, N), N)
@@ -307,10 +308,9 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
         skip_r_sq=False
         success=True
-
         print('Gaussian fit')
         param_g, covs_g = curve_fit(gauss, X, y, maxfev=10000)
-        print(param_g)
+        std_g = param_g[1]
 
 
 
@@ -352,7 +352,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     total_sep=np.degrees(2*separation)
     final_bias = np.mean(final_bias)
     #print(total_sep)
-    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func) #bias_b1, bias_b2)
+    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func, std_g) #bias_b1, bias_b2)
 
 
 ###
@@ -415,6 +415,11 @@ m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separa
     kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
 
 
+
+m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, 
+    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=225, kappa_I=15, 
+    kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True) 
+
 # numcores = multiprocessing.cpu_count() 
 # print('Numer cores: '+ str(numcores))
 # kappa_e_test = [ 300, 225] 
@@ -450,3 +455,33 @@ m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separa
 
 
 
+### Simulations fitting a gaussian to get the std (width of a bump)
+
+numcores = multiprocessing.cpu_count() 
+print('Numer cores: '+ str(numcores))
+kappa_e_test = [ 300, 225] 
+kappa_i_test = [ 30, 15]      
+
+rep_dist = 50
+
+kappas_e=[]
+kappas_i=[]
+for idx, k in enumerate(kappa_e_test):
+    kappas_e = kappas_e + [k]*rep_dist
+    kappas_i = kappas_i + [kappa_i_test[idx]]*rep_dist
+
+
+results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=1, I0E=0.1, I0I=0.5,
+ GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for kape, kapi in zip(kappas_e, kappas_i)) 
+
+
+
+
+kappas_e = [results[i][7] for i in range(len(results))]  
+kappas_i = [results[i][8] for i in range(len(results))]                                                              
+succs = [results[i][10] for i in range(len(results))]   
+gaussian_std = [results[i][-1] for i in range(len(results))]  
+
+
+df=pd.DataFrame({'gaussian_std':gaussian_std,  'kappas_E':kappas_e,  
+    'kappas_I':kappas_i, 'success':succs })
