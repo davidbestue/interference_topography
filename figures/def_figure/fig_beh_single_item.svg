@@ -769,9 +769,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="-45.056999"
-     inkscape:cy="860.33725"
+     inkscape:zoom="1"
+     inkscape:cx="327.32575"
+     inkscape:cy="563.09063"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -811,7 +811,7 @@
          style="font-size:8.41744518px;stroke-width:0.63130838;stroke-linecap:butt;stroke-linejoin:round">Figure 2: Behaviour single item</tspan></text>
     <g
        id="figure_1"
-       transform="matrix(0.19805028,0,0,0.19805028,7.0971947,128.52944)"
+       transform="matrix(0.12050987,0,0,0.12050987,8.949278,48.926127)"
        style="stroke-linecap:butt;stroke-linejoin:round">
       <g
          id="patch_1"
@@ -3590,7 +3590,7 @@
     </g>
     <g
        id="figure_1-4"
-       transform="matrix(0.22693217,0,0,0.22693217,12.026622,39.721792)"
+       transform="matrix(0.17477395,0,0,0.17477395,131.72056,48.664417)"
        style="stroke-linecap:butt;stroke-linejoin:round">
       <g
          id="patch_1-2"
@@ -6351,18 +6351,5 @@
          style="stroke-width:0.29705808;stroke-linecap:butt;stroke-linejoin:round"
          x="11.662627"
          y="39.117447">A</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:11.8823204px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.29705811;stroke-linecap:butt;stroke-linejoin:round"
-       x="12.361248"
-       y="120.60911"
-       id="text38757-8-41"
-       inkscape:export-xdpi="96"
-       inkscape:export-ydpi="96"><tspan
-         sodipodi:role="line"
-         id="tspan38755-0-6"
-         style="stroke-width:0.29705811;stroke-linecap:butt;stroke-linejoin:round"
-         x="12.361248"
-         y="120.60911">B</tspan></text>
   </g>
 </svg>
