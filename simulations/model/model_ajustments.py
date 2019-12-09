@@ -202,19 +202,19 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #### plot heatmap
         RE_sorted=flipud(RE)
         plt.figure(figsize=(9,6))
-        sns.heatmap(RE_sorted, cmap='viridis', vmax=8)
+        sns.heatmap(RE_sorted, cmap='binary', vmax=8)
         #plt.title('BUMP activity')
         #plt.ylabel('Angle')
         plt.xlabel('time')
-        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
+        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=5) ## flipped, so it is p_target 
         #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
         plt.yticks([])
         plt.xticks([])
         plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
         #plt.plot([stimon, stimon,], [0+20, N-20], 'k-', label='onset')
         #plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
-        plt.plot([stimon, stimon,], [0+20, N-20], 'k-')
-        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--')
+        plt.plot([stimon, stimon,], [0+20, N-20], 'k-', linewidth=3)
+        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k-', linewidth=3)
         #plt.legend()
         plt.show(block=False)
     
