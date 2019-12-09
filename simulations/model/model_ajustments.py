@@ -232,6 +232,9 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     def bi_von_misses(x,mu1,k1,mu2,k2):
         return von_misses(x,mu1,k1) + von_misses(x,mu2,k2)
 
+    def gauss(x,mu,sigma,A):
+        return A*exp(-(x-mu)**2/2/sigma**2)
+
     ##
     y=np.reshape(rE, (N)) 
     X=np.reshape(np.linspace(-pi, pi, N), N)
@@ -304,6 +307,13 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
         skip_r_sq=False
         success=True
+
+        print('Gaussian fit')
+        param_g, covs_g = curve_fit(gauss, X, y, maxfev=10000)
+        print(param_g)
+
+
+
 
         if n_stims==1:
             estimated_angles=np.degrees(param[0]+pi)
