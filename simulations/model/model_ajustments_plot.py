@@ -373,7 +373,7 @@ kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
 rep_dist = 5
 
 n_kappas= len(kappa_e_test)
-n_sepa = len(distances_test)
+n_noise= len(noise_test)
 
 noise_parameters= noise_test * rep_dist * n_kappas
 
@@ -381,8 +381,8 @@ kappas_e=[]
 kappas_i=[]
 
 for idx, k in enumerate(kappa_e_test):
-    kappas_e = kappas_e + [k]*n_sepa*rep_dist
-    kappas_i = kappas_i + [kappa_i_test[idx]]*n_sepa*rep_dist
+    kappas_e = kappas_e + [k]*n_noise*rep_dist
+    kappas_i = kappas_i + [kappa_i_test[idx]]*n_noise*rep_dist
 
 
 
