@@ -365,12 +365,12 @@ print('Numer cores: '+ str(numcores))
 
 min_noise = 0.6
 max_noise = 1.2
-nois_n = 3
+nois_n = 10
 noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
 kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
-rep_dist = 5
+rep_dist = 100
 
 n_kappas= len(kappa_e_test)
 n_noise= len(noise_test)
