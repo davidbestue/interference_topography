@@ -411,3 +411,14 @@ number_bumps = [results[i][-3] for i in range(len(results))]
 
 df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  
     'kappas_I':kappas_i, 'success':succs, 'sigE':sigE, 'decod_f':decode_f, 'number_bumps':number_bumps })
+
+
+
+
+
+
+
+df_=df.loc[df['success']==True] 
+df_['absb2']=abs(df.b2) 
+df_ = df_[abs(df_1.absb2)<1.5*np.std(df_.absb2)]
+sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
