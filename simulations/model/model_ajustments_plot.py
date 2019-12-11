@@ -370,7 +370,7 @@ noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
 kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
-rep_dist = 10
+rep_dist = 5
 
 n_kappas= len(kappa_e_test)
 n_sepa = len(distances_test)
