@@ -353,7 +353,8 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     total_sep=np.degrees(2*separation)
     final_bias = np.mean(final_bias)
     #print(total_sep)
-    return(IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func, std_g) #bias_b1, bias_b2)
+    return(IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
+    success, number_of_bumps, decode_func, std_g) #bias_b1, bias_b2)
 
 
 
@@ -364,7 +365,7 @@ print('Numer cores: '+ str(numcores))
 kappa_e_test = [ 300, 225] 
 kappa_i_test = [ 30, 15]      
 
-rep_dist = 10
+rep_dist = 50
 
 kappas_e=[]
 kappas_i=[]
@@ -383,20 +384,20 @@ results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=
 
 
 
-IE = [IE[i][0] for i in range(len(results))]
-WE = [WE[i][1] for i in range(len(results))]
-WI = [WI[i][2] for i in range(len(results))]
-rE = [WI[i][3] for i in range(len(results))]
-IEs = [WI[i][4] for i in range(len(results))]
+IE = [results[i][0] for i in range(len(results))]
+WE = [results[i][1] for i in range(len(results))]
+WI = [results[i][2] for i in range(len(results))]
+rE = [results[i][3] for i in range(len(results))]
+IEs = [results[i][4] for i in range(len(results))]
 final_biases = [results[i][5] for i in range(len(results))]
 b1 = [results[i][6] for i in range(len(results))]
 b2 = [results[i][7] for i in range(len(results))]
-separations = [results[i][8] for i in range(len(results))]   
-kappas_e = [results[i][9] for i in range(len(results))]  
-kappas_i = [results[i][10] for i in range(len(results))]                                                              
-succs = [results[i][11] for i in range(len(results))]   
-decode_f = [results[i][-1] for i in range(len(results))]  
-number_bumps = [results[i][-2] for i in range(len(results))]  
+separations = [results[i][11] for i in range(len(results))]   
+kappas_e = [results[i][12] for i in range(len(results))]  
+kappas_i = [results[i][13] for i in range(len(results))]                                                              
+succs = [results[i][14] for i in range(len(results))]   
+decode_f = [results[i][-2] for i in range(len(results))]  
+number_bumps = [results[i][-3] for i in range(len(results))]  
 
 
 df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  
