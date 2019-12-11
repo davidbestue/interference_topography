@@ -360,7 +360,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 
 
 
-numcores = multiprocessing.cpu_count() 
+numcores = multiprocessing.cpu_count() -1 
 print('Numer cores: '+ str(numcores))
 
 min_noise = 0.6
