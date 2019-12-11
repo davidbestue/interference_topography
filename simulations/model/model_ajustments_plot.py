@@ -415,9 +415,7 @@ df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations
 
 
 
-
-
-
+## visualize
 df_=df.loc[df['success']==True] 
 df_['absb2']=abs(df.b2) 
 df_ = df_[abs(df_1.absb2)<1.5*np.std(df_.absb2)]
