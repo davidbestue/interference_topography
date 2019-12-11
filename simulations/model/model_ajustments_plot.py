@@ -409,6 +409,7 @@ decode_f = [results[i][-2] for i in range(len(results))]
 number_bumps = [results[i][-3] for i in range(len(results))]  
 
 
+
 df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  
     'kappas_I':kappas_i, 'success':succs, 'sigE':sigE, 'decod_f':decode_f, 'number_bumps':number_bumps })
 
