@@ -318,7 +318,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
             bias_b1 = 180 - decode_rE(rE) #np.degrees(origin) - estimated_angles ## con fit
             bias_b2 = 180 - decode_rE(rE) ## scon decode_rE
             final_bias = [abs(bias_b2), abs(bias_b2)]
-            skip_r_sq=False
+            skip_r_sq=True
             success=True
             std_g=999
     ##
