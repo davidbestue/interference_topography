@@ -322,6 +322,8 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
             success=True
             std_g=999
             r_squared=0
+            decode_func = 1
+            plot_fit=False
     ##
     else:
         print('Error simultaion')
