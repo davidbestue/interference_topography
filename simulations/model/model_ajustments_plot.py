@@ -267,18 +267,18 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     #number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
 
     if number_of_bumps ==2:
-        param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75], maxfev=100000)
-        ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
-        estimated_angle_1=np.degrees(param[0]+pi)  
-        estimated_angle_2=np.degrees(param[2]+pi)  
-        estimated_angles = [estimated_angle_1, estimated_angle_2]
-        estimated_angles.sort()
-        bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
-        bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
-        final_bias = [bias_b1, bias_b2]
-        skip_r_sq=False
-        success=True
-        decode_func = 0
+        # param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75], maxfev=100000)
+        # ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
+        # estimated_angle_1=np.degrees(param[0]+pi)  
+        # estimated_angle_2=np.degrees(param[2]+pi)  
+        # estimated_angles = [estimated_angle_1, estimated_angle_2]
+        # estimated_angles.sort()
+        # bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
+        # bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
+        # final_bias = [bias_b1, bias_b2]
+        # skip_r_sq=False
+        # success=True
+        # decode_func = 0
         if n_stims==1:
             print('Error simultaion')
             bias_b1=999
@@ -293,32 +293,28 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #
     #
     elif number_of_bumps ==1:
-        param, covs = curve_fit(von_misses, X, y, maxfev=100000)
-        ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
-        if param[0]<0:
-            estimated_angles =decode_rE(rE)
-            print('1 - with decode function')
-            decode_func = 1
-        else:
-            estimated_angles=np.degrees(param[0]+pi) 
-            decode_func = 0 
-        #
-        bias_b1 = estimated_angles - np.degrees( origin - separation)
-        bias_b2 = np.degrees(origin + separation) - estimated_angles  ## bias (positive means attraction)
-        ###final_bias = [bias_b1, bias_b2]  
-        final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
-        skip_r_sq=False
-        success=True
-        print('Gaussian fit')
-        param_g, covs_g = curve_fit(gauss, X, y, maxfev=100000)
-        std_g = param_g[1]
-
-
-
-
+        # param, covs = curve_fit(von_misses, X, y, maxfev=100000)
+        # ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
+        # if param[0]<0:
+        #     estimated_angles =decode_rE(rE)
+        #     print('1 - with decode function')
+        #     decode_func = 1
+        # else:
+        #     estimated_angles=np.degrees(param[0]+pi) 
+        #     decode_func = 0 
+        # #
+        # bias_b1 = estimated_angles - np.degrees( origin - separation)
+        # bias_b2 = np.degrees(origin + separation) - estimated_angles  ## bias (positive means attraction)
+        # ###final_bias = [bias_b1, bias_b2]  
+        # final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
+        # skip_r_sq=False
+        # success=True
+        # print('Gaussian fit')
+        # param_g, covs_g = curve_fit(gauss, X, y, maxfev=100000)
+        # std_g = param_g[1]
         if n_stims==1:
-            estimated_angles=np.degrees(param[0]+pi)
-            bias_b1 = np.degrees(origin) - estimated_angles ## con fit
+            estimated_angles= decode_rE(rE) #np.degrees(param[0]+pi)
+            bias_b1 = 180 - decode_rE(rE) #np.degrees(origin) - estimated_angles ## con fit
             bias_b2 = 180 - decode_rE(rE) ## scon decode_rE
             final_bias = [abs(bias_b2), abs(bias_b2)]
     ##
