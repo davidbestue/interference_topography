@@ -356,7 +356,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     total_sep=np.degrees(2*separation)
     final_bias = np.mean(final_bias)
 
-    ## save each simulation
+    ## save each simulation in the paralel process
     too_many=100
     os.chdir('C:\\Users\\David\\Desktop')
     path_resp = os.path.join(os.getcwd(), 'simuls')  
