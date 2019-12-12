@@ -445,19 +445,27 @@ df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations
 # df_ = df_[abs(df_1.absb2)<1.5*np.std(df_.absb2)]
 # sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
 
+too_many=0
+
+
 os.chdir('C:\\Users\\David\\Desktop')
 path_resp = os.path.join(os.getcwd(), 'simuls')  
 total_sim = 10
 save_each_ = True
 
-
+import time
+timeout = time.time() + 3   # 1 minutes from now
 os.chdir(path_resp)
+
 if save_each_!=False:
     #to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
     #success, sigE, number_of_bumps, decode_func, std_g]
     filename =  str(np.random.randint(total_sim)) + '.pkl'
     while filename in os.listdir(path_resp): #in case it has the same name, add a number behind
             filename =  str(np.random.randint(total_sim)) + '.pkl'
+            if time.time()>timeout:
+                too_many+=1
+                filename =  str(np.random.randint(total_sim)) + str(too_many) + '.pkl'
     #
     with open(filename, 'wb') as fp:
         pickle.dump(to_save, fp)
