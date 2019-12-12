@@ -321,6 +321,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
             skip_r_sq=True
             success=True
             std_g=999
+            r_squared=0
     ##
     else:
         print('Error simultaion')
