@@ -95,7 +95,7 @@ def viz_polymonial(X, y, poly_reg, pol_reg):
 
 def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
  GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True ,
-  plot_fit=True, save_each_name=False, total_sim=1000, path_resp=False):
+  plot_fit=True, save_each_=False, total_sim=999999999, path_save=False):
     #
     st_sim =time.time()
     dt=2
@@ -356,16 +356,17 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     total_sep=np.degrees(2*separation)
     final_bias = np.mean(final_bias)
 
-    if save_each_name!=False:
+    ## save each simulation
+    total_sim = 3
+    if save_each_!=False:
         to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
         success, sigE, number_of_bumps, decode_func, std_g]
         filename =  str(np.random.randint(total_sim)) + '.pkl'
+        while filename in os.listdir(path_save): #in case it has the same name, add a number behind
+                filename =  str(np.random.randint(total_sim)) + '.pkl'
 
-while filename in os.listdir(path_resp): #in case it has the same name, add a number behind
-    session +=1
-    filename =  filename.split('.')[0].split('_')[0]  + '_' + str(session) + '.xlsx'
-    with open('outfile', 'wb') as fp:
-        pickle.dump(itemlist, fp)
+        with open(filename, 'wb') as fp:
+            pickle.dump(to_save, fp)
 
 
 
@@ -443,3 +444,24 @@ df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations
 # df_['absb2']=abs(df.b2) 
 # df_ = df_[abs(df_1.absb2)<1.5*np.std(df_.absb2)]
 # sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
+
+os.chdir('C:\\Users\\David\\Desktop')
+path_resp = os.path.join(os.getcwd(), 'simuls')  
+total_sim = 10
+save_each_ = True
+
+
+os.chdir(path_resp)
+if save_each_!=False:
+    #to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
+    #success, sigE, number_of_bumps, decode_func, std_g]
+    filename =  str(np.random.randint(total_sim)) + '.pkl'
+    while filename in os.listdir(path_resp): #in case it has the same name, add a number behind
+            filename =  str(np.random.randint(total_sim)) + '.pkl'
+    #
+    with open(filename, 'wb') as fp:
+        pickle.dump(to_save, fp)
+
+
+
+
