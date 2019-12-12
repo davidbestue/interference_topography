@@ -267,7 +267,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     #number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
 
     if number_of_bumps ==2:
-        param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75], maxfev=10000)
+        param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75], maxfev=100000)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
         estimated_angle_1=np.degrees(param[0]+pi)  
         estimated_angle_2=np.degrees(param[2]+pi)  
@@ -293,7 +293,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #
     #
     elif number_of_bumps ==1:
-        param, covs = curve_fit(von_misses, X, y, maxfev=10000)
+        param, covs = curve_fit(von_misses, X, y, maxfev=100000)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
         if param[0]<0:
             estimated_angles =decode_rE(rE)
@@ -310,7 +310,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         skip_r_sq=False
         success=True
         print('Gaussian fit')
-        param_g, covs_g = curve_fit(gauss, X, y, maxfev=10000)
+        param_g, covs_g = curve_fit(gauss, X, y, maxfev=100000)
         std_g = param_g[1]
 
 
