@@ -363,9 +363,9 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 numcores = multiprocessing.cpu_count() -1 
 print('Numer cores: '+ str(numcores))
 
-min_noise = 0.6
+min_noise = 0.2
 max_noise = 1.2
-nois_n = 10
+nois_n = 11
 noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
