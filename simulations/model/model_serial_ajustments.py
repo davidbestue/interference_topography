@@ -1,3 +1,5 @@
+
+
 from linares_plot import *
 from math import floor, exp, sqrt, pi
 import cmath
@@ -16,8 +18,11 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 import scipy.signal
 from scipy.optimize import curve_fit 
+import os
+import pickle
 
 
+## Fucntions to use
 
 
 def decode_rE(rE, a_ini=0, a_fin=360, N=512):
@@ -88,9 +93,9 @@ def viz_polymonial(X, y, poly_reg, pol_reg):
 
 # model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
 
-
 def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
- GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True):
+ GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True ,
+  plot_fit=True, save_each_name=False, total_sim=1000, path_resp=False):
     #
     st_sim =time.time()
     dt=2
@@ -156,6 +161,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     #generation of the noise and the connectivity between inhib and exit
     RE=zeros((N,nsteps));
     RI=zeros((N,nsteps));
+    IEs= zeros((N,nsteps));
     f = lambda x : x*x*(x>0)*(x<1) + reshape(array([cmath.sqrt(4*x[i]-3) for i in range(0, len(x))]).real, (N,1)) * (x>=1)
     ### diferential equations
     for i in range(0, nsteps):
@@ -177,6 +183,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #drawnow
         RE[:,i] = rEr;
         RI[:,i] = rIr;
+        IEs[:,i] = reshape(IE,N)
     #
     ## metrics
     if n_stims==2:
@@ -199,20 +206,20 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #### plot heatmap
         RE_sorted=flipud(RE)
         plt.figure(figsize=(9,6))
-        sns.heatmap(RE_sorted, cmap='viridis', vmax=8)
-        plt.title('BUMP activity')
-        plt.ylabel('Angle')
+        sns.heatmap(RE_sorted, cmap='binary', vmax=8)
+        #plt.title('BUMP activity')
+        #plt.ylabel('Angle')
         plt.xlabel('time')
-        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
-        plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
+        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=2) ## flipped, so it is p_target 
+        #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
         plt.yticks([])
         plt.xticks([])
         plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
-        plt.plot([stimon, stimon,], [0+20, N-20], 'k-', label='onset')
-        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
-        plt.plot([stimon, stimon,], [0+20, N-20], 'k-')
-        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--')
-        plt.legend()
+        #plt.plot([stimon, stimon,], [0+20, N-20], 'k-', label='onset')
+        #plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
+        plt.plot([stimon, stimon,], [0+20, N-20], 'k-', linewidth=0.5)
+        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k-', linewidth=0.5)
+        #plt.legend()
         plt.show(block=False)
     
     
@@ -229,6 +236,10 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     def bi_von_misses(x,mu1,k1,mu2,k2):
         return von_misses(x,mu1,k1) + von_misses(x,mu2,k2)
 
+    def gauss(x,mu,sigma,A):
+        return A*exp(-(x-mu)**2/2/sigma**2)
+
+    std_g = 999
     ##
     y=np.reshape(rE, (N)) 
     X=np.reshape(np.linspace(-pi, pi, N), N)
@@ -259,7 +270,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     #number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
 
     if number_of_bumps ==2:
-        param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75], maxfev=10000)
+        param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75], maxfev=100000)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
         estimated_angle_1=np.degrees(param[0]+pi)  
         estimated_angle_2=np.degrees(param[2]+pi)  
@@ -271,9 +282,21 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         skip_r_sq=False
         success=True
         decode_func = 0
-
+        if n_stims==1:
+            print('Error simultaion')
+            bias_b1=999
+            bias_b2=999
+            estimated_angles=999
+            final_bias=[999, 999]
+            plot_fit=False
+            skip_r_sq=True
+            r_squared=0
+            success=False ## to eliminate wrong simulations easily at the end
+            decode_func = 0
+        #
+    #
     elif number_of_bumps ==1:
-        param, covs = curve_fit(von_misses, X, y, maxfev=10000)
+        param, covs = curve_fit(von_misses, X, y, maxfev=100000)
         ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
         if param[0]<0:
             estimated_angles =decode_rE(rE)
@@ -289,11 +312,23 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
         skip_r_sq=False
         success=True
+        print('Gaussian fit')
+        param_g, covs_g = curve_fit(gauss, X, y, maxfev=100000)
+        std_g = param_g[1]
 
+
+
+
+        if n_stims==1:
+            estimated_angles=np.degrees(param[0]+pi)
+            bias_b1 = np.degrees(origin) - estimated_angles ## con fit
+            bias_b2 = 180 - decode_rE(rE) ## scon decode_rE
+            final_bias = [abs(bias_b2), abs(bias_b2)]
+    ##
     else:
         print('Error simultaion')
         bias_b1=999
-        bias_b2=999
+        bias_b2=decode_rE(rE)
         estimated_angles=999
         final_bias=[999, 999]
         plot_fit=False
@@ -316,39 +351,95 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         plt.plot(X, ans, '--', color ='blue', label ="fit") 
         plt.legend() 
         plt.show(block=False) 
-
-
+    ##
     ### Output
     total_sep=np.degrees(2*separation)
     final_bias = np.mean(final_bias)
+
+    if save_each_name!=False:
+        to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
+        success, sigE, number_of_bumps, decode_func, std_g]
+        filename =  str(np.random.randint(total_sim)) + '.pkl'
+
+while filename in os.listdir(path_resp): #in case it has the same name, add a number behind
+    session +=1
+    filename =  filename.split('.')[0].split('_')[0]  + '_' + str(session) + '.xlsx'
+    with open('outfile', 'wb') as fp:
+        pickle.dump(itemlist, fp)
+
+
+
+
+
     #print(total_sep)
-
-    if n_stims==1:
-        bias = decode_rE(rE) 
-        final_bias = abs(180 - bias)
-        decode_func = 1
-
-
-    #### Save a txt after each simulation in case it crashes
-    savetxt(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func) #bias_b1, bias_b2)
+    return(IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
+    success, sigE, number_of_bumps, decode_func, std_g) #bias_b1, bias_b2)
 
 
 
 
 
-
-    return(final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, success, number_of_bumps, decode_func) #bias_b1, bias_b2)
-
-
-    
+numcores = multiprocessing.cpu_count() -1 
+print('Numer cores: '+ str(numcores))
 
 
-from joblib import Parallel, delayed
-import multiprocessing
-
-numcores = multiprocessing.cpu_count() - 3
 
 
-m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=2, 
-    I0E=0.1, I0I=0.5, GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=225, kappa_I=15, 
-    kappa_stim=75, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False) 
+min_noise = 0.6
+max_noise = 1.2
+nois_n = 2
+noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
+
+kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
+kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
+rep_dist = 10
+
+n_kappas= len(kappa_e_test)
+n_noise= len(noise_test)
+
+noise_parameters= noise_test * rep_dist * n_kappas
+
+kappas_e=[]
+kappas_i=[]
+
+for idx, k in enumerate(kappa_e_test):
+    kappas_e = kappas_e + [k]*n_noise*rep_dist
+    kappas_i = kappas_i + [kappa_i_test[idx]]*n_noise*rep_dist
+
+
+
+results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4, 
+ n_stims=1, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=noise_p, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, 
+ plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
+
+
+
+IE = [results[i][0] for i in range(len(results))]
+WE = [results[i][1] for i in range(len(results))]
+WI = [results[i][2] for i in range(len(results))]
+rE = [results[i][3] for i in range(len(results))]
+IEs = [results[i][4] for i in range(len(results))]
+final_biases = [results[i][5] for i in range(len(results))]
+b1 = [results[i][6] for i in range(len(results))]
+b2 = [results[i][7] for i in range(len(results))]
+separations = [results[i][11] for i in range(len(results))]   
+kappas_e = [results[i][12] for i in range(len(results))]  
+kappas_i = [results[i][13] for i in range(len(results))]                                                              
+succs = [results[i][15] for i in range(len(results))]   
+sigE = [results[i][16] for i in range(len(results))]   
+decode_f = [results[i][-2] for i in range(len(results))]  
+number_bumps = [results[i][-3] for i in range(len(results))]  
+
+
+
+df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  
+    'kappas_I':kappas_i, 'success':succs, 'sigE':sigE, 'decod_f':decode_f, 'number_bumps':number_bumps })
+
+
+
+
+## visualize
+# df_=df.loc[df['success']==True] 
+# df_['absb2']=abs(df.b2) 
+# df_ = df_[abs(df_1.absb2)<1.5*np.std(df_.absb2)]
+# sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
