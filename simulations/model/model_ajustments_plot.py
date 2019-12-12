@@ -290,6 +290,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
             r_squared=0
             success=False ## to eliminate wrong simulations easily at the end
             decode_func = 0
+            std_g=999
         #
     #
     elif number_of_bumps ==1:
@@ -317,6 +318,9 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
             bias_b1 = 180 - decode_rE(rE) #np.degrees(origin) - estimated_angles ## con fit
             bias_b2 = 180 - decode_rE(rE) ## scon decode_rE
             final_bias = [abs(bias_b2), abs(bias_b2)]
+            skip_r_sq=False
+            success=True
+            std_g=999
     ##
     else:
         print('Error simultaion')
@@ -329,6 +333,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         r_squared=0
         success=False ## to eliminate wrong simulations easily at the end
         decode_func = 0
+        std_g=999
 
     #error_fit (r_squared)
     if skip_r_sq==False:
