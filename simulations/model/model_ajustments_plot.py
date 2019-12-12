@@ -300,7 +300,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #     print('1 - with decode function')
         #     decode_func = 1
         # else:
-        #     estimated_angles=np.degrees(param[0]+pi) 
+        #     estimated_angles=np.degrees(param[0]+pi) ##
         #     decode_func = 0 
         # #
         # bias_b1 = estimated_angles - np.degrees( origin - separation)
