@@ -477,4 +477,4 @@ for file in os.listdir(os.getcwd()):
 
 
 df=pd.DataFrame(data)
-df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', decode_func]
+df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', 'decode_func']
