@@ -393,9 +393,9 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 numcores = multiprocessing.cpu_count() -1 
 print('Numer cores: '+ str(numcores))
 
-min_noise = 1.2
-max_noise = 1.6
-nois_n = 5
+min_noise = 0.6
+max_noise = 1.2
+nois_n = 11
 noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
@@ -454,7 +454,8 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 
 # df=pd.DataFrame(data)
 # df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', 'decode_func']
-# ### df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_increase.xlsx')
+# df=df.loc[df['sigE']<1.3]
+## df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_increase.xlsx')
 
 
 # ##visualize
