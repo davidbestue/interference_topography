@@ -393,9 +393,9 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 numcores = multiprocessing.cpu_count() -1 
 print('Numer cores: '+ str(numcores))
 
-min_noise = 0.2
-max_noise = 1.2
-nois_n = 11
+min_noise = 1.2
+max_noise = 1.6
+nois_n = 5
 noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
@@ -462,35 +462,35 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 ### then you will not consume RAM, as it will reset at every run of the loop.
 ### I do not know if the total time will change ( what can be compromised by running several loops??)
 
-import os
-import pickle
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+# import os
+# import pickle
+# import numpy as np
+# import pandas as pd
+# import matplotlib.pyplot as plt
+# import seaborn as sns
 
 
-path_='C:\\Users\\David\\Desktop\\sim_noise' 
-os.chdir(path_)
+# path_='C:\\Users\\David\\Desktop\\sim_noise' 
+# os.chdir(path_)
 
 
-data=[]
+# data=[]
 
-for file in os.listdir(os.getcwd()):
-    f=open(file,"rb")
-    #file_open=np.array(pickle.load(f, encoding='latin1'))
-    data.append(pickle.load(f, encoding='latin1'))
-
-
-df=pd.DataFrame(data)
-df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', 'decode_func']
-df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_increase.xlsx')
+# for file in os.listdir(os.getcwd()):
+#     f=open(file,"rb")
+#     #file_open=np.array(pickle.load(f, encoding='latin1'))
+#     data.append(pickle.load(f, encoding='latin1'))
 
 
-##visualize
-df_=df.loc[df['success']==True] 
-df_['absb2']=abs(df_.b2) 
-df_ = df_[abs(df_.absb2)<1.5*np.std(df_.absb2)]
-plt.figure()
-sns.factorplot(x='sigE', y='absb2', hue='kappa_E', data=df_) 
-plt.show()
+# df=pd.DataFrame(data)
+# df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', 'decode_func']
+# ### df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_increase.xlsx')
+
+
+# ##visualize
+# df_=df.loc[df['success']==True] 
+# df_['absb2']=abs(df_.b2) 
+# df_ = df_[abs(df_.absb2)<1.5*np.std(df_.absb2)]
+# plt.figure()
+# sns.factorplot(x='sigE', y='absb2', hue='kappa_E', data=df_) 
+# plt.show()
