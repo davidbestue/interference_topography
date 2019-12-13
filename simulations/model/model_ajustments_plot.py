@@ -425,36 +425,6 @@ results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=
  plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False, save_each_=True, total_sim=999999999, path_save=path_)  
 for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
 
-# IE = [results[i][0] for i in range(len(results))]
-# WE = [results[i][1] for i in range(len(results))]
-# WI = [results[i][2] for i in range(len(results))]
-# rE = [results[i][3] for i in range(len(results))]
-# IEs = [results[i][4] for i in range(len(results))]
-# final_biases = [results[i][5] for i in range(len(results))]
-# b1 = [results[i][6] for i in range(len(results))]
-# b2 = [results[i][7] for i in range(len(results))]
-# separations = [results[i][11] for i in range(len(results))]   
-# kappas_e = [results[i][12] for i in range(len(results))]  
-# kappas_i = [results[i][13] for i in range(len(results))]                                                              
-# succs = [results[i][15] for i in range(len(results))]   
-# sigE = [results[i][16] for i in range(len(results))]   
-# decode_f = [results[i][-2] for i in range(len(results))]  
-# number_bumps = [results[i][-3] for i in range(len(results))]  
-
-
-
-# df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  
-#     'kappas_I':kappas_i, 'success':succs, 'sigE':sigE, 'decod_f':decode_f, 'number_bumps':number_bumps })
-
-
-
-
-## visualize
-# df_=df.loc[df['success']==True] 
-# df_['absb2']=abs(df.b2) 
-# df_ = df_[abs(df_1.absb2)<1.5*np.std(df_.absb2)]
-# sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
-
 
 
 #### Read all the .pkl files from the directory you saved the simulations 
