@@ -454,3 +454,9 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 # df_['absb2']=abs(df.b2) 
 # df_ = df_[abs(df_1.absb2)<1.5*np.std(df_.absb2)]
 # sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
+
+
+
+#### Read all the .pkl files
+path_='C:\\Users\\David\\Desktop\\sim_noise' 
+os.chdir(path_)
