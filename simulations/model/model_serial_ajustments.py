@@ -270,18 +270,18 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     #number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
 
     if number_of_bumps ==2:
-        param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75], maxfev=100000)
-        ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
-        estimated_angle_1=np.degrees(param[0]+pi)  
-        estimated_angle_2=np.degrees(param[2]+pi)  
-        estimated_angles = [estimated_angle_1, estimated_angle_2]
-        estimated_angles.sort()
-        bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
-        bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
-        final_bias = [bias_b1, bias_b2]
-        skip_r_sq=False
-        success=True
-        decode_func = 0
+        # param, covs = curve_fit(bi_von_misses, X, y, p0=[separation, 75, -separation, 75], maxfev=100000)
+        # ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
+        # estimated_angle_1=np.degrees(param[0]+pi)  
+        # estimated_angle_2=np.degrees(param[2]+pi)  
+        # estimated_angles = [estimated_angle_1, estimated_angle_2]
+        # estimated_angles.sort()
+        # bias_b1 = estimated_angles[0] -  np.degrees(origin - separation) ### change the error stuff
+        # bias_b2 =  np.degrees(origin + separation) - estimated_angles[1]
+        # final_bias = [bias_b1, bias_b2]
+        # skip_r_sq=False
+        # success=True
+        # decode_func = 0
         if n_stims==1:
             print('Error simultaion')
             bias_b1=999
@@ -293,38 +293,39 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
             r_squared=0
             success=False ## to eliminate wrong simulations easily at the end
             decode_func = 0
-        #
+            std_g=999
     #
     elif number_of_bumps ==1:
-        param, covs = curve_fit(von_misses, X, y, maxfev=100000)
-        ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
-        if param[0]<0:
-            estimated_angles =decode_rE(rE)
-            print('1 - with decode function')
-            decode_func = 1
-        else:
-            estimated_angles=np.degrees(param[0]+pi) 
-            decode_func = 0 
-        #
-        bias_b1 = estimated_angles - np.degrees( origin - separation)
-        bias_b2 = np.degrees(origin + separation) - estimated_angles  ## bias (positive means attraction)
-        ###final_bias = [bias_b1, bias_b2]  
-        final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
-        skip_r_sq=False
-        success=True
-        print('Gaussian fit')
-        param_g, covs_g = curve_fit(gauss, X, y, maxfev=100000)
-        std_g = param_g[1]
-
-
-
-
+        # param, covs = curve_fit(von_misses, X, y, maxfev=100000)
+        # ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
+        # if param[0]<0:
+        #     estimated_angles =decode_rE(rE)
+        #     print('1 - with decode function')
+        #     decode_func = 1
+        # else:
+        #     estimated_angles=np.degrees(param[0]+pi) ##
+        #     decode_func = 0 
+        # #
+        # bias_b1 = estimated_angles - np.degrees( origin - separation)
+        # bias_b2 = np.degrees(origin + separation) - estimated_angles  ## bias (positive means attraction)
+        # ###final_bias = [bias_b1, bias_b2]  
+        # final_bias = [bias_b1, bias_b2] # de la otra manera estas forzando la media todo el rato
+        # skip_r_sq=False
+        # success=True
+        # print('Gaussian fit')
+        # param_g, covs_g = curve_fit(gauss, X, y, maxfev=100000)
+        # std_g = param_g[1]
         if n_stims==1:
-            estimated_angles=np.degrees(param[0]+pi)
-            bias_b1 = np.degrees(origin) - estimated_angles ## con fit
+            estimated_angles= decode_rE(rE) #np.degrees(param[0]+pi)
+            bias_b1 = 180 - decode_rE(rE) #np.degrees(origin) - estimated_angles ## con fit
             bias_b2 = 180 - decode_rE(rE) ## scon decode_rE
             final_bias = [abs(bias_b2), abs(bias_b2)]
-    ##
+            skip_r_sq=True
+            success=True
+            std_g=999
+            r_squared=0
+            decode_func = 1
+            plot_fit=False
     else:
         print('Error simultaion')
         bias_b1=999
@@ -336,6 +337,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         r_squared=0
         success=False ## to eliminate wrong simulations easily at the end
         decode_func = 0
+        std_g=999
 
     #error_fit (r_squared)
     if skip_r_sq==False:
@@ -368,8 +370,8 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     os.chdir(path_resp)
 
     if save_each_!=False:
-        #to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
-        #success, sigE, number_of_bumps, decode_func, std_g]
+        to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
+        success, sigE, number_of_bumps, decode_func, std_g]
         filename =  str(np.random.randint(total_sim)) + '.pkl'
         while filename in os.listdir(path_resp): #in case it has the same name, add a number behind
                 filename =  str(np.random.randint(total_sim)) + '.pkl'
@@ -392,21 +394,17 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 
 
 
-
 numcores = multiprocessing.cpu_count() -1 
 print('Numer cores: '+ str(numcores))
 
-
-
-
-min_noise = 0.6
+min_noise = 0.2
 max_noise = 1.2
-nois_n = 2
+nois_n = 2#11
 noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
 kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
-rep_dist = 10
+rep_dist = 5#500
 
 n_kappas= len(kappa_e_test)
 n_noise= len(noise_test)
@@ -422,9 +420,13 @@ for idx, k in enumerate(kappa_e_test):
 
 
 
+
+path_='C:\\Users\\David\\Desktop\\sim_noise' 
+
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4, 
  n_stims=1, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=noise_p, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, 
- plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
+ plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False, save_each_=True, total_sim=999999999, path_save=path_)  
+for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
 
 
 
@@ -451,40 +453,3 @@ df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations
 
 
 
-
-## visualize
-# df_=df.loc[df['success']==True] 
-# df_['absb2']=abs(df.b2) 
-# df_ = df_[abs(df_1.absb2)<1.5*np.std(df_.absb2)]
-# sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
-
-too_many=0
-
-
-os.chdir('C:\\Users\\David\\Desktop')
-path_resp = os.path.join(os.getcwd(), 'simuls')  
-total_sim = 10
-save_each_ = True
-
-import time
-timeout = time.time() + 3   # 1 minutes from now
-os.chdir(path_resp)
-
-if save_each_!=False:
-    #to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
-    #success, sigE, number_of_bumps, decode_func, std_g]
-    filename =  str(np.random.randint(total_sim)) + '.pkl'
-    while filename in os.listdir(path_resp): #in case it has the same name, add a number behind
-            filename =  str(np.random.randint(total_sim)) + '.pkl'
-            if time.time()>timeout:
-                too_many+=1
-                filename =  str(np.random.randint(total_sim)) + str(too_many) + '.pkl'
-    #
-    with open(filename, 'wb') as fp:
-        pickle.dump(to_save, fp)
-
-
-
-
-with open('66.pkl', 'rb') as f:
-    mynewlist = pickle.load(f)
