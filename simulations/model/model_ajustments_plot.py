@@ -486,4 +486,6 @@ df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'succes
 df_=df.loc[df['success']==True] 
 df_['absb2']=abs(df_.b2) 
 df_ = df_[abs(df_.absb2)<1.5*np.std(df_.absb2)]
-sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
+plt.figure()
+sns.factorplot(x='sigE', y='absb2', hue='kappa_E', data=df_) 
+plt.show()
