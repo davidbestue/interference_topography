@@ -369,20 +369,22 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     os.chdir(path_save)
     timeout = time.time() + 3   # 1 minutes from now
     if save_each_!=False:
-	    to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
-	    success, sigE, number_of_bumps, decode_func, std_g]
-	    filename =  str(np.random.randint(total_sim)) + '.pkl'
-	    while filename in os.listdir(path_save): #in case it has the same name, add a number behind
-	            filename =  str(np.random.randint(total_sim)) + '.pkl'
-	            if time.time()>timeout:
-	                too_many+=1
-	                filename =  str(np.random.randint(total_sim)) + str(np.random.randint(too_many)) + '.pkl'
-	    #
-	    with open(filename, 'wb') as fp:
-	        pickle.dump(to_save, fp)
-	####
-    return(IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
-    success, sigE, number_of_bumps, decode_func, std_g) #bias_b1, bias_b2)
+        #to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
+        #success, sigE, number_of_bumps, decode_func, std_g]
+        to_save = [ final_bias, bias_b1, bias_b2, total_sep, kappa_E, kappa_I, success, sigE, number_of_bumps, decode_func]
+        filename =  str(np.random.randint(total_sim)) + '.pkl'
+        while filename in os.listdir(path_save): #in case it has the same name, add a number behind
+                filename =  str(np.random.randint(total_sim)) + '.pkl'
+                if time.time()>timeout:
+                    too_many+=1
+                    filename =  str(np.random.randint(total_sim)) + str(np.random.randint(too_many)) + '.pkl'
+        #
+        with open(filename, 'wb') as fp:
+            pickle.dump(to_save, fp)
+    ####
+    #return(IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
+    #success, sigE, number_of_bumps, decode_func, std_g) #bias_b1, bias_b2)
+    return( final_bias, bias_b1, bias_b2, total_sep, kappa_E, kappa_I, success, sigE, number_of_bumps, decode_func)
 
 
 
@@ -393,12 +395,12 @@ print('Numer cores: '+ str(numcores))
 
 min_noise = 0.2
 max_noise = 1.2
-nois_n = 11
+nois_n = 2#11
 noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
 kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
-rep_dist = 300
+rep_dist = 2#300
 
 n_kappas= len(kappa_e_test)
 n_noise= len(noise_test)
