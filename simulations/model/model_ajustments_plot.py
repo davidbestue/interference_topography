@@ -481,6 +481,8 @@ for file in os.listdir(os.getcwd()):
 
 df=pd.DataFrame(data)
 df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', 'decode_func']
+df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_increase.xlsx')
+
 
 ##visualize
 df_=df.loc[df['success']==True] 
