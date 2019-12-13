@@ -458,5 +458,23 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 
 
 #### Read all the .pkl files
+
+import os
+import pickle
+import numpy as np
+import pandas as pd
+
 path_='C:\\Users\\David\\Desktop\\sim_noise' 
 os.chdir(path_)
+
+
+data=[]
+
+for file in os.listdir(os.getcwd()):
+    f=open(file,"rb")
+    #file_open=np.array(pickle.load(f, encoding='latin1'))
+    data.append(pickle.load(f, encoding='latin1'))
+
+
+df=pd.DataFrame(data)
+df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', decode_func]
