@@ -95,7 +95,8 @@ def viz_polymonial(X, y, poly_reg, pol_reg):
 # model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
 
 def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
- GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=True):
+ GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, plot_hm=True , 
+ plot_fit=True, save_each_=False, total_sim=999999999, path_save=False):
     #
     st_sim =time.time()
     dt=2
@@ -360,6 +361,26 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     total_sep=np.degrees(2*separation)
     final_bias = np.mean(final_bias)
     #print(total_sep)
+
+
+
+    ### Save each output
+    too_many=100
+    os.chdir(path_save)
+    timeout = time.time() + 3   # 1 minutes from now
+    if save_each_!=False:
+	    to_save = [ IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
+	    success, sigE, number_of_bumps, decode_func, std_g]
+	    filename =  str(np.random.randint(total_sim)) + '.pkl'
+	    while filename in os.listdir(path_save): #in case it has the same name, add a number behind
+	            filename =  str(np.random.randint(total_sim)) + '.pkl'
+	            if time.time()>timeout:
+	                too_many+=1
+	                filename =  str(np.random.randint(total_sim)) + str(np.random.randint(too_many)) + '.pkl'
+	    #
+	    with open(filename, 'wb') as fp:
+	        pickle.dump(to_save, fp)
+	####
     return(IE, WE, WI, rE, IEs, final_bias, bias_b1, bias_b2, rE, RE, estimated_angles, total_sep, kappa_E, kappa_I, r_squared, 
     success, sigE, number_of_bumps, decode_func, std_g) #bias_b1, bias_b2)
 
@@ -393,11 +414,15 @@ for idx, k in enumerate(kappa_e_test):
 
 
 
+
+##path_='C:\\Users\\David\\Desktop\\sim_noise' 
+
+path_='/home/david/Desktop/sim_noise' 
+
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4, 
  n_stims=1, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=noise_p, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, 
- plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False)  for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
-
-
+ plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False, save_each_=True, total_sim=999999999, path_save=path_)  
+for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
 
 IE = [results[i][0] for i in range(len(results))]
 WE = [results[i][1] for i in range(len(results))]
