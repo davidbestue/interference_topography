@@ -18,6 +18,9 @@ from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 import scipy.signal
 from scipy.optimize import curve_fit 
+import os
+import pickle
+
 
 
 ## Fucntions to use
