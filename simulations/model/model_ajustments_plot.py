@@ -463,6 +463,9 @@ import os
 import pickle
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 
 path_='C:\\Users\\David\\Desktop\\sim_noise' 
 os.chdir(path_)
@@ -478,3 +481,9 @@ for file in os.listdir(os.getcwd()):
 
 df=pd.DataFrame(data)
 df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', 'decode_func']
+
+##visualize
+df_=df.loc[df['success']==True] 
+df_['absb2']=abs(df_.b2) 
+df_ = df_[abs(df_.absb2)<1.5*np.std(df_.absb2)]
+sns.factorplot(x='sigE', y='absb2', hue='kappas_E', data=df_) 
