@@ -395,12 +395,12 @@ print('Numer cores: '+ str(numcores))
 
 min_noise = 0.2
 max_noise = 1.2
-nois_n = 2#11
+nois_n = 11
 noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
 kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
-rep_dist = 2#300
+rep_dist = 300
 
 n_kappas= len(kappa_e_test)
 n_noise= len(noise_test)
@@ -417,8 +417,7 @@ for idx, k in enumerate(kappa_e_test):
 
 
 
-##path_='C:\\Users\\David\\Desktop\\sim_noise' 
-
+#path_='C:\\Users\\David\\Desktop\\sim_noise' 
 path_='/home/david/Desktop/sim_noise' 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4, 
@@ -426,26 +425,26 @@ results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=
  plot_connectivity=False, plot_rate=False, plot_hm=False , plot_fit=False, save_each_=True, total_sim=999999999, path_save=path_)  
 for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
 
-IE = [results[i][0] for i in range(len(results))]
-WE = [results[i][1] for i in range(len(results))]
-WI = [results[i][2] for i in range(len(results))]
-rE = [results[i][3] for i in range(len(results))]
-IEs = [results[i][4] for i in range(len(results))]
-final_biases = [results[i][5] for i in range(len(results))]
-b1 = [results[i][6] for i in range(len(results))]
-b2 = [results[i][7] for i in range(len(results))]
-separations = [results[i][11] for i in range(len(results))]   
-kappas_e = [results[i][12] for i in range(len(results))]  
-kappas_i = [results[i][13] for i in range(len(results))]                                                              
-succs = [results[i][15] for i in range(len(results))]   
-sigE = [results[i][16] for i in range(len(results))]   
-decode_f = [results[i][-2] for i in range(len(results))]  
-number_bumps = [results[i][-3] for i in range(len(results))]  
+# IE = [results[i][0] for i in range(len(results))]
+# WE = [results[i][1] for i in range(len(results))]
+# WI = [results[i][2] for i in range(len(results))]
+# rE = [results[i][3] for i in range(len(results))]
+# IEs = [results[i][4] for i in range(len(results))]
+# final_biases = [results[i][5] for i in range(len(results))]
+# b1 = [results[i][6] for i in range(len(results))]
+# b2 = [results[i][7] for i in range(len(results))]
+# separations = [results[i][11] for i in range(len(results))]   
+# kappas_e = [results[i][12] for i in range(len(results))]  
+# kappas_i = [results[i][13] for i in range(len(results))]                                                              
+# succs = [results[i][15] for i in range(len(results))]   
+# sigE = [results[i][16] for i in range(len(results))]   
+# decode_f = [results[i][-2] for i in range(len(results))]  
+# number_bumps = [results[i][-3] for i in range(len(results))]  
 
 
 
-df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  
-    'kappas_I':kappas_i, 'success':succs, 'sigE':sigE, 'decod_f':decode_f, 'number_bumps':number_bumps })
+# df=pd.DataFrame({'bias':final_biases, 'b1':b1, 'b2':b2, 'separation':separations, 'kappas_E':kappas_e,  
+#     'kappas_I':kappas_i, 'success':succs, 'sigE':sigE, 'decod_f':decode_f, 'number_bumps':number_bumps })
 
 
 
