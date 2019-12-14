@@ -439,7 +439,6 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 # import matplotlib.pyplot as plt
 # import seaborn as sns
 
-
 # path_='C:\\Users\\David\\Desktop\\sim_noise' 
 # os.chdir(path_)
 
