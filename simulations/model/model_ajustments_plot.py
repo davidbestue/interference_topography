@@ -393,14 +393,14 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 numcores = multiprocessing.cpu_count() -1 
 print('Numer cores: '+ str(numcores))
 
-min_noise = 0.6
+min_noise = 0.1
 max_noise = 1.2
-nois_n = 11
+nois_n = 15
 noise_test = [np.round(list(np.linspace(min_noise, max_noise, nois_n))[x],2) for x in range(nois_n)] 
 
 kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
 kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
-rep_dist = 300
+rep_dist = 500
 
 n_kappas= len(kappa_e_test)
 n_noise= len(noise_test)
@@ -418,7 +418,7 @@ for idx, k in enumerate(kappa_e_test):
 
 
 #path_='C:\\Users\\David\\Desktop\\sim_noise' 
-path_='/home/david/Desktop/sim_noise' 
+path_='/home/david/Desktop/sim_noise_ok' 
 
 results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4, 
  n_stims=1, I0E=0.1, I0I=0.5,  GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=noise_p, sigI=1.9, kappa_E=kape, kappa_I=kapi, kappa_stim=75, N=512, 
@@ -439,7 +439,7 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 # import matplotlib.pyplot as plt
 # import seaborn as sns
 
-# path_='C:\\Users\\David\\Desktop\\sim_noise' 
+# path_='C:\\Users\\David\\Desktop\\sim_noise2' 
 # os.chdir(path_)
 
 # data=[]
@@ -452,8 +452,8 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 
 # df=pd.DataFrame(data)
 # df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', 'decode_func']
-# df=df.loc[df['sigE']<1.3]
-## df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_increase.xlsx')
+# #df=df.loc[df['sigE']<1.3]
+# df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_increase3.xlsx')
 
 
 # ##visualize
