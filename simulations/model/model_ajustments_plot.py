@@ -438,7 +438,7 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 # import matplotlib.pyplot as plt
 # import seaborn as sns
 
-# path_='C:\\Users\\David\\Desktop\\sim_noise2' 
+# path_='C:\\Users\\David\\Desktop\\sim_noise_ok' 
 # os.chdir(path_)
 
 # data=[]
@@ -452,7 +452,7 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 # df=pd.DataFrame(data)
 # df.columns=['final_bias', 'b1', 'b2', 'total_sep', 'kappa_E', 'kappa_I', 'success', 'sigE', 'number_of_bumps', 'decode_func']
 # df=df.loc[df['sigE']<1.3]
-# df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_increase3.xlsx')
+# df.to_excel('C:\\Users\\David\\Documents\\GitHub\\interference_topography\\simulations\\model\\please_noise_ok.xlsx')
 
 
 # ##visualize
