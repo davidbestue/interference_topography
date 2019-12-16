@@ -416,7 +416,6 @@ for idx, k in enumerate(kappa_e_test):
 
 
 
-
 #path_='C:\\Users\\David\\Desktop\\sim_noise' 
 path_='/home/david/Desktop/sim_noise_ok' 
 
