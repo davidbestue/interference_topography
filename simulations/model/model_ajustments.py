@@ -359,7 +359,6 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 ####
 
 
-
 # 2 bumps 
 
 # m = model(totalTime=3000, targ_onset=100,  presentation_period=350, angle_separation=22, tauE=9, tauI=4,  n_stims=2, 
