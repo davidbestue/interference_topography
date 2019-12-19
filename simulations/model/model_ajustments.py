@@ -205,7 +205,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         sns.set_style("ticks")
         plt.figure(figsize=(9,6))
         #sns.heatmap(RE_sorted, cmap='binary', vmax=8)
-        sns.heatmap(RE_sorted, cmap='coolwarm', vmax=8)
+        sns.heatmap(RE_sorted, cmap='viridis', vmax=8)
         #plt.title('BUMP activity')
         #plt.ylabel('Angle')
         plt.xlabel('time (s)')
