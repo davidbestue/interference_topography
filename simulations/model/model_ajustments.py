@@ -201,11 +201,14 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
     if plot_hm==True:
         #### plot heatmap
         RE_sorted=flipud(RE)
+        sns.set_context("poster", font_scale=1.1)
+        sns.set_style("ticks")
         plt.figure(figsize=(9,6))
-        sns.heatmap(RE_sorted, cmap='binary', vmax=8)
+        #sns.heatmap(RE_sorted, cmap='binary', vmax=8)
+        sns.heatmap(RE_sorted, cmap='coolwarm', vmax=8)
         #plt.title('BUMP activity')
         #plt.ylabel('Angle')
-        plt.xlabel('time')
+        plt.xlabel('time (s)')
         plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=2) ## flipped, so it is p_target 
         #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
         plt.yticks([])
