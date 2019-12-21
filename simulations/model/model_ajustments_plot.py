@@ -425,7 +425,6 @@ results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=
 for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
 
 
-
 #### Read all the .pkl files from the directory you saved the simulations 
 ### an alternative is to make a loop dividing by the total number of cores.
 ### then you will not consume RAM, as it will reset at every run of the loop.
