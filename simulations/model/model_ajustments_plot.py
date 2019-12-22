@@ -429,7 +429,6 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 ### an alternative is to make a loop dividing by the total number of cores.
 ### then you will not consume RAM, as it will reset at every run of the loop.
 ### I do not know if the total time will change ( what can be compromised by running several loops??)
-
 # import os
 # import pickle
 # import numpy as np
