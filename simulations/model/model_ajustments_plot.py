@@ -440,7 +440,6 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 # os.chdir(path_)
 
 # data=[]
-
 # for file in os.listdir(os.getcwd()):
 #     f=open(file,"rb")
 #     #file_open=np.array(pickle.load(f, encoding='latin1'))
