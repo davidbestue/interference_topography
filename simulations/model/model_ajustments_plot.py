@@ -439,6 +439,7 @@ for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i))
 # path_='C:\\Users\\David\\Desktop\\sim_noise_ok' 
 # os.chdir(path_)
 
+
 # data=[]
 # for file in os.listdir(os.getcwd()):
 #     f=open(file,"rb")
