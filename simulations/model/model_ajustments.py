@@ -427,7 +427,6 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 # kappa_i_test = [ 30, 15]      
 
 # rep_dist = 1000
-
 # kappas_e=[]
 # kappas_i=[]
 # for idx, k in enumerate(kappa_e_test):
