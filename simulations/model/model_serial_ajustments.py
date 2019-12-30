@@ -429,7 +429,6 @@ results = Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, targ_onset=
 for noise_p, kape, kapi in zip(noise_parameters, kappas_e, kappas_i)) 
 
 
-
 IE = [results[i][0] for i in range(len(results))]
 WE = [results[i][1] for i in range(len(results))]
 WI = [results[i][2] for i in range(len(results))]
