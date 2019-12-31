@@ -485,3 +485,4 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 
 
 # df.to_excel('please_fit_gauss.xlsx')
+
