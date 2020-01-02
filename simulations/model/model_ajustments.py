@@ -480,7 +480,5 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 # df=pd.DataFrame({'gaussian_std':gaussian_std,  'kappas_E':kappas_e,  
 #     'kappas_I':kappas_i, 'success':succs })
 
-
-
 # df.to_excel('please_fit_gauss.xlsx')
 
