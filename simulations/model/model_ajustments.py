@@ -453,7 +453,6 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 
 
 ### Simulations fitting a gaussian to get the std (width of a bump)
-
 # numcores = multiprocessing.cpu_count() - 3
 # print('Numer cores: '+ str(numcores))
 # kappa_e_test = [ 300, 225] 
