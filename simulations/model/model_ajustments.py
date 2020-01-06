@@ -451,7 +451,6 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 #     'kappas_I':kappas_i, 'success':succs, 'decod_f':decode_f, 'number_bumps':number_bumps })
 
 
-
 ### Simulations fitting a gaussian to get the std (width of a bump)
 # numcores = multiprocessing.cpu_count() - 3
 # print('Numer cores: '+ str(numcores))
