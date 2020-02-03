@@ -375,7 +375,6 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 # distances_test = [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 35, 40, 45, 50, 60, 70, 80, 90]
 # distances_test = [9, 10, 11, 12, 13, 14] 
 
-
 # kappa_e_test = [ 300, 225] #[300, 300, 300, 250, 250, 250, 200, 200, 200, 150, 150, 150]
 # kappa_i_test = [ 30, 15]       #[30, 20, 10, 30, 20, 10, 30, 20, 10, 30, 20, 10]
 # rep_dist = 100
