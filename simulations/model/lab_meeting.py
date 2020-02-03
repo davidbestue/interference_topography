@@ -209,8 +209,8 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #plt.ylabel('Angle')
         plt.xlabel('time (s)')
         #plt.ylim(int(3*N/8), int(5*N/8))
-        #plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=2) ## flipped, so it is p_target 
-        #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
+        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=2) ## flipped, so it is p_target 
+        plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--k',linewidth=2) ## flipped, so it is p_target 
         plt.yticks([])
         plt.xticks([])
         plt.yticks([N/8, 3*N/8, N/2, 5*N/8, 7*N/8 ] ,['45','135','180', '225', '315'])
@@ -364,7 +364,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
 
 
 model(totalTime=2000, targ_onset=100,  presentation_period=350, angle_separation=23, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5,
-    GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=300, kappa_I=30, kappa_stim=75, N=512, 
+    GEE=0.025, GEI=0.019, GIE=0.01 , GII=0.1, sigE=1.1, sigI=1.9, kappa_E=225, kappa_I=15, kappa_stim=75, N=512, 
     plot_connectivity=False, plot_rate=False, plot_hm=True , plot_fit=False)  
 
 
