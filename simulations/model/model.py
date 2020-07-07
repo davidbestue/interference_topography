@@ -158,7 +158,7 @@ def model(totalTime, targ_onset, presentation_period, separation, tauE=9, tauI=4
     RE=zeros((N,nsteps));
     RI=zeros((N,nsteps));
     f = lambda x : x*x*(x>0)*(x<1) + reshape(array([cmath.sqrt(4*x[i]-3) for i in range(0, len(x))]).real, (N,1)) * (x>=1)
-    ### diferential equations
+    ### Diferential equations
     for i in range(0, nsteps):
         noiseE = sigE*random.randn(N,1);
         noiseI = sigI*random.randn(N,1);
