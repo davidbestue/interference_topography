@@ -55,9 +55,9 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="886.3639"
-     inkscape:cx="2549.4798"
-     inkscape:zoom="0.61176564"
+     inkscape:cy="1231.0986"
+     inkscape:cx="3564.808"
+     inkscape:zoom="0.33911435"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -296,7 +296,7 @@
     <rect
        ry="32.964657"
        y="62.380989"
-       x="842.78259"
+       x="865.00793"
        height="181.65233"
        width="201.91364"
        id="rect835-1-0"
@@ -305,7 +305,7 @@
        rx="0"
        ry="0"
        y="147.25616"
-       x="939.65454"
+       x="961.87988"
        height="11.205644"
        width="9.6487932"
        id="rect837-3-4"
@@ -314,13 +314,13 @@
        ry="47.811836"
        rx="48.233452"
        cy="152.36963"
-       cx="943.32458"
+       cx="965.54993"
        id="path1474"
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.20000006;stroke-miterlimit:4;stroke-dasharray:4.80000023,2.40000012;stroke-dashoffset:0;stroke-opacity:1" />
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.2;stroke-miterlimit:4;stroke-dasharray:4.8, 2.4;stroke-dashoffset:0;stroke-opacity:1" />
     <ellipse
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.20000006;stroke-miterlimit:4;stroke-dasharray:4.80000023,2.40000012;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.2;stroke-miterlimit:4;stroke-dasharray:4.8, 2.4;stroke-dashoffset:0;stroke-opacity:1"
        id="path1474-3"
-       cx="944.5307"
+       cx="966.75604"
        cy="151.86525"
        rx="65.628181"
        ry="65.05452" />
@@ -328,51 +328,227 @@
        ry="80.732307"
        rx="81.444214"
        cy="151.18477"
-       cx="945.13776"
+       cx="967.3631"
        id="path1474-3-2"
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.22000007;stroke-miterlimit:4;stroke-dasharray:4.8800003,2.44000015;stroke-dashoffset:0;stroke-opacity:1" />
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.22;stroke-miterlimit:4;stroke-dasharray:4.88, 2.44;stroke-dashoffset:0;stroke-opacity:1" />
     <ellipse
        style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768"
        id="path921-6"
-       cx="953.64337"
+       cx="975.86871"
        cy="105.96037"
        rx="6.4279275"
        ry="7.1421809" />
     <ellipse
        style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768"
        id="path921-4"
-       cx="984.78278"
+       cx="1007.0083"
        cy="99.473007"
        rx="6.4279275"
        ry="7.1421809" />
     <ellipse
        style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768"
        id="path921-8"
-       cx="1012.4622"
+       cx="1034.6879"
        cy="103.36543"
        rx="6.4279275"
        ry="7.1421809" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.4583px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="951.27844"
+       x="973.50378"
        y="190.95995"
        id="text1298-7-36-8"><tspan
          sodipodi:role="line"
          id="tspan1296-5-1-7"
-         x="951.27844"
+         x="973.50378"
          y="190.95995"
          style="font-size:26.4583px;stroke-width:0.264583">r1</tspan></text>
     <text
        id="text1298-7-36-8-6"
        y="228.05869"
-       x="1002.8166"
+       x="1025.0422"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.4583px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        xml:space="preserve"><tspan
          style="font-size:26.4583px;stroke-width:0.264583"
          y="228.05869"
-         x="1002.8166"
+         x="1025.0422"
          id="tspan1296-5-1-7-7"
          sodipodi:role="line">r3</tspan></text>
+    <ellipse
+       ry="7.1421809"
+       rx="6.4279275"
+       cy="304.04138"
+       cx="927.26141"
+       id="path921-6-1"
+       style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="953.13922"
+       y="313.46188"
+       id="text1298-7-3-5"><tspan
+         sodipodi:role="line"
+         id="tspan1296-5-8-0"
+         x="953.13922"
+         y="313.46188"
+         style="font-size:35.2777px;stroke-width:0.264583">target</tspan></text>
+    <text
+       id="text1298-7-3-5-1"
+       y="389.54831"
+       x="908.7251"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-size:35.2777px;stroke-width:0.264583"
+         y="389.54831"
+         x="908.7251"
+         id="tspan1296-5-8-0-5"
+         sodipodi:role="line">angles:      12, 16, 20º</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="905.60101"
+       y="433.81375"
+       id="text1298-7-3-5-1-9"><tspan
+         sodipodi:role="line"
+         id="tspan1296-5-8-0-5-7"
+         x="905.60101"
+         y="433.81375"
+         style="font-size:35.2777px;stroke-width:0.264583">radii:      7.78, 10.70, 13.68 cm</tspan></text>
+    <rect
+       style="opacity:1;fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:4.21418;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect835-1-0-1"
+       width="201.91365"
+       height="181.65233"
+       x="1184.9276"
+       y="62.380993"
+       ry="32.964657" />
+    <rect
+       style="opacity:1;fill:#000000;fill-opacity:0.870536;stroke:#000000;stroke-width:1.30002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768"
+       id="rect837-3-4-4"
+       width="9.6487932"
+       height="11.205644"
+       x="1281.7996"
+       y="147.25616"
+       ry="0"
+       rx="0" />
+    <ellipse
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.2;stroke-miterlimit:4;stroke-dasharray:4.79999, 2.4;stroke-dashoffset:0;stroke-opacity:1"
+       id="path1474-2"
+       cx="1285.4696"
+       cy="152.36963"
+       rx="48.233452"
+       ry="47.81184" />
+    <ellipse
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.22;stroke-miterlimit:4;stroke-dasharray:4.88, 2.44;stroke-dashoffset:0;stroke-opacity:1"
+       id="path1474-3-2-5"
+       cx="1287.2828"
+       cy="151.18477"
+       rx="81.444214"
+       ry="80.732307" />
+    <ellipse
+       ry="7.1421809"
+       rx="6.4279275"
+       cy="108.55533"
+       cx="1304.8707"
+       id="path921-6-3"
+       style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768" />
+    <ellipse
+       ry="7.1421809"
+       rx="6.4279275"
+       cy="117.63765"
+       cx="1320.4404"
+       id="path921-4-7"
+       style="opacity:1;fill:#ffff00;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768" />
+    <ellipse
+       ry="7.1421809"
+       rx="6.4279275"
+       cy="76.31498"
+       cx="1317.4546"
+       id="path921-8-3"
+       style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768" />
+    <text
+       id="text1298-7-36-8-2"
+       y="190.95996"
+       x="1293.4235"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.4583px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-size:26.4583px;stroke-width:0.264583"
+         y="190.95996"
+         x="1293.4235"
+         id="tspan1296-5-1-7-3"
+         sodipodi:role="line">r1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.4583px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="1344.9617"
+       y="228.0587"
+       id="text1298-7-36-8-6-8"><tspan
+         sodipodi:role="line"
+         id="tspan1296-5-1-7-7-3"
+         x="1344.9617"
+         y="228.0587"
+         style="font-size:26.4583px;stroke-width:0.264583">r3</tspan></text>
+    <ellipse
+       style="opacity:1;fill:#ffff00;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768"
+       id="path921-4-7-5"
+       cx="1345.2911"
+       cy="94.536987"
+       rx="6.4279275"
+       ry="7.1421809" />
+    <text
+       id="text1298-7-3-5-9"
+       y="310.91251"
+       x="1161.1934"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-size:35.2777px;stroke-width:0.264583"
+         y="310.91251"
+         x="1161.1934"
+         id="tspan1296-5-8-0-2"
+         sodipodi:role="line">non-target</tspan></text>
+    <ellipse
+       ry="7.1421809"
+       rx="6.4279275"
+       cy="301.3194"
+       cx="1147.7303"
+       id="path921-4-7-5-1"
+       style="opacity:1;fill:#ffff00;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768" />
+    <path
+       id="path1686"
+       d="m 1317.5627,76.113438 -30.892,75.927342 59.1787,-57.689892"
+       style="fill:none;stroke:#000000;stroke-width:0.965;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:0.965,2.895;stroke-dashoffset:0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.6944px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="1337.4343"
+       y="83.734833"
+       id="text1298-7-36-8-2-5"><tspan
+         sodipodi:role="line"
+         id="tspan1296-5-1-7-3-3"
+         x="1337.4343"
+         y="83.734833"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.6944px;font-family:'Bradley Hand ITC';-inkscape-font-specification:'Bradley Hand ITC';stroke-width:0.264583">α</tspan></text>
+    <text
+       id="text1298-7-369"
+       y="45.90358"
+       x="880.36993"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-size:35.2777px;stroke-width:0.264583"
+         y="45.90358"
+         x="880.36993"
+         id="tspan1296-5-3"
+         sodipodi:role="line">single-item</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="1203.366"
+       y="44.08783"
+       id="text1298-7-369-7"><tspan
+         sodipodi:role="line"
+         id="tspan1296-5-3-3"
+         x="1203.366"
+         y="44.08783"
+         style="font-size:35.2777px;stroke-width:0.264583">multi-item</tspan></text>
   </g>
 </svg>
