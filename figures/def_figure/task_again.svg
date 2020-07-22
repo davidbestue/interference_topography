@@ -55,9 +55,9 @@
      inkscape:document-rotation="0"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="1308.5788"
-     inkscape:cx="2030.2986"
-     inkscape:zoom="1.0503469"
+     inkscape:cy="886.3639"
+     inkscape:cx="2549.4798"
+     inkscape:zoom="0.61176564"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -254,11 +254,125 @@
          y="127.09444"
          x="626.90387"
          id="tspan1296-5-4"
-         sodipodi:role="line">500ms</tspan></text>
+         sodipodi:role="line">0.5s</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.823804;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.29523, 6.59043;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow1Mend-2)"
        d="m 605.71072,372.90857 c 32.35582,0.21185 37.70937,-23.1174 25.98721,-44.35176"
        id="path1004-8"
        sodipodi:nodetypes="cc" />
+    <text
+       id="text1298-7-3"
+       y="245.64391"
+       x="587.76483"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-size:35.2777px;stroke-width:0.264583"
+         y="245.64391"
+         x="587.76483"
+         id="tspan1296-5-8"
+         sodipodi:role="line">delay</tspan></text>
+    <text
+       id="text1298-7-36"
+       y="282.18109"
+       x="586.55994"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-size:35.2777px;stroke-width:0.264583"
+         y="282.18109"
+         x="586.55994"
+         id="tspan1296-5-1"
+         sodipodi:role="line">0 or 3s</tspan></text>
+    <text
+       id="text1298-7-5"
+       y="481.47495"
+       x="554.99689"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.2777px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-size:35.2777px;stroke-width:0.264583"
+         y="481.47495"
+         x="554.99689"
+         id="tspan1296-5-0"
+         sodipodi:role="line">response</tspan></text>
+    <rect
+       ry="32.964657"
+       y="62.380989"
+       x="842.78259"
+       height="181.65233"
+       width="201.91364"
+       id="rect835-1-0"
+       style="opacity:1;fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:4.21418;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       rx="0"
+       ry="0"
+       y="147.25616"
+       x="939.65454"
+       height="11.205644"
+       width="9.6487932"
+       id="rect837-3-4"
+       style="opacity:1;fill:#000000;fill-opacity:0.870536;stroke:#000000;stroke-width:1.30002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768" />
+    <ellipse
+       ry="47.811836"
+       rx="48.233452"
+       cy="152.36963"
+       cx="943.32458"
+       id="path1474"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.20000006;stroke-miterlimit:4;stroke-dasharray:4.80000023,2.40000012;stroke-dashoffset:0;stroke-opacity:1" />
+    <ellipse
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.20000006;stroke-miterlimit:4;stroke-dasharray:4.80000023,2.40000012;stroke-dashoffset:0;stroke-opacity:1"
+       id="path1474-3"
+       cx="944.5307"
+       cy="151.86525"
+       rx="65.628181"
+       ry="65.05452" />
+    <ellipse
+       ry="80.732307"
+       rx="81.444214"
+       cy="151.18477"
+       cx="945.13776"
+       id="path1474-3-2"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.22000007;stroke-miterlimit:4;stroke-dasharray:4.8800003,2.44000015;stroke-dashoffset:0;stroke-opacity:1" />
+    <ellipse
+       style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768"
+       id="path921-6"
+       cx="953.64337"
+       cy="105.96037"
+       rx="6.4279275"
+       ry="7.1421809" />
+    <ellipse
+       style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768"
+       id="path921-4"
+       cx="984.78278"
+       cy="99.473007"
+       rx="6.4279275"
+       ry="7.1421809" />
+    <ellipse
+       style="opacity:1;fill:#0000ff;fill-opacity:0.870536;stroke:none;stroke-width:1.27036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.997768"
+       id="path921-8"
+       cx="1012.4622"
+       cy="103.36543"
+       rx="6.4279275"
+       ry="7.1421809" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.4583px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="951.27844"
+       y="190.95995"
+       id="text1298-7-36-8"><tspan
+         sodipodi:role="line"
+         id="tspan1296-5-1-7"
+         x="951.27844"
+         y="190.95995"
+         style="font-size:26.4583px;stroke-width:0.264583">r1</tspan></text>
+    <text
+       id="text1298-7-36-8-6"
+       y="228.05869"
+       x="1002.8166"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.4583px;line-height:0.25;font-family:Tahoma;-inkscape-font-specification:Tahoma;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"><tspan
+         style="font-size:26.4583px;stroke-width:0.264583"
+         y="228.05869"
+         x="1002.8166"
+         id="tspan1296-5-1-7-7"
+         sodipodi:role="line">r3</tspan></text>
   </g>
 </svg>
