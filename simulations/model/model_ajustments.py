@@ -208,7 +208,7 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #plt.ylabel('Angle')
         plt.xlabel('time (s)')
         #plt.ylim(int(3*N/8), int(5*N/8))
-        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=2) ## flipped, so it is p_target 
+        plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--k', linewidth=2) ## flipped, so it is p_target. 
         #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
         plt.yticks([])
         plt.xticks([])
