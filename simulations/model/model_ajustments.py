@@ -212,12 +212,12 @@ def model(totalTime, targ_onset, presentation_period, angle_separation, tauE=9, 
         #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
         plt.yticks([])
         plt.xticks([])
-        plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
-        #plt.ylim( 3*N/8, 5*N/8)
+        #plt.yticks([N/8, 3*N/8, 5*N/8, 7*N/8 ] ,['45','135','225', '315'])
+        plt.ylim( 3*N/8, 5*N/8)
         #plt.plot([stimon, stimon,], [0+20, N-20], 'k-', label='onset')
         #plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--', label='offset')
-        plt.plot([stimon, stimon,], [0+20, N-20], 'k-', linewidth=0.5)
-        plt.plot([stimoff, stimoff,], [0+20, N-20], 'k-', linewidth=0.5)
+        #plt.plot([stimon, stimon,], [0+20, N-20], 'k-', linewidth=0.5)
+        #plt.plot([stimoff, stimoff,], [0+20, N-20], 'k-', linewidth=0.5)
         #plt.legend()
         plt.show(block=False)
     
