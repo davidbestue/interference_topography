@@ -102,8 +102,8 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     WE=zeros((N,N));
     WI=zeros((N,N));
     ###
-    p1 = positions
-    ### p1 goes from 0 to 2pi (0 is fixation and 2pi is limit)    
+    p1 = np.radians(positions)
+    ### p1 goes from 0 -360 and you convert it to 0-2pi radians (0 is fixation and 2pi is limit)    
 
     theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
 
