@@ -107,10 +107,10 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
     theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
 
-    kappas_e_range= np.linspace(100, 120, N)
+    kappas_e_range= np.linspace(100, 300, N) ##100-300 ok
     kappas_e_range = np.flip(kappas_e_range)
 
-    kappas_i_range = np.linspace(10, 20, N)
+    kappas_i_range = np.linspace(15, 20, N) #15-20 ok
     kappas_i_range = np.flip(kappas_i_range)
 
 
