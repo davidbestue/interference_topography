@@ -20,6 +20,7 @@ import scipy.signal
 from scipy.optimize import curve_fit 
 
 
+
 def decode_rE(rE, a_ini=0, a_fin=360, N=512):
     #Population vector for a given rE
     # return ( angle in radians, absolut angle in radians, abs angle in degrees )
@@ -27,15 +28,13 @@ def decode_rE(rE, a_ini=0, a_fin=360, N=512):
     Angles = np.linspace(a_ini, a_fin, N) 
     angles=np.radians(Angles)
     rE = np.reshape(rE, (1,N))
-    R = numpy.sum(np.dot(rE,exp(1j*angles)))/numpy.sum(rE)
-    
+    R = numpy.sum(np.dot(rE,exp(1j*angles)))/numpy.sum(rE) ## finding it with imagianry numbers
     angle_decoded = np.degrees(np.angle(R))
     if angle_decoded<0:
         angle_decoded = 360+angle_decoded
     
     return angle_decoded
-    #Mat.append(  [angle(R), abs(angle(R)) , degrees(abs(angle(R)))]  )
-    #return round( np.degrees(abs(np.angle(R))), 2)
+
 
 
 def circ_dist(a1,a2):
@@ -175,11 +174,10 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     if plot_rate==True:
         #### plot dynamics
         fig = plt.figure()
-        plt.title('Rate dynamics')
+        plt.title('')
         plt.plot(rE)
-        plt.xlabel('time (ms)')
+        plt.xlabel('neuron')
         plt.ylabel('rate (Hz)')
-        plt.legend()
         plt.show(block=False)
     if plot_hm==True:
         #### plot heatmap
@@ -200,89 +198,16 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--')
         plt.legend()
         plt.show(block=False)
-    
-    
-    ## print time consumed
-    end_sim =time.time()
-    total_time= end_sim - st_sim 
-    total_time = round(total_time, 1)
-    print('Simulation time: ' + str(total_time) + 's')
 
-    ###### Fit
-    def von_misses(x,mu,k):
-        return (exp( k * cos(x-mu))) / (2*pi*scipy.special.i0(k)) 
+    ###
+    final_readout = decode_rE(rE)
+    print(final_readout)
+    print(np.degrees(p1) )
+    error =  np.degrees(p1)  - final_readout 
+    ### if error>0 means attraction to fixation
+    ### if error<0 means repulsion to fixation
 
-    def bi_von_misses(x,mu1,k1,mu2,k2):
-        return von_misses(x,mu1,k1) + von_misses(x,mu2,k2)
-
-    ##
-    y=np.reshape(rE, (N)) 
-    X=np.reshape(np.linspace(-pi, pi, N), N)
-
-    ### Fit
-    df_n_p=pd.DataFrame()
-    df_n_p['rE'] = rE.reshape(512)
-    r = df_n_p['rE'].rolling(window=20).mean()
-    number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
-
-    if number_of_bumps ==2:
-        param, covs = curve_fit(bi_von_misses, X, y, p0=[p1, 75, -p1, 75])
-        ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
-        estimated_angle_1=np.degrees(param[0]+pi)  
-        estimated_angle_2=np.degrees(param[2]+pi)  
-        estimated_angles = [estimated_angle_1, estimated_angle_2]
-        estimated_angles.sort()
-        bias_b1 = estimated_angles[0] -  np.degrees(p1) ### change the error stuff
-        bias_b2 =  np.degrees(p2) - estimated_angles[1]
-        final_bias = [bias_b1, bias_b2]
-        skip_r_sq=False
-        success=True
-
-    elif number_of_bumps ==1:
-        param, covs = curve_fit(von_misses, X, y)
-        ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
-        estimated_angle=np.degrees(param[0]+pi)  
-        bias_b1 = estimated_angle - np.degrees(p1)
-        bias_b2 = np.degrees(p2) - estimated_angle  ## bias (positive means attraction)
-        final_bias = [bias_b1, bias_b2]  
-        skip_r_sq=False
-        success=True
-
-    else:
-        print('Error simultaion')
-        final_bias=[999, 999]
-        plot_fit=False
-        skip_r_sq=True
-        r_squared=0
-        success=False ## to eliminate wrong simulations easily at the end
-
-    #error_fit (r_squared)
-    if skip_r_sq==False:
-        residuals = y - ans
-        ss_res = np.sum(residuals**2)
-        ss_tot = np.sum((y-numpy.mean(y))**2)
-        r_squared = 1 - (ss_res / ss_tot)
-
-    #plot fit
-    if plot_fit==True:
-        plt.figure()
-        plt.plot(X, y, 'o', color ='red', label ="data") 
-        plt.plot(X, ans, '--', color ='blue', label ="fit") 
-        plt.legend() 
-        plt.show(block=False) 
-
-
-    ### Output
-    total_sep=np.degrees(2*p1)
-    final_bias = np.mean(final_bias)
-    #print(total_sep)
-
-    if n_stims==1:
-        bias = decode_rE(rE) 
-        final_bias = abs(np.degrees(p1) - bias)
-
-
-    return(final_bias, total_sep, kappa_E, rE, r_squared, success, number_of_bumps) #bias_b1, bias_b2)
+    return error #bias_b1, bias_b2)
 
 
 ###
@@ -354,3 +279,80 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 # #plt.legend(title='kappaE', loc='upper right', labels=['100', '200'])
 # plt.show(block=False)
 
+
+
+
+    # ## print time consumed
+    # end_sim =time.time()
+    # total_time= end_sim - st_sim 
+    # total_time = round(total_time, 1)
+    # print('Simulation time: ' + str(total_time) + 's')
+
+    # ###### Fit
+    # def von_misses(x,mu,k):
+    #     return (exp( k * cos(x-mu))) / (2*pi*scipy.special.i0(k)) 
+
+    # def bi_von_misses(x,mu1,k1,mu2,k2):
+    #     return von_misses(x,mu1,k1) + von_misses(x,mu2,k2)
+
+    # ##
+    # y=np.reshape(rE, (N)) 
+    # X=np.reshape(np.linspace(-pi, pi, N), N)
+
+    # ### Fit
+    # df_n_p=pd.DataFrame()
+    # df_n_p['rE'] = rE.reshape(512)
+    # r = df_n_p['rE'].rolling(window=20).mean()
+    # number_of_bumps = len(scipy.signal.find_peaks(r, 2)[0]) 
+
+    # if number_of_bumps ==2:
+    #     param, covs = curve_fit(bi_von_misses, X, y, p0=[p1, 75, -p1, 75])
+    #     ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) + (exp( param[3] * cos(X-param[2]))) / (2*pi*scipy.special.i0(param[3])) 
+    #     estimated_angle_1=np.degrees(param[0]+pi)  
+    #     estimated_angle_2=np.degrees(param[2]+pi)  
+    #     estimated_angles = [estimated_angle_1, estimated_angle_2]
+    #     estimated_angles.sort()
+    #     bias_b1 = estimated_angles[0] -  np.degrees(p1) ### change the error stuff
+    #     bias_b2 =  np.degrees(p2) - estimated_angles[1]
+    #     final_bias = [bias_b1, bias_b2]
+    #     skip_r_sq=False
+    #     success=True
+
+    # elif number_of_bumps ==1:
+    #     param, covs = curve_fit(von_misses, X, y)
+    #     ans = (exp( param[1] * cos(X-param[0]))) / (2*pi*scipy.special.i0(param[1])) 
+    #     estimated_angle=np.degrees(param[0]+pi)  
+    #     bias_b1 = estimated_angle - np.degrees(p1)
+    #     bias_b2 = np.degrees(p2) - estimated_angle  ## bias (positive means attraction)
+    #     final_bias = [bias_b1, bias_b2]  
+    #     skip_r_sq=False
+    #     success=True
+
+    # else:
+    #     print('Error simultaion')
+    #     final_bias=[999, 999]
+    #     plot_fit=False
+    #     skip_r_sq=True
+    #     r_squared=0
+    #     success=False ## to eliminate wrong simulations easily at the end
+
+    # #error_fit (r_squared)
+    # if skip_r_sq==False:
+    #     residuals = y - ans
+    #     ss_res = np.sum(residuals**2)
+    #     ss_tot = np.sum((y-numpy.mean(y))**2)
+    #     r_squared = 1 - (ss_res / ss_tot)
+
+    # #plot fit
+    # if plot_fit==True:
+    #     plt.figure()
+    #     plt.plot(X, y, 'o', color ='red', label ="data") 
+    #     plt.plot(X, ans, '--', color ='blue', label ="fit") 
+    #     plt.legend() 
+    #     plt.show(block=False) 
+
+
+    # ### Output
+    # total_sep=np.degrees(2*p1)
+    # final_bias = np.mean(final_bias)
+    # #print(total_sep)
