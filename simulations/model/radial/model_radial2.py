@@ -201,8 +201,6 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
     ###
     final_readout = decode_rE(rE)
-    print(final_readout)
-    print(np.degrees(p1) )
     error =  np.degrees(p1)  - final_readout 
     ### if error>0 means attraction to fixation
     ### if error<0 means repulsion to fixation
