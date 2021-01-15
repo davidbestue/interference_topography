@@ -114,9 +114,14 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
     kappas_e_range= np.linspace(50, 250, N)
     kappas_e_range = np.flip(kappas_e_range)
+
+    kappas_i_range = np.linspace(3, 30, N)
+    kappas_i_range = np.flip(kappas_i_range)
+
+
     for i in range(0, N):
         v_E_new=[e**(kappas_e_range[i]*cos(theta[f]))/(2*pi*scipy.special.i0(kappas_e_range[i])) for f in range(0, len(theta))]    
-        v_I_new=[e**(kappa_I*cos(theta[f]))/(2*pi*scipy.special.i0(kappa_I)) for f in range(0, len(theta))]
+        v_I_new=[e**(kappas_i_range[i]*cos(theta[f]))/(2*pi*scipy.special.i0(kappas_i_range[i])) for f in range(0, len(theta))]
         ###    
         vE_NEW=roll(v_E_new,i)
         vI_NEW=roll(v_I_new,i) #to roll
@@ -127,9 +132,11 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     # Plot of the connectivity profile
     if plot_connectivity ==True:
         plt.figure()
-        for con_we in [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475]:
-            plt.plot(WE[con_we, :], 'b')
-            plt.plot(WI[con_we, :], 'r')
+        for con_w in [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475]:
+            plt.plot(WE[con_w, :], 'b')
+            plt.plot(WI[con_w, :], 'r')
+        plt.xlabel('radius')
+        plt.legend(frameon = False)
         plt.show(block=False)
     ##
     # Stims
