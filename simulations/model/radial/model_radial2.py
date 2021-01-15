@@ -102,20 +102,16 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     v_I=zeros((N));
     WE=zeros((N,N));
     WI=zeros((N,N));
-    if n_stims ==2:
-        p1=positions[0]
-        p2=positions[1]
-        
-    elif n_stims==1:
-        p1 = positions
-        p2 = positions
+    ###
+    p1 = positions
+    ### p1 goes from 0 to 2pi (0 is fixation and 2pi is limit)    
 
     theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
 
-    kappas_e_range= np.linspace(50, 150, N)
+    kappas_e_range= np.linspace(100, 120, N)
     kappas_e_range = np.flip(kappas_e_range)
 
-    kappas_i_range = np.linspace(2, 35, N)
+    kappas_i_range = np.linspace(10, 20, N)
     kappas_i_range = np.flip(kappas_i_range)
 
 
@@ -135,25 +131,16 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         for con_w in [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475]:
             plt.plot(WE[con_w, :], 'b')
             plt.plot(WI[con_w, :], 'r')
-        plt.xlabel('radius')
+        plt.xlabel('eccentricity')
         plt.legend(frameon = False)
         plt.show(block=False)
     ##
     # Stims
-    if n_stims==2:
-        stimulus1=zeros((N))
-        stimulus2=zeros((N))
-        for i in range(0, N):
-            stimulus1[i]=e**(kappa_stim*cos(theta[i] +  p1)) / (2*pi*scipy.special.i0(kappa_stim))
-            stimulus2[i]=e**(kappa_stim*cos(theta[i] +  p2)) / (2*pi*scipy.special.i0(kappa_stim))
-        stimulus= (stimulus1 + stimulus2);
-        stimulus=reshape(stimulus, (N,1))
-    elif n_stims==1:
-        stimulus2=zeros((N));
-        for i in range(0, N):
-            stimulus2[i]=e**(kappa_stim*cos(theta[i] + p1)) / (2*pi*scipy.special.i0(kappa_stim))
-        stimulus=stimulus2
-        stimulus=reshape(stimulus, (N,1))
+    stimulus2=zeros((N));
+    for i in range(0, N):
+        stimulus2[i]=e**(kappa_stim*cos(theta[i] - p1)) / (2*pi*scipy.special.i0(kappa_stim))
+    stimulus=stimulus2
+    stimulus=reshape(stimulus, (N,1))
     ###
     ###
     stimon = floor(targ_onset/dt);
@@ -184,11 +171,6 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         RE[:,i] = rEr;
         RI[:,i] = rIr;
     #
-    ## metrics
-    if n_stims==2:
-        interference = Interference_effects( [decode_rE(stimulus1)], [decode_rE(rE)], [decode_rE(stimulus2)])[0]
-        p_targ1 = int((N * np.degrees(p1))/360)
-        p_targ2 = int((N * np.degrees(p2))/360)
     #
     if plot_rate==True:
         #### plot dynamics
@@ -201,11 +183,11 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         plt.show(block=False)
     if plot_hm==True:
         #### plot heatmap
-        RE_sorted=flipud(RE)
+        RE_sorted=RE
         plt.figure(figsize=(9,6))
         sns.heatmap(RE_sorted, cmap='viridis')
         plt.title('BUMP activity')
-        plt.ylabel('Angle')
+        plt.ylabel('eccentricity')
         plt.xlabel('time')
         #plt.plot([stimon, nsteps], [p_targ2, p_targ2], '--b',) ## flipped, so it is p_target 
         #plt.plot([stimon, nsteps], [p_targ1, p_targ1], '--r',) ## flipped, so it is p_target 
