@@ -16,7 +16,7 @@ path_save= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_ex.xlsx
 
 Positions = list(np.arange(60,80,10))*2
 
-outputs= Parallel(n_jobs = numcores)(delayed(model)(otalTime=2000, 
+outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, 
            targ_onset=100,  
            presentation_period=350,
            positions=posx, 
