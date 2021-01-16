@@ -205,7 +205,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     ### if error>0 means attraction to fixation
     ### if error<0 means repulsion to fixation
 
-    return error #bias_b1, bias_b2)
+    return error, positions #bias_b1, bias_b2)
 
 
 ###
