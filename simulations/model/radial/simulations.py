@@ -7,14 +7,12 @@ from model_radial2 import *
 
 numcores = multiprocessing.cpu_count() - 4
 
-path_save= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_ex.xlsx'
+path_save= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_.xlsx'
 
 ###########################################################################################################################################################
 
 
-#Positions = list(np.arange(60,310,10))*1000  
-
-Positions = list(np.arange(60,80,10))*2
+Positions = list(np.arange(60,310,10))*1000  
 
 outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000, 
            targ_onset=100,  
@@ -32,8 +30,10 @@ outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=2000,
 
 
 df = pd.DataFrame(outputs)
-df=['interference', 'position']
+df.columns=['interference', 'position']
 
 #############
 
-#df.to_excel(path_save)
+df.to_excel(path_save)
+
+#
