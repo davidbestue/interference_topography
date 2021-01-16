@@ -7,7 +7,7 @@ from model_radial2 import *
 
 numcores = multiprocessing.cpu_count() - 4
 
-path_save= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul.xlsx'
+path_save= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_ex.xlsx'
 
 ###########################################################################################################################################################
 
