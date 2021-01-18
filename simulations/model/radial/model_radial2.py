@@ -128,7 +128,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     # Plot of the connectivity profile
     if plot_connectivity ==True:
         plt.figure()
-        p_cols=['royalblue', 'lightcoral' ]
+        p_cols=['#98c1d9', '#ee6c4d' ]
         for con_w in [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450]:
             plt.plot(WE[con_w, :], p_cols[0])
             plt.plot(WI[con_w, :], p_cols[1])
@@ -145,7 +145,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         plt.yticks([0,4,8])
         plt.xlim(-10, 520)
         plt.xticks([0, int(512/2), 512], ['0', '180', '360'])
-        l = plt.legend(loc=1, frameon=False, prop={'size': 16})
+        l = plt.legend(loc=1, frameon=False, prop={'size': 20})
         for i_h, h_idx in enumerate(['WE', 'WI']):
             l.get_texts()[i_h].set_text(h_idx)
             l.legendHandles[i_h].set_visible(False);
