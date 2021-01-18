@@ -128,10 +128,20 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     # Plot of the connectivity profile
     if plot_connectivity ==True:
         plt.figure()
-        for con_w in [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450, 475]:
-            plt.plot(WE[con_w, :], 'b')
-            plt.plot(WI[con_w, :], 'r')
+        for con_w in [25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375, 400, 425, 450]:
+            plt.plot(WE[con_w, :], 'darkblue')
+            plt.plot(WI[con_w, :], 'darkred')
         plt.xlabel('eccentricity')
+        plt.xlabel('pdf')
+        plt.gca().spines['right'].set_visible(False)  # aesthetics                                                                              # remove right spines
+        plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
+        plt.gca().get_xaxis().tick_bottom()                                                                                         
+        plt.gca().get_yaxis().tick_left()
+        plt.gca().tick_params(direction='in') #direction
+        plt.plot(WE[475, :], 'darkblue', label='WE')
+        plt.plot(WI[475, :], 'darkred', label='WI')
+        plt.ylim(0,8)
+        plt.yticks([0,4,8])
         plt.legend(frameon = False)
         plt.show(block=False)
     ##
