@@ -245,8 +245,8 @@ def simulation_heatmap_R(RE, time_simulation, position, target_onset, pres_perio
     dims=np.shape(RE)
     dimN = dims[0]
     plt.figure(figsize=(8,6))
-    ax = sns.heatmap(RE, cmap=pal_cyan, vmin=0, vmax=9,  cbar=True, 
-                cbar_kws={"shrink": .82, 'ticks' : [0,3,6,9], 'label': 'rate (Hz)'})
+    ax = sns.heatmap(RE, cmap=pal_cyan, vmin=0, vmax=8,  cbar=True, 
+                cbar_kws={"shrink": .82, 'ticks' : [0,2,4,6,8], 'label': 'rate (Hz)'})
     ax.figure.axes[-1].yaxis.label.set_size(20)
     ax.figure.axes[-1].tick_params(labelsize=20)
     plt.gca().set_ylabel('')
