@@ -105,16 +105,15 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     ###
     p1 = np.radians(positions)
     ### p1 goes from 0 -360 and you convert it to 0-2pi radians (0 is fixation and 2pi is limit)    
-
+    ###
     theta = [float(range(0,N)[i])/N*2*pi for i in range(0,N)] 
-
+    ###
     kappas_e_range= np.linspace(100, 300, N) ##100-300 ok
     kappas_e_range = np.flip(kappas_e_range)
-
+    ###
     kappas_i_range = np.linspace(11, 20, N) #15-20 ok
     kappas_i_range = np.flip(kappas_i_range)
-
-
+    ###
     for i in range(0, N):
         v_E_new=[e**(kappas_e_range[i]*cos(theta[f]))/(2*pi*scipy.special.i0(kappas_e_range[i])) for f in range(0, len(theta))]    
         v_I_new=[e**(kappas_i_range[i]*cos(theta[f]))/(2*pi*scipy.special.i0(kappas_i_range[i])) for f in range(0, len(theta))]
@@ -217,7 +216,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
         plt.plot([stimoff, stimoff,], [0+20, N-20], 'k--')
         plt.legend()
         plt.show(block=False)
-
+    ###
     ###
     final_readout = decode_rE(rE)
     error =  np.degrees(p1)  - final_readout 
