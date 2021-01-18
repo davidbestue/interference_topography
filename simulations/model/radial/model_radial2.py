@@ -231,7 +231,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 
 
 
-## plotear el hetamap (se necesiat el RE)
+### plotear el hetamap (se necesiat el RE)
 
 def simulation_heatmap_R(RE, time_simulation, position, target_onset, pres_period):
     pal_cyan = sns.color_palette("RdBu_r", n_colors=200)[40:] #RdBu_r
