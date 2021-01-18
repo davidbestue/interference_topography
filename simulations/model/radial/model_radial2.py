@@ -133,7 +133,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
             plt.plot(WE[con_w, :], p_cols[0])
             plt.plot(WI[con_w, :], p_cols[1])
         plt.xlabel('eccentricity ($^\circ$)')
-        plt.xlabel('pdf')
+        plt.ylabel('pdf')
         plt.gca().spines['right'].set_visible(False)  # aesthetics                                                                              # remove right spines
         plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
         plt.gca().get_xaxis().tick_bottom()                                                                                         
