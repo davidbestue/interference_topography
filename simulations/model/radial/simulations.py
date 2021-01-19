@@ -5,7 +5,7 @@
 
 from model_radial2 import *
 
-numcores = multiprocessing.cpu_count() - 4
+numcores = multiprocessing.cpu_count() - 8
 
 
 ############################################# delay 2 seconds ##############################################################################################################
