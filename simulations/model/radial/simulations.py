@@ -5,14 +5,14 @@
 
 from model_radial2 import *
 
-numcores = multiprocessing.cpu_count() - 8
+numcores = multiprocessing.cpu_count() - 3
 
 
 ############################################# delay 2 seconds ##############################################################################################################
 
 path_save_d= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_d3_11.xlsx'
 
-Positions = list(np.arange(60,310,10))*1000  
+Positions = list(np.arange(60,310,10))*10 #000  
 
 outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=3000, 
            targ_onset=100,  
@@ -43,7 +43,7 @@ dfd.to_excel(path_save_d)
 
 path_save_p= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_d0_11.xlsx'
 
-Positions = list(np.arange(60,310,10))*1000  
+Positions = list(np.arange(60,310,10))*10 #00  
 
 outputsp= Parallel(n_jobs = numcores)(delayed(model)(totalTime=600, 
            targ_onset=100,  
