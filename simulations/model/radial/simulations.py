@@ -26,7 +26,8 @@ outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=3000,
            kappa_E=100, kappa_I=20, 
            kappa_stim=100, N=512,
            plot_connectivity=False, 
-           plot_rate=False, plot_hm=False, plot_fit=False) for posx in Positions) 
+           plot_rate=False, plot_hm=False, 
+           plot_fit=False, save_RE=False) for posx in Positions) 
 
 
 dfd = pd.DataFrame(outputs)
