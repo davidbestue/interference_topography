@@ -10,7 +10,7 @@ numcores = multiprocessing.cpu_count() - 3
 
 ############################################# delay 2 seconds ##############################################################################################################
 
-path_save_d= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_d3_11.xlsx'
+path_save_d= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_d3_1000.xlsx'
 
 Positions = list(np.arange(60,310,10))*1000  
 print('delay')
@@ -42,7 +42,7 @@ dfd.to_excel(path_save_d)
 
 ############################################# delay 2 seconds ##############################################################################################################
 
-path_save_p= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_d0_11.xlsx'
+path_save_p= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_d0_1000.xlsx'
 
 Positions = list(np.arange(60,310,10))*1000 #00  
 
