@@ -12,7 +12,7 @@ numcores = multiprocessing.cpu_count() - 3
 
 path_save_d= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_d3_11.xlsx'
 
-Positions = list(np.arange(60,310,10))*100  
+Positions = list(np.arange(60,310,10))*1000  
 print('delay')
 
 outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=3000, 
@@ -44,7 +44,7 @@ dfd.to_excel(path_save_d)
 
 path_save_p= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_d0_11.xlsx'
 
-Positions = list(np.arange(60,310,10))*100 #00  
+Positions = list(np.arange(60,310,10))*1000 #00  
 
 print('no-delay')
 
