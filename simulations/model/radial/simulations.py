@@ -15,7 +15,7 @@ paths_save_= [ '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_0.x
 
 
 for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ):
-	Positions = list(np.arange(60,310,10))*1  
+	Positions = list(np.arange(60,310,10))*500  
 	print(TIMES)
 	outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=3000, 
 	           targ_onset=100,  
