@@ -10,12 +10,12 @@ numcores = multiprocessing.cpu_count() - 3
 
 ############################################# delay 2 seconds ##############################################################################################################
 
-paths_save_= [ '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_0.xlsx', '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_1000.xlsx', 
-'/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_2000.xlsx', '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_3000.xlsx']
+paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_times.xlsx'
 
+frames=[]
 
 for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ):
-	Positions = list(np.arange(60,310,10))*500  
+	Positions = list(np.arange(60,310,10))*1  
 	print(TIMES)
 	outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=3000, 
 	           targ_onset=100,  
@@ -35,9 +35,12 @@ for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ):
 	df = pd.DataFrame(outputs)
 	df.columns=['interference', 'position']
 	df['delay_time']=TIMES-450
+	frames.append(df)
 	############
 
-	df.to_excel(paths_save_[idx])
+##
+df_tot = pd.concat(frames)
+df_tot.to_excel(paths_save_)
 
 
 
