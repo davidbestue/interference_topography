@@ -8,9 +8,6 @@ from model_radial2 import *
 numcores = multiprocessing.cpu_count() - 3
 
 
-
-
-
 ############################################# delay 2 seconds ##############################################################################################################
 
 paths_save_= [ '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_0.xlsx', '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_1000.xlsx', 
