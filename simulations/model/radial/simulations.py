@@ -17,7 +17,7 @@ frames=[]
 for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ):
 	Positions = list(np.arange(60,310,10))*1  
 	print(TIMES)
-	outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=3000, 
+	outputs= Parallel(n_jobs = numcores)(delayed(model)(totalTime=TIMES, 
 	           targ_onset=100,  
 	           presentation_period=350,
 	           positions=posx, 
