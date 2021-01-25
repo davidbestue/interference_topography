@@ -10,7 +10,7 @@ numcores = multiprocessing.cpu_count() - 3
 
 ############################################# delay 2 seconds ##############################################################################################################
 
-paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_times.xlsx'
+paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_times2.xlsx'
 
 frames=[]
 
