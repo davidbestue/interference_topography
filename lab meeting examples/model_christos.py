@@ -142,7 +142,8 @@ def ornstein_uhlenbeck(t_final, delta_t , theta ):
 def model(totalTime, targ_onset_1, targ_onset_2, presentation_period, angle_target_i, angle_separation, tauE=9, 
           tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, GIE=0.01 , GII=0.1, sigE=0.5, sigI=1.6, k_noise=0.8,
           kappa_E=100, kappa_I=1.75, kappa_stim=100, N=512, plot_connectivity=False, plot_rate=False, 
-          plot_hm=True , plot_fit=True, stim_strengthE=1., stim_strengthI=1., 
+          plot_hm=True , plot_fit=True, 
+          stim_strengthE1=1., stim_strengthI1=1., stim_strengthE2=1., stim_strengthI2=1.,
           phantom_st = 0.2, phantom_onset=500, phantom_on='off', phnatom_duration=200):
     #
     st_sim =time.time()
@@ -251,11 +252,11 @@ def model(totalTime, targ_onset_1, targ_onset_2, presentation_period, angle_targ
             background= background_s
         ## stim condition
         if i>stimon1 and i<stimoff1:
-            IE=IE+stim_strengthE*stimulus_1 + (background_on-background_s);
-            II=II+stim_strengthI*stimulus_1;
+            IE=IE+stim_strengthE1*stimulus_1 + (background_on-background_s);
+            II=II+stim_strengthI1*stimulus_1;
         if i>stimon2 and i<stimoff2:
-            IE=IE+stim_strengthE*stimulus_2 + (background_on-background_s);
-            II=II+stim_strengthI*stimulus_2;
+            IE=IE+stim_strengthE2*stimulus_2 + (background_on-background_s);
+            II=II+stim_strengthI2*stimulus_2;
         #
         #rates of exit and inhib
         rE = rE + (f(IE) - rE + noiseE)*dt/tauE;
