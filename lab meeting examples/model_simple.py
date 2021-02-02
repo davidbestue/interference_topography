@@ -223,7 +223,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
     if save_RE==True:
         return error, positions, RE
     else:
-        return  error, positions, max(rE), I0E
+        return  error, positions, I0E, max(rE)
     #
 
 
