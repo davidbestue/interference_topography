@@ -86,6 +86,7 @@ def viz_polymonial(X, y, poly_reg, pol_reg):
     plt.show(block=False)
     return
 
+
 # model(totalTime=2000, targ_onset=100,  presentation_period=100, separation=2) 
 
 def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,  n_stims=2, I0E=0.1, I0I=0.5, GEE=0.022, GEI=0.019, 
