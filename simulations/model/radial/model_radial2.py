@@ -20,7 +20,6 @@ import scipy.signal
 from scipy.optimize import curve_fit 
 
 
-
 def decode_rE(rE, a_ini=0, a_fin=360, N=512):
     #Population vector for a given rE
     # return ( angle in radians, absolut angle in radians, abs angle in degrees )
