@@ -48,7 +48,7 @@ def model_radial_linear(totalTime, targ_onset, presentation_period, position,
                          tauE=9, tauI=4,  
                          I0E=0.1, I0I=0.5, 
                          GEE=0.022, GEI=0.019, GIE=0.01 , GII=0.1, 
-                         NsigE=1., NsigI=2., 
+                         NsigE=0.8, NsigI=1.7, 
                          plot_connectivity=False, plot_rate=False, save_RE=False):
     #
     st_sim =time.time()
