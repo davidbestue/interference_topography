@@ -43,7 +43,7 @@ def decode_rE(rE, a_ini=0, a_fin=360, N=512):
 
 
 
-def model_radial_linear(totalTime, targ_onset, presentation_period, positions, 
+def model_radial_linear(totalTime, targ_onset, presentation_period, position, 
                          N=512, rint = 1, rext = 6,
                          tauE=9, tauI=4,  
                          I0E=0.1, I0I=0.5, 
@@ -119,7 +119,7 @@ def model_radial_linear(totalTime, targ_onset, presentation_period, positions,
     stimulus = zeros((N));
     for j in range(0, N): #para cada distancia hay una sigma diferente
         for i in range(0, N): #dentro de cada distancia se calcula la conectividad con el resto teniendo en cuenta una j concreta (una sigma especifica)
-            stimulus[i]= 1/(sqrt(2*pi)*SE[j])*e**(-((positions- radii[i])**2)/(2*(SE[j]**2))) 
+            stimulus[i]= 1/(sqrt(2*pi)*SE[j])*e**(-((position- radii[i])**2)/(2*(SE[j]**2))) 
     
     stimulus=reshape(stimulus, (N,1))
     ###
@@ -166,13 +166,13 @@ def model_radial_linear(totalTime, targ_onset, presentation_period, positions,
     ###
     final_readout = decode_rE(rE)
     final_readout = final_readout * ((rext-rint) / 360) + rint ##conversion a espacio (rint, rext)
-    error =  positions - final_readout
+    error =  position - final_readout
     ### if error>0 means attraction to fixation
     ### if error<0 means repulsion to fixation
     if save_RE==True:
-        return error, positions, RE
+        return error, position, RE
     else:
-        return  error, positions
+        return  error, position
     #
 ##
 
