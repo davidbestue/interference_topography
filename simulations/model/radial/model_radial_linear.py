@@ -175,3 +175,57 @@ def model_radial_linear(totalTime, targ_onset, presentation_period, positions,
         return  error, positions
     #
 ##
+
+
+
+###############################################
+###############################################
+############################################### plot the heatmap nice
+###############################################
+###############################################
+
+
+def simulation_heatmap_rad(RE, time_simulation, position, target_onset, pres_period, rext=6, rint=1):
+    pal_cyan = sns.color_palette("RdBu_r", n_colors=200)[40:] #RdBu_r
+    #
+    dims=np.shape(RE)
+    dimN = dims[0]
+    plt.figure(figsize=(8,6))
+    ax = sns.heatmap(RE, cmap=pal_cyan, vmin=0, vmax=8,  cbar=True, 
+                cbar_kws={"shrink": .82, 'ticks' : [0,2,4,6,8], 'label': 'rate (Hz)'})
+    ax.figure.axes[-1].yaxis.label.set_size(20)
+    ax.figure.axes[-1].tick_params(labelsize=20)
+    plt.gca().set_ylabel('')
+    plt.gca().set_xlabel('')
+    plt.gca().set_title('')
+    p_stim = (position-rint) * dims[0]/(rext-rint)
+    #
+    stimon = target_onset/2
+    stimoff = (target_onset + pres_period) / 2
+    #
+    plt.gca().plot([stimon, stimon+400], [p_stim, p_stim], ls='--', color ='blue', linewidth=1) 
+    #
+    plt.gca().set_xticks([])
+    plt.gca().set_xticklabels([])
+    #
+    plt.gca().set_yticks([0, int(dimN/4), int(dimN/2),  int(3*dimN/4), int(dimN) ])
+    plt.gca().set_yticklabels([str(rint),'',str((rext+rint)/2), '', str(rext)], fontsize=20)
+    #
+    plt.gca().set_xlabel('', fontsize=20);
+    plt.gca().set_ylabel('neuron preferred (cm)', fontsize=20);
+    plt.gca().set_ylim(dimN+60, -45)
+    ###
+    ##line stims 
+    s1on=stimon
+    s1off=stimoff
+    plt.plot([0, s1on], [-15, -15], 'k-', linewidth=2)
+    plt.plot([s1on, s1on], [-15, -40], 'k-', linewidth=2)
+    plt.plot([s1on, s1off], [-40, -40], 'k-', linewidth=2)
+    plt.plot([s1off, s1off], [-15, -40], 'k-', linewidth=2)
+    plt.plot([s1off, dims[1]], [-15, -15], 'k-', linewidth=2)
+    #
+    #time
+    x1sec = 1000 * dims[1] / time_simulation
+    plt.plot([dims[1]-x1sec, dims[1]], [dimN+30, dimN+30], 'k-', linewidth=2)
+    plt.text(dims[1]-300, 600, '1s', fontsize=20);
+    plt.show()
