@@ -10,13 +10,13 @@ numcores = multiprocessing.cpu_count() - 3
 
 ############################################# delay 2 seconds ##############################################################################################################
 
-paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_radial_linear_EX.xlsx'
+paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_radial_linear_all.xlsx'
 
 frames=[]
 
-for idx, TIMES in enumerate(list(np.arange(0,2000, 1000) + 450 ) ): ##4000
+for idx, TIMES in enumerate(list(np.arange(0,2000, 4000) + 450 ) ): ##4000
 	print(TIMES)
-	Positions = list(np.arange(1.5,5.25,0.5))*2 ##0.25
+	Positions = list(np.arange(1.5,5.25,0.25))*500 ##0.25
 	Times=[TIMES for i in range(len(Positions))]
 	outputs= Parallel(n_jobs = numcores)(delayed(model_radial_linear)(totalTime=tim, 
 	           targ_onset=100,  
@@ -38,4 +38,4 @@ for idx, TIMES in enumerate(list(np.arange(0,2000, 1000) + 450 ) ): ##4000
 
 ##
 df_tot = pd.concat(frames)
-###df_tot.to_excel(paths_save_)
+df_tot.to_excel(paths_save_)
