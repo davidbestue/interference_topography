@@ -15,10 +15,11 @@ paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_radia
 
 frames=[]
 
-for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ):
-	Positions = list(np.arange(1.5,5.25,0.5))*2
+for idx, TIMES in enumerate(list(np.arange(0,2000, 1000) + 450 ) ): ##4000
 	print(TIMES)
-	outputs= Parallel(n_jobs = numcores)(delayed(model_radial_linear)(totalTime=TIMES, 
+	Positions = list(np.arange(1.5,5.25,0.5))*2 ##0.25
+	Times=[TIMES for i in range(len(Positions))]
+	outputs= Parallel(n_jobs = numcores)(delayed(model_radial_linear)(totalTime=tim, 
 	           targ_onset=100,  
 	           presentation_period=350,
 	           position=posx, 
@@ -28,7 +29,7 @@ for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ):
 	           NsigE=0.8, NsigI=1.7, 
 	           N=512, rint = 1, rext = 6,
 	           plot_connectivity=False, 
-	           plot_rate=False, save_RE=False) for posx in Positions) 
+	           plot_rate=False, save_RE=False) for posx, tim in zip(Positions, Times)) 
 	#
 	df = pd.DataFrame(outputs)
 	df.columns=['interference', 'position']
@@ -38,6 +39,6 @@ for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ):
 
 ##
 df_tot = pd.concat(frames)
-df_tot.to_excel(paths_save_)
+###df_tot.to_excel(paths_save_)
 
 
