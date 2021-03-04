@@ -14,7 +14,7 @@ paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simul_radia
 
 frames=[]
 
-for idx, TIMES in enumerate(list(np.arange(0,2000, 4000) + 450 ) ): ##4000
+for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ): ##4000
 	print(TIMES)
 	Positions = list(np.arange(1.5,5.25,0.25))*500 ##0.25
 	Times=[TIMES for i in range(len(Positions))]
