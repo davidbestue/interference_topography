@@ -64,13 +64,13 @@ def model_radial_linear(totalTime, targ_onset, presentation_period, position,
     ###     
     radii = np.linspace(rint, rext, N) ##all radii (linear)
     #### sigmasE (taking the kappaE in radius 1 in the angular model)
-    ser1 = 1/300
+    ser1 = 1/float(300)
     ke1=1.  
     ke2=1.7     ##above 1 to be supralinear (inconsistency: the change in kappaE is lesss stepper then in kappaI)         
     ke3=0.05             
     SE = ke1*ser1*radii**ke2 + ke3 ##all sigmasE (supralinear increase)
     #### sigmasI (taking the kappaI in radius 1 in the angular model) (alth¡hough I had to add the constant to correct)
-    sir1 = 1/30 
+    sir1 = 1/float(30) 
     ki1=0.5
     ki2= 1.6  ##above 1 to be supralinear
     ki3=0.2
