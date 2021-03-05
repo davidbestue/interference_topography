@@ -170,7 +170,7 @@ def model_radial_linear(totalTime, targ_onset, presentation_period, position,
     ### if error>0 means attraction to fixation
     ### if error<0 means repulsion to fixation
     if save_RE==True:
-        return error, position, totalTime, RE, SE
+        return error, position, totalTime, RE
     else:
         return error, position, totalTime
     #
