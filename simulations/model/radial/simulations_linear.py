@@ -31,7 +31,7 @@ for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ): ##4000
 	           plot_rate=False, save_RE=False) for posx, tim in zip(Positions, Times)) 
 	#
 	df = pd.DataFrame(outputs)
-	df.columns=['interference', 'position']
+	df.columns=['interference', 'position', 'simul_time']
 	df['delay_time']=TIMES-450
 	frames.append(df)
 	############
