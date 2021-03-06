@@ -10,13 +10,40 @@ numcores = multiprocessing.cpu_count() - 3
 
 ############################################# delay 2 seconds ##############################################################################################################
 
-paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simulations_radial_linear.xlsx'
+# paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simulations_radial_linear.xlsx'
+
+# frames=[]
+
+# for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ): ##4000
+# 	print(TIMES)
+# 	Positions = list(np.arange(1.5,5.25,0.25))*500 ##0.25
+# 	Times=[TIMES for i in range(len(Positions))]
+# 	outputs= Parallel(n_jobs = numcores)(delayed(model_radial_linear)(totalTime=tim, 
+# 	           targ_onset=100,  
+# 	           presentation_period=350,
+# 	           position=posx, 
+# 	           tauE=9, tauI=4,  
+# 	           I0E=0.1, I0I=0.5,
+# 	           GEE=0.022, GEI=0.019, GIE=0.01 , GII=0.1, 
+# 	           NsigE=0.8, NsigI=1.7, 
+# 	           N=512, rint = 1, rext = 6,
+# 	           plot_connectivity=False, 
+# 	           plot_rate=False, save_RE=False) for posx, tim in zip(Positions, Times)) 
+# 	#
+# 	df = pd.DataFrame(outputs)
+# 	df.columns=['interference', 'position', 'simul_time']
+# 	df['delay_time']=TIMES-450
+# 	frames.append(df)
+# 	############
+
+
+paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simulations_radial_linear_noiser.xlsx'
 
 frames=[]
 
 for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ): ##4000
 	print(TIMES)
-	Positions = list(np.arange(1.5,5.25,0.25))*500 ##0.25
+	Positions = list(np.arange(2,4.75,0.25))*500 ##0.25
 	Times=[TIMES for i in range(len(Positions))]
 	outputs= Parallel(n_jobs = numcores)(delayed(model_radial_linear)(totalTime=tim, 
 	           targ_onset=100,  
@@ -25,7 +52,7 @@ for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ): ##4000
 	           tauE=9, tauI=4,  
 	           I0E=0.1, I0I=0.5,
 	           GEE=0.022, GEI=0.019, GIE=0.01 , GII=0.1, 
-	           NsigE=0.8, NsigI=1.7, 
+	           NsigE=1.2, NsigI=2.2, 
 	           N=512, rint = 1, rext = 6,
 	           plot_connectivity=False, 
 	           plot_rate=False, save_RE=False) for posx, tim in zip(Positions, Times)) 
@@ -35,6 +62,7 @@ for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ): ##4000
 	df['delay_time']=TIMES-450
 	frames.append(df)
 	############
+
 
 ##
 df_tot= pd.concat(frames)
