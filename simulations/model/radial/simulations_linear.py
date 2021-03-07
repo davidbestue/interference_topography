@@ -37,7 +37,7 @@ numcores = multiprocessing.cpu_count() - 3
 # 	############
 
 
-paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simulations_radial_linear_noiser.xlsx'
+paths_save_= '/home/david/Desktop/IDIBAPS/Simulations_radial/results_simulations_radial_linear_noiser2.xlsx'
 
 frames=[]
 
@@ -52,7 +52,7 @@ for idx, TIMES in enumerate(list(np.arange(0,4000, 1000) + 450 ) ): ##4000
 	           tauE=9, tauI=4,  
 	           I0E=0.1, I0I=0.5,
 	           GEE=0.022, GEI=0.019, GIE=0.01 , GII=0.1, 
-	           NsigE=1.2, NsigI=2.2, 
+	           NsigE=0.95, NsigI=1.8, 
 	           N=512, rint = 1, rext = 6,
 	           plot_connectivity=False, 
 	           plot_rate=False, save_RE=False) for posx, tim in zip(Positions, Times)) 
