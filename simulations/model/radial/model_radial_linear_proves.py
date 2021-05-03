@@ -48,8 +48,8 @@ def model_radial_linear_proves(totalTime, targ_onset, presentation_period, posit
                          I0E=0.1, I0I=0.5, 
                          GEE=0.022, GEI=0.019, GIE=0.01 , GII=0.1, 
                          NsigE=0.8, NsigI=1.7, 
-                         ke1=1., ke2=1.7, ke3=0.05, nE=300,
-                         ki1=0.5, ki2=1.6, ki3=0.2, nI=30,
+                         conse1=1., ke2=1.7, ke3=0.05, nE=300,
+                         consi1=0.5, ki2=1.6, ki3=0.2, nI=30,
                          plot_connectivity=False, plot_rate=False, save_RE=False):
     #
     st_sim =time.time()
@@ -66,11 +66,11 @@ def model_radial_linear_proves(totalTime, targ_onset, presentation_period, posit
     ###     
     radii = np.linspace(rint, rext, N) ##all radii (linear)
     #### sigmasE (taking the kappaE in radius 1 in the angular model)
-    ser1 = 1/float(nE)   
-    SE = ke1*ser1*radii**ke2 + ke3 ##all sigmasE (supralinear increase)
+    ke1 = 1/float(nE)*conse1 
+    SE = ke1*radii**ke2 + ke3 ##all sigmasE (supralinear increase)
     #### sigmasI (taking the kappaI in radius 1 in the angular model) (alth¡hough I had to add the constant to correct)
-    sir1 = 1/float(nI) 
-    SI = ki1*sir1*radii**ki2 + ki3 ##all sigmasI (supralinear increase)
+    ki1 = 1/float(nI)*consi1
+    SI = ki1*radii**ki2 + ki3 ##all sigmasI (supralinear increase)
     ###
     ### connectivity profile for E and I in the radial dimension
     for j in range(0, N): #para cada distancia hay una sigma diferente
@@ -166,7 +166,7 @@ def model_radial_linear_proves(totalTime, targ_onset, presentation_period, posit
     ### if error>0 means attraction to fixation
     ### if error<0 means repulsion to fixation
     if save_RE==True:
-        return error, position, totalTime, RE
+        return error, position, totalTime, RE, WE, WI, SE, SI
     else:
         return error, position, totalTime
     #
