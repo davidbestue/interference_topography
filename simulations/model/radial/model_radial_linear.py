@@ -167,6 +167,7 @@ def model_radial_linear(totalTime, targ_onset, presentation_period, position,
     final_radius = final_readout * (float((rext-rint)) / 360) + rint ##conversion a espacio (rint, rext)
     error =  position - final_radius
     error = round(error, 3)
+    #
     ### if error>0 means attraction to fixation
     ### if error<0 means repulsion to fixation
     if save_RE==True:
