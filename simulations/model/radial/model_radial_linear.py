@@ -177,7 +177,6 @@ def model_radial_linear(totalTime, targ_onset, presentation_period, position,
 ##
 
 
-
 ###############################################
 ###############################################
 ############################################### plot the heatmap nice
