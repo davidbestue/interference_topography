@@ -287,7 +287,7 @@ def model(totalTime, targ_onset_1, targ_onset_2, presentation_period, angle_targ
         plt.gca().get_xaxis().tick_bottom()                                                                                         
         plt.gca().get_yaxis().tick_left()
         plt.gca().tick_params(direction='in') #direction
-        plt.legend(loc=4, frameon=False,  bbox_to_anchor=(1.05, 0.25), prop={'size': 14})
+        plt.legend(loc=4, frameon=False,  bbox_to_anchor=(1.25, 0.25), prop={'size': 14})
         plt.show(block=False)
     if plot_hm==True:
         #### plot heatmap
