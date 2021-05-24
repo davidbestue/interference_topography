@@ -279,10 +279,15 @@ def model(totalTime, targ_onset_1, targ_onset_2, presentation_period, angle_targ
         fig = plt.figure()
         plt.title('Rate dynamics')
         plt.plot(RE[N-p_targ1, :], 'b', label='target1')
-        plt.plot(RE[N-p_targ2, :], 'r', label='target2')
+        plt.plot(RE[N-p_targ2, :], 'r', label='distractor')
         plt.xlabel('time (ms)')
         plt.ylabel('rate (Hz)')
-        plt.legend()
+        plt.gca().spines['right'].set_visible(False)  # aesthetics                                                                              # remove right spines
+        plt.gca().spines['top'].set_visible(False)                                                                                  # remove top spines
+        plt.gca().get_xaxis().tick_bottom()                                                                                         
+        plt.gca().get_yaxis().tick_left()
+        plt.gca().tick_params(direction='in') #direction
+        plt.legend(loc=4, frameon=False,  bbox_to_anchor=(1.05, 0.25), prop={'size': 14})
         plt.show(block=False)
     if plot_hm==True:
         #### plot heatmap
