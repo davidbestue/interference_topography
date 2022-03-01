@@ -230,7 +230,7 @@ def model(totalTime, targ_onset, presentation_period, positions, tauE=9, tauI=4,
 ### plotear el hetamap (se necesiat el RE)
 
 def simulation_heatmap_R(RE, time_simulation, position, target_onset, pres_period):
-    pal_cyan = sns.color_palette("RdBu_r", n_colors=200)[40:] #RdBu_r
+    pal_cyan = sns.color_palette("cividis", n_colors=200)[40:] #RdBu_r
     #
     dims=np.shape(RE)
     dimN = dims[0]
@@ -247,7 +247,7 @@ def simulation_heatmap_R(RE, time_simulation, position, target_onset, pres_perio
     stimon = target_onset/2
     stimoff = (target_onset + pres_period) / 2
     #
-    plt.gca().plot([stimon, stimon+400], [p_stim, p_stim], ls='--', color ='blue', linewidth=1) 
+    #plt.gca().plot([stimon, stimon+400], [p_stim, p_stim], ls='--', color ='blue', linewidth=1) 
     #
     plt.gca().set_xticks([])
     plt.gca().set_xticklabels([])
